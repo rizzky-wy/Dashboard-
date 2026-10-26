@@ -1,368 +1,60 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I'am Ok - I'am Fine - Rizky Wijayanto</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Inter & Simple Font Awesome Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0284c7', // Simple Soft Blue accent
-                            600: '#0369a1',
-                            900: '#0f172a', // Deep slate text
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .tab-panel {
-            display: none;
-        }
-        .tab-panel.active {
-            display: block;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rizky Wijayanto - fine.my.id</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Inter',sans-serif}</style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-white text-slate-900">
 
-    <!-- HEADER / NAVIGATION (Minimalis) -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="flex items-center justify-between h-16">
-                
-                <!-- Logo Brand -->
-                <div class="flex items-center gap-3">
-                    <a href="#" onclick="switchTab('dashboard')" class="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
-                        <span class="w-2.5 h-6 bg-brand-500 rounded-sm"></span>
-                        WELCOME
-                    </a>
-                </div>
+<!-- NAV -->
+<nav class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+  <a href="/" class="font-bold text-[15px]">Creator</a>
+  <div class="flex gap-5 text-[13px] text-slate-600">
+    <a href="/">Dashboard</a>
+    <a href="/media/">Media</a>
+    <a href="/ipd/">IPD</a>
+    <a href="/game/">Game Edu</a>
+    <a href="/tutorial/">Tutorial</a>
+  </div>
+</nav>
 
-                <!-- Navigasi Desktop (Flat & Simple) -->
-                <nav class="hidden md:flex items-center space-x-1">
-                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-4 py-2 text-sm font-medium rounded-lg text-slate-900 bg-slate-100">
-                        Dashboard
-                    </button>
-                    <button onclick="switchTab('media')" id="nav-media" class="nav-btn px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50">
-                        Media
-                    </button>
-                    <button onclick="switchTab('game')" id="nav-game" class="nav-btn px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50">
-                        Game Edu
-                    </button>
-                    <button onclick="switchTab('tutorial')" id="nav-tutorial" class="nav-btn px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50">
-                        Tutorial
-                    </button>
-                </nav>
+<!-- HERO -->
+<section class="text-center pt-24 pb-16 px-6">
+  <h1 class="text-[38px] md:text-[48px] font-bold tracking-tight">
+    Halo, Saya Rizky Wijayanto 👋
+  </h1>
+  <p class="text-slate-500 mt-3 text-[15px]">Guru Sekolah Dasar</p>
+  <a href="#karya" class="inline-block mt-8 bg-[#3B9EFF] hover:bg-[#2d8af0] text-white text-[14px] font-medium px-6 py-3 rounded-full">
+    Lihat Karya Saya
+  </a>
+</section>
 
-                <!-- Nama Pengguna -->
-                <div class="flex items-center gap-3">
-                    <div class="text-right hidden sm:block">
-                        <p class="text-xs text-slate-400 font-medium">Pengguna</p>
-                        <p class="text-sm font-semibold text-slate-800">Rizky Wijayanto</p>
-                    </div>
-                    <div class="w-9 h-9 rounded-full bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm border border-slate-300">
-                        RW
-                    </div>
-                    <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-btn" class="md:hidden text-slate-600 hover:text-slate-900 p-2">
-                        <i class="fa-solid fa-bars text-lg"></i>
-                    </button>
-                </div>
+<!-- KARYA (isi media kamu di sini nanti) -->
+<section id="karya" class="max-w-5xl mx-auto px-6 py-16 border-t">
+  <h2 class="font-semibold">Karya Saya</h2>
+  <div class="grid md:grid-cols-3 gap-4 mt-6">
+    <a href="/media/" class="border rounded-2xl p-5 hover:bg-slate-50">
+      <h3 class="font-semibold text-[14px]">📁 Media</h3>
+      <p class="text-[12px] text-slate-500 mt-1">Video & modul pembelajaran</p>
+    </a>
+    <a href="/ipd/" class="border rounded-2xl p-5 hover:bg-slate-50">
+      <h3 class="font-semibold text-[14px]">📊 IPD</h3>
+      <p class="text-[12px] text-slate-500 mt-1">Instrumen penilaian</p>
+    </a>
+    <a href="/game/" class="border rounded-2xl p-5 hover:bg-slate-50">
+      <h3 class="font-semibold text-[14px]">🎮 Game Edu</h3>
+      <p class="text-[12px] text-slate-500 mt-1">Game edukasi interaktif</p>
+    </a>
+  </div>
+</section>
 
-            </div>
-        </div>
+<footer class="text-center py-10 text-[12px] text-slate-400">
+  © 2026 fine.my.id — Rizky Wijayanto
+</footer>
 
-        <!-- Navigation Mobile Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-1">
-            <button onclick="switchTab('dashboard')" id="m-nav-dashboard" class="m-nav-btn w-full text-left px-3 py-2 text-sm font-medium rounded-md bg-slate-100 text-slate-900">
-                Dashboard
-            </button>
-            <button onclick="switchTab('media')" id="m-nav-media" class="m-nav-btn w-full text-left px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-50">
-                Media
-            </button>
-            <button onclick="switchTab('game')" id="m-nav-game" class="m-nav-btn w-full text-left px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-50">
-                Game Edu
-            </button>
-            <button onclick="switchTab('tutorial')" id="m-nav-tutorial" class="m-nav-btn w-full text-left px-3 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-50">
-                Tutorial
-            </button>
-        </div>
-    </header>
-
-    <!-- CONTAINER UTAMA -->
-    <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
-
-        <!-- BANNER MENYAPA (Sederhana & Tanpa Gradient Gelap) -->
-        <div class="mb-8 p-6 bg-white border border-slate-200 rounded-xl">
-            <h1 class="text-2xl font-bold text-slate-900">Selamat datang, Rizky Wijayanto</h1>
-            <p class="text-slate-600 text-sm mt-1">Halaman kelola platform WELCOME. Pilih menu di bawah untuk mulai mengakses fitur.</p>
-        </div>
-
-        <!-- 1. TAB DASHBOARD -->
-        <div id="tab-dashboard" class="tab-panel active space-y-6">
-            <!-- Grid Ringkasan -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="bg-white p-5 rounded-xl border border-slate-200">
-                    <p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Perpustakaan Media</p>
-                    <p class="text-2xl font-bold text-slate-900 mt-1">12 File</p>
-                    <button onclick="switchTab('media')" class="mt-4 text-xs font-semibold text-brand-500 hover:underline inline-flex items-center gap-1">
-                        Lihat Media <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </button>
-                </div>
-
-                <div class="bg-white p-5 rounded-xl border border-slate-200">
-                    <p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Game Edukasi</p>
-                    <p class="text-2xl font-bold text-slate-900 mt-1">4 Modul</p>
-                    <button onclick="switchTab('game')" class="mt-4 text-xs font-semibold text-brand-500 hover:underline inline-flex items-center gap-1">
-                        Buka Game <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </button>
-                </div>
-
-                <div class="bg-white p-5 rounded-xl border border-slate-200">
-                    <p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Materi Tutorial</p>
-                    <p class="text-2xl font-bold text-slate-900 mt-1">8 Panduan</p>
-                    <button onclick="switchTab('tutorial')" class="mt-4 text-xs font-semibold text-brand-500 hover:underline inline-flex items-center gap-1">
-                        Pelajari Tutorial <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Informasi Tambahan Sederhana -->
-            <div class="bg-white p-6 rounded-xl border border-slate-200">
-                <h2 class="text-base font-bold text-slate-900 mb-4">Aktivitas Terakhir</h2>
-                <div class="divide-y divide-slate-100 text-sm">
-                    <div class="py-3 flex justify-between items-center">
-                        <div>
-                            <p class="font-medium text-slate-800">Menambahkan dokumen "Modul_Edukasi.pdf"</p>
-                            <p class="text-xs text-slate-400">Media • Hari ini</p>
-                        </div>
-                        <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Selesai</span>
-                    </div>
-                    <div class="py-3 flex justify-between items-center">
-                        <div>
-                            <p class="font-medium text-slate-800">Memperbarui Kuis Logika Dasar</p>
-                            <p class="text-xs text-slate-400">Game Edu • Kemarin</p>
-                        </div>
-                        <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Diperbarui</span>
-                    </div>
-                    <div class="py-3 flex justify-between items-center">
-                        <div>
-                            <p class="font-medium text-slate-800">Menerbitkan Tutorial "Pengenalan WELCOME"</p>
-                            <p class="text-xs text-slate-400">Tutorial • 3 hari lalu</p>
-                        </div>
-                        <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Aktif</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. TAB MEDIA -->
-        <div id="tab-media" class="tab-panel space-y-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-900">Media</h2>
-                    <p class="text-xs text-slate-500">Berkas gambar dan dokumen terunggah.</p>
-                </div>
-                <button class="px-4 py-2 bg-slate-900 text-white text-xs font-medium rounded-lg hover:bg-slate-800 transition-colors">
-                    + Unggah File
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="bg-white p-4 rounded-xl border border-slate-200">
-                    <div class="h-32 bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 text-2xl mb-3">
-                        <i class="fa-regular fa-image"></i>
-                    </div>
-                    <p class="font-semibold text-sm text-slate-800 truncate">Banner_Utama.jpg</p>
-                    <p class="text-xs text-slate-400 mt-1">1.2 MB • Gambar</p>
-                </div>
-
-                <div class="bg-white p-4 rounded-xl border border-slate-200">
-                    <div class="h-32 bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 text-2xl mb-3">
-                        <i class="fa-regular fa-file-pdf"></i>
-                    </div>
-                    <p class="font-semibold text-sm text-slate-800 truncate">Panduan_Lengkap.pdf</p>
-                    <p class="text-xs text-slate-400 mt-1">3.4 MB • Dokumen</p>
-                </div>
-
-                <div class="bg-white p-4 rounded-xl border border-slate-200">
-                    <div class="h-32 bg-slate-100 rounded-lg flex items-center justify-center text-slate-400 text-2xl mb-3">
-                        <i class="fa-regular fa-file-code"></i>
-                    </div>
-                    <p class="font-semibold text-sm text-slate-800 truncate">Struktur_Data.json</p>
-                    <p class="text-xs text-slate-400 mt-1">45 KB • Berkas</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. TAB GAME EDU -->
-        <div id="tab-game" class="tab-panel space-y-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-900">Game Edukasi</h2>
-                    <p class="text-xs text-slate-500">Permainan dan kuis interaktif pembelajaran.</p>
-                </div>
-                <button class="px-4 py-2 bg-slate-900 text-white text-xs font-medium rounded-lg hover:bg-slate-800 transition-colors">
-                    + Buat Game Baru
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white p-5 rounded-xl border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <span class="text-[10px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded uppercase">Kuis</span>
-                        <h3 class="font-bold text-slate-900 text-base mt-2">Teka-Teki Logika Dasar</h3>
-                        <p class="text-xs text-slate-600 mt-1">Latihan pemikiran logis melalui kuis singkat 10 pertanyaan.</p>
-                    </div>
-                    <button class="mt-4 px-3 py-2 border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-semibold rounded-lg w-full text-center">
-                        Mulai Game
-                    </button>
-                </div>
-
-                <div class="bg-white p-5 rounded-xl border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <span class="text-[10px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded uppercase">Simulasi</span>
-                        <h3 class="font-bold text-slate-900 text-base mt-2">Pencocokan Kata Kunci</h3>
-                        <p class="text-xs text-slate-600 mt-1">Game memasangkan istilah dan definisi secara tepat.</p>
-                    </div>
-                    <button class="mt-4 px-3 py-2 border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-semibold rounded-lg w-full text-center">
-                        Mulai Game
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. TAB TUTORIAL -->
-        <div id="tab-tutorial" class="tab-panel space-y-6">
-            <div>
-                <h2 class="text-lg font-bold text-slate-900">Tutorial</h2>
-                <p class="text-xs text-slate-500">Panduan langkah demi langkah penggunaan platform WELCOME oleh Rizky Wijayanto.</p>
-            </div>
-
-            <div class="space-y-3">
-                <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-lg bg-slate-100 font-semibold text-slate-700 text-xs flex items-center justify-center">1</span>
-                        <div>
-                            <h4 class="font-semibold text-sm text-slate-900">Pengenalan Dasar Platform WELCOME</h4>
-                            <p class="text-xs text-slate-500">Memahami navigasi dan struktur utama aplikasi.</p>
-                        </div>
-                    </div>
-                    <button class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium rounded-lg">
-                        Baca
-                    </button>
-                </div>
-
-                <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-lg bg-slate-100 font-semibold text-slate-700 text-xs flex items-center justify-center">2</span>
-                        <div>
-                            <h4 class="font-semibold text-sm text-slate-900">Cara Mengunggah dan Mengelola Media</h4>
-                            <p class="text-xs text-slate-500">Panduan mengelompokkan dokumen dan media visual.</p>
-                        </div>
-                    </div>
-                    <button class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium rounded-lg">
-                        Baca
-                    </button>
-                </div>
-
-                <div class="bg-white p-4 rounded-xl border border-slate-200 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-lg bg-slate-100 font-semibold text-slate-700 text-xs flex items-center justify-center">3</span>
-                        <div>
-                            <h4 class="font-semibold text-sm text-slate-900">Membuat Modul Pembelajaran Kuis</h4>
-                            <p class="text-xs text-slate-500">Panduan membuat pertanyaan interaktif untuk Game Edu.</p>
-                        </div>
-                    </div>
-                    <button class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-medium rounded-lg">
-                        Baca
-                    </button>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- FOOTER (Sederhana) -->
-    <footer class="bg-white border-t border-slate-200 mt-auto">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-6 text-center sm:text-left sm:flex sm:justify-between sm:items-center text-xs text-slate-500">
-            <p>&copy; WELCOME. Dikelola oleh <strong class="text-slate-800 font-semibold">Rizky Wijayanto</strong>.</p>
-            <div class="mt-2 sm:mt-0 space-x-4">
-                <a href="#" class="hover:underline">Bantuan</a>
-                <a href="#" class="hover:underline">Privasi</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- LOGIKA SWITCH TAB Sederhana -->
-    <script>
-        function switchTab(tabId) {
-            // Sembunyikan semua konten tab
-            const panels = document.querySelectorAll('.tab-panel');
-            panels.forEach(panel => panel.classList.remove('active'));
-
-            // Reset gaya tombol desktop
-            const navBtns = document.querySelectorAll('.nav-btn');
-            navBtns.forEach(btn => {
-                btn.classList.remove('bg-slate-100', 'text-slate-900');
-                btn.classList.add('text-slate-600');
-            });
-
-            // Reset gaya tombol mobile
-            const mNavBtns = document.querySelectorAll('.m-nav-btn');
-            mNavBtns.forEach(btn => {
-                btn.classList.remove('bg-slate-100', 'text-slate-900');
-                btn.classList.add('text-slate-600');
-            });
-
-            // Tampilkan tab yang dipilih
-            const targetPanel = document.getElementById('tab-' + tabId);
-            if (targetPanel) {
-                targetPanel.classList.add('active');
-            }
-
-            // Highlight tombol navigasi aktif
-            const activeNav = document.getElementById('nav-' + tabId);
-            if (activeNav) {
-                activeNav.classList.remove('text-slate-600');
-                activeNav.classList.add('bg-slate-100', 'text-slate-900');
-            }
-
-            const activeMNav = document.getElementById('m-nav-' + tabId);
-            if (activeMNav) {
-                activeMNav.classList.remove('text-slate-600');
-                activeMNav.classList.add('bg-slate-100', 'text-slate-900');
-            }
-
-            // Tutup menu mobile jika terbuka
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
-        }
-
-        // Toggle Mobile Menu
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-    </script>
 </body>
 </html>
