@@ -1,1 +1,1398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Garuda - Kisi-Kisi 35 Soal Pendidikan Pancasila VII</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter & Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pancasila: {
+                            red: '#D32F2F',
+                            gold: '#FFC107',
+                            darkGold: '#B78103',
+                            navy: '#1A237E',
+                            green: '#2E7D32',
+                            lightBg: '#F8FAFCE0'
+                        }
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #8E0E00 0%, #1F1C18 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .gold-badge {
+            background: linear-gradient(135deg, #FFE000 0%, #799F0C 100%);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+        }
+        .pulau-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .pulau-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
+        }
+        .btn-game {
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .btn-game:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        .btn-game:active {
+            transform: translateY(1px);
+        }
+        .scratchpad-canvas {
+            touch-action: none;
+            background-color: #fefefe;
+            border: 2px dashed #CBD5E1;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 md:p-6 text-slate-800 relative pb-16">
 
+    <!-- FLOATING CREATOR BADGE (Mencolok, Elegan & Non-intrusif) -->
+    <div class="fixed top-3 right-3 z-50 flex items-center gap-2 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-slate-900 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-2xl border-2 border-yellow-200 text-xs sm:text-sm font-bold tracking-wide animate-pulse">
+        <i class="fa-solid fa-crown text-yellow-900 text-base"></i>
+        <span>Karya: <span class="underline decoration-red-600 decoration-2">Rizky Wijayanto, S.Pd.</span> | SMPN 4 Kalibening</span>
+    </div>
+
+    <!-- MAIN APP CONTAINER -->
+    <div class="max-w-5xl mx-auto">
+        
+        <!-- HEADER APP -->
+        <header class="text-center my-6 text-white">
+            <div class="inline-flex items-center gap-3 bg-red-800/80 px-6 py-2 rounded-full border border-red-400/40 mb-3 shadow-lg">
+                <i class="fa-solid fa-shield-halved text-yellow-400 text-xl"></i>
+                <span class="text-xs sm:text-sm font-semibold tracking-wider uppercase text-yellow-200">Asesmen Sumatif Gasal TA 2026/2027</span>
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight drop-shadow-md text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-white">
+                🇲🇨 PETUALANGAN GARUDA 🇲🇨
+            </h1>
+            <p class="text-sm sm:text-base text-slate-200 mt-2 max-w-2xl mx-auto font-light">
+                Media Belajar Interaktif Kisi-Kisi 35 Soal Pendidikan Pancasila Kelas VII SMPN 4 Kalibening
+            </p>
+        </header>
+
+        <!-- DASHBOARD MENU MAIN SELECTOR -->
+        <div id="mainMenu" class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+            
+            <!-- MODE 1: PETUALANGAN -->
+            <div onclick="switchMode('adventure')" class="glass-card rounded-2xl p-6 text-center cursor-pointer pulau-card border-t-4 border-amber-500 relative overflow-hidden group">
+                <div class="absolute -right-6 -bottom-6 opacity-10 group-hover:opacity-20 transition">
+                    <i class="fa-solid fa-map-marked-alt text-9xl text-amber-600"></i>
+                </div>
+                <div class="w-16 h-16 bg-amber-500 text-slate-900 rounded-2xl flex items-center justify-center mx-auto text-3xl font-extrabold shadow-lg mb-4">
+                    🗺️
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">1. Mode Petualangan</h3>
+                <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                    Jelajahi Peta 5 Pulau Sila (30 Pos Indikator). Dipandu NPC Tokoh Perumus Bangsa dengan Bintang Emas & Confetti!
+                </p>
+                <span class="inline-block bg-amber-500 text-slate-900 text-xs font-bold px-4 py-2 rounded-xl btn-game">
+                    Mulai Petualangan <i class="fa-solid fa-arrow-right ml-1"></i>
+                </span>
+            </div>
+
+            <!-- MODE 2: KUIS CEPAT -->
+            <div onclick="switchMode('quiz')" class="glass-card rounded-2xl p-6 text-center cursor-pointer pulau-card border-t-4 border-red-600 relative overflow-hidden group">
+                <div class="absolute -right-6 -bottom-6 opacity-10 group-hover:opacity-20 transition">
+                    <i class="fa-solid fa-stopwatch text-9xl text-red-600"></i>
+                </div>
+                <div class="w-16 h-16 bg-red-600 text-white rounded-2xl flex items-center justify-center mx-auto text-3xl font-extrabold shadow-lg mb-4">
+                    ⚡
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">2. Mode Kuis Cepat 35 Soal</h3>
+                <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                    Simulasi Tes Lengkap 35 Soal. Timer 15 Menit, Analisis Radar Chart 5 Sila & Predikat KKTP!
+                </p>
+                <span class="inline-block bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-xl btn-game">
+                    Mulai Kuis Cepat <i class="fa-solid fa-arrow-right ml-1"></i>
+                </span>
+            </div>
+
+            <!-- MODE 3: NUMERASI -->
+            <div onclick="switchMode('numeracy')" class="glass-card rounded-2xl p-6 text-center cursor-pointer pulau-card border-t-4 border-emerald-600 relative overflow-hidden group">
+                <div class="absolute -right-6 -bottom-6 opacity-10 group-hover:opacity-20 transition">
+                    <i class="fa-solid fa-calculator text-9xl text-emerald-600"></i>
+                </div>
+                <div class="w-16 h-16 bg-emerald-600 text-white rounded-2xl flex items-center justify-center mx-auto text-3xl font-extrabold shadow-lg mb-4">
+                    🔢
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-2">3. Mode Numerasi</h3>
+                <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                    Latihan khusus 4 soal hitungan matematika-Pancasila paling sering keliru. Lengkap dengan Kalkulator & Coretan!
+                </p>
+                <span class="inline-block bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-xl btn-game">
+                    Mulai Numerasi <i class="fa-solid fa-arrow-right ml-1"></i>
+                </span>
+            </div>
+
+        </div>
+
+        <!-- CONTAINER UNTUK TIAP MODE -->
+        
+        <!-- ================= MODE 1: PETUALANGAN (PETA 5 PULAU) ================= -->
+        <section id="adventureSection" class="hidden">
+            <div class="glass-card rounded-2xl p-4 sm:p-6 mb-6">
+                <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+                    <button onclick="goHome()" class="bg-slate-700 text-white text-xs px-3 py-2 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-house mr-1"></i> Menu Utama
+                    </button>
+                    <h2 class="text-lg sm:text-xl font-bold text-amber-700 flex items-center gap-2">
+                        <i class="fa-solid fa-map"></i> Peta Nusantara 5 Sila
+                    </h2>
+                    <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-3 py-1 rounded-full" id="advProgressBadge">
+                        Progres: 0/30 Pos
+                    </span>
+                </div>
+
+                <!-- SELECTOR PULAU SILA -->
+                <div id="islandGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-6">
+                    <!-- Dynamic Islands will be generated here -->
+                </div>
+
+                <!-- POS CONTAINER (INSIDE SELECTED ISLAND) -->
+                <div id="posContainer" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h3 id="selectedIslandTitle" class="text-md font-bold text-slate-800 mb-3 flex items-center justify-between">
+                        <!-- Island Name -->
+                    </h3>
+                    <div id="posButtonsGrid" class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                        <!-- Pos buttons 1 to 6 -->
+                    </div>
+                </div>
+
+                <!-- SOAL POS MODAL / DISPLAY -->
+                <div id="adventureQuestionBox" class="hidden mt-6 bg-white p-5 rounded-xl border-2 border-amber-400 shadow-xl">
+                    <!-- Meta Header -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3 bg-amber-50 p-2.5 rounded-lg text-xs">
+                        <span id="advMetaNo" class="font-extrabold text-amber-900 bg-amber-200 px-2 py-1 rounded">No Soal: -</span>
+                        <span id="advMetaIndikator" class="font-medium text-slate-700">Indikator: -</span>
+                        <span id="advMetaLevel" class="font-bold px-2 py-0.5 rounded text-white bg-blue-600">Level: -</span>
+                    </div>
+
+                    <!-- Question Text -->
+                    <div id="advQuestionText" class="text-sm sm:text-base font-semibold text-slate-800 mb-4 leading-relaxed">
+                        <!-- Soal -->
+                    </div>
+
+                    <!-- Options -->
+                    <div id="advOptionsGrid" class="grid grid-cols-1 gap-2.5 mb-4">
+                        <!-- Pilihan A, B, C, D -->
+                    </div>
+
+                    <!-- NPC Penjelasan Box (Hidden initially) -->
+                    <div id="npcBox" class="hidden bg-yellow-50 border-2 border-yellow-400 p-4 rounded-xl flex items-start gap-4">
+                        <div class="text-4xl" id="npcAvatar">👨‍⚖️</div>
+                        <div class="text-xs sm:text-sm">
+                            <h4 id="npcName" class="font-bold text-amber-900 mb-1">Mr. Mohammad Yamin</h4>
+                            <p id="npcDialog" class="text-slate-700 italic">"Luar biasa! Jawabanmu sangat tepat!"</p>
+                        </div>
+                    </div>
+
+                    <!-- Hint Box (Hidden initially) -->
+                    <div id="hintBox" class="hidden bg-red-50 border border-red-300 p-3 rounded-xl text-xs text-red-800 mt-3 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-500 text-lg"></i>
+                        <span id="hintText">Petunjuk: Ingat kembali tokoh perumus dasar negara...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= MODE 2: KUIS CEPAT 35 SOAL ================= -->
+        <section id="quizSection" class="hidden">
+            <div class="glass-card rounded-2xl p-4 sm:p-6 mb-6">
+                <!-- Header Status -->
+                <div class="flex flex-wrap justify-between items-center mb-4 pb-3 border-b border-slate-200 gap-2">
+                    <button onclick="goHome()" class="bg-slate-700 text-white text-xs px-3 py-2 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-house mr-1"></i> Menu Utama
+                    </button>
+
+                    <!-- Timer Bar -->
+                    <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-1.5 rounded-full font-bold text-sm flex items-center gap-2">
+                        <i class="fa-regular fa-clock animate-spin"></i>
+                        <span>Sisa Waktu: <span id="quizTimer">15:00</span></span>
+                    </div>
+
+                    <button onclick="finishQuizConfirmation()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-4 py-2 rounded-lg font-bold transition">
+                        <i class="fa-solid fa-paper-plane mr-1"></i> Selesaikan Kuis
+                    </button>
+                </div>
+
+                <!-- QUESTION NAVIGATOR NUMBERS (1-35) -->
+                <div class="bg-slate-100 p-3 rounded-xl mb-4">
+                    <div class="text-xs font-semibold text-slate-600 mb-2 flex justify-between">
+                        <span>Peta Soal (Klik nomor untuk berpindah):</span>
+                        <span class="text-slate-500"><span id="answeredCount">0</span>/35 Terjawab</span>
+                    </div>
+                    <div id="quizNavGrid" class="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto p-1">
+                        <!-- Button 1 to 35 -->
+                    </div>
+                </div>
+
+                <!-- SOAL CARD -->
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-md">
+                    <div class="flex justify-between items-center mb-2">
+                        <span id="quizQuestionNum" class="text-xs font-bold text-red-600 bg-red-100 px-2.5 py-1 rounded-full">Soal #1</span>
+                        <span id="quizQuestionMeta" class="text-xs text-slate-500 font-medium">L1 - Sejarah BPUPKI</span>
+                    </div>
+
+                    <p id="quizQuestionText" class="text-sm sm:text-base font-semibold text-slate-800 mb-4 leading-relaxed">
+                        <!-- Content -->
+                    </p>
+
+                    <div id="quizOptionsGrid" class="grid grid-cols-1 gap-2.5 mb-4">
+                        <!-- Options -->
+                    </div>
+
+                    <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                        <button onclick="prevQuiz()" id="btnPrevQuiz" class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs px-4 py-2 rounded-lg font-semibold">
+                            <i class="fa-solid fa-arrow-left mr-1"></i> Sebelumnya
+                        </button>
+                        <button onclick="toggleDoubt()" id="btnDoubt" class="bg-amber-100 hover:bg-amber-200 text-amber-800 text-xs px-3 py-2 rounded-lg font-semibold border border-amber-300">
+                            <i class="fa-regular fa-flag mr-1"></i> Ragu-Ragu
+                        </button>
+                        <button onclick="nextQuiz()" id="btnNextQuiz" class="bg-red-600 hover:bg-red-700 text-white text-xs px-4 py-2 rounded-lg font-semibold">
+                            Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULT SECTION FOR KUIS CEPAT -->
+        <section id="quizResultSection" class="hidden">
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <h2 class="text-2xl font-extrabold text-slate-800 mb-2"> Hasil Evaluasi Kuis Cepat</h2>
+                <p class="text-xs text-slate-600 mb-6">Asesmen Sumatif Gasal Pendidikan Pancasila VII</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-6">
+                    <!-- SKOR CARD -->
+                    <div class="bg-gradient-to-br from-amber-500 to-amber-600 text-slate-900 rounded-2xl p-6 shadow-xl border-2 border-yellow-300">
+                        <span class="text-xs uppercase font-bold tracking-wider opacity-80">Nilai Akhir Siswa</span>
+                        <div id="finalScoreDisplay" class="text-6xl font-black my-2">0</div>
+                        <div id="kktpBadge" class="inline-block px-4 py-1.5 rounded-full text-xs font-bold bg-white text-slate-900 shadow">
+                            Belum Tuntas (Remedial)
+                        </div>
+                    </div>
+
+                    <!-- RADAR CHART SVG / CANVAS (ANALISIS 5 SILA) -->
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow flex flex-col items-center">
+                        <h4 class="text-xs font-bold text-slate-700 mb-2">📊 Radar Penguasaan 5 Sila Pancasila</h4>
+                        <canvas id="radarChartCanvas" width="260" height="260" class="max-w-full"></canvas>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-3">
+                    <button onclick="goHome()" class="bg-slate-700 hover:bg-slate-800 text-white text-xs px-5 py-2.5 rounded-xl font-bold">
+                        <i class="fa-solid fa-house mr-1"></i> Kembali ke Menu
+                    </button>
+                    <button onclick="switchMode('quiz')" class="bg-red-600 hover:bg-red-700 text-white text-xs px-5 py-2.5 rounded-xl font-bold">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Coba Lagi Kuis
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= MODE 3: NUMERASI PANCASILA ================= -->
+        <section id="numeracySection" class="hidden">
+            <div class="glass-card rounded-2xl p-4 sm:p-6 mb-6">
+                <div class="flex justify-between items-center mb-4 pb-3 border-b border-slate-200">
+                    <button onclick="goHome()" class="bg-slate-700 text-white text-xs px-3 py-2 rounded-lg hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-house mr-1"></i> Menu Utama
+                    </button>
+                    <h2 class="text-lg sm:text-xl font-bold text-emerald-700 flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> Tantangan Numerasi Pancasila
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- SOAL & LIST NUMERASI -->
+                    <div class="lg:col-span-2 space-y-4">
+                        <!-- Select Numeracy Question Tab -->
+                        <div class="flex gap-2 border-b border-slate-200 pb-2 overflow-x-auto" id="numTabs">
+                            <button onclick="loadNumeracySoal(0)" class="num-tab-btn active bg-emerald-600 text-white text-xs px-3 py-2 rounded-lg font-semibold whitespace-nowrap">Soal 1 (Survei)</button>
+                            <button onclick="loadNumeracySoal(1)" class="num-tab-btn bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-semibold whitespace-nowrap">Soal 2 (Bansos)</button>
+                            <button onclick="loadNumeracySoal(2)" class="num-tab-btn bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-semibold whitespace-nowrap">Soal 3 (Rasio)</button>
+                            <button onclick="loadNumeracySoal(3)" class="num-tab-btn bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-semibold whitespace-nowrap">Soal 4 (Jepang)</button>
+                        </div>
+
+                        <!-- Numeracy Soal Card -->
+                        <div class="bg-white p-5 rounded-xl border border-emerald-200 shadow-md">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full" id="numTitle">Soal Numerasi 1</span>
+                                <span class="text-xs text-slate-500">Kontekstual Pancasila</span>
+                            </div>
+                            <p id="numQuestionText" class="text-sm font-semibold text-slate-800 mb-4 leading-relaxed">
+                                <!-- Text Soal Numerasi -->
+                            </p>
+
+                            <div id="numOptionsGrid" class="grid grid-cols-1 gap-2.5 mb-4">
+                                <!-- Options -->
+                            </div>
+
+                            <div id="numFeedback" class="hidden p-3 rounded-lg text-xs font-medium"></div>
+                        </div>
+                    </div>
+
+                    <!-- INTERACTIVE TOOLKIT: CALCULATOR & SCRATCHPAD -->
+                    <div class="bg-slate-100 p-4 rounded-xl border border-slate-300">
+                        <h4 class="text-xs font-bold text-slate-700 mb-3 flex items-center gap-1.5">
+                            <i class="fa-solid fa-toolbox text-emerald-600"></i> Alat Bantu Hitung Siswa
+                        </h4>
+
+                        <!-- KALKULATOR MINI -->
+                        <div class="bg-slate-800 p-3 rounded-xl shadow mb-4">
+                            <input type="text" id="calcDisplay" readonly class="w-full bg-emerald-950 text-emerald-400 font-mono text-right text-lg p-2 rounded mb-2 font-bold tracking-wider" value="0">
+                            <div class="grid grid-cols-4 gap-1.5 text-xs">
+                                <button onclick="calcInput('C')" class="bg-red-500 text-white p-2 rounded font-bold">C</button>
+                                <button onclick="calcInput('/')" class="bg-slate-600 text-white p-2 rounded font-bold">/</button>
+                                <button onclick="calcInput('*')" class="bg-slate-600 text-white p-2 rounded font-bold">*</button>
+                                <button onclick="calcInput('-')" class="bg-slate-600 text-white p-2 rounded font-bold">-</button>
+                                
+                                <button onclick="calcInput('7')" class="bg-slate-700 text-white p-2 rounded font-bold">7</button>
+                                <button onclick="calcInput('8')" class="bg-slate-700 text-white p-2 rounded font-bold">8</button>
+                                <button onclick="calcInput('9')" class="bg-slate-700 text-white p-2 rounded font-bold">9</button>
+                                <button onclick="calcInput('+')" class="bg-slate-600 text-white p-2 rounded font-bold">+</button>
+                                
+                                <button onclick="calcInput('4')" class="bg-slate-700 text-white p-2 rounded font-bold">4</button>
+                                <button onclick="calcInput('5')" class="bg-slate-700 text-white p-2 rounded font-bold">5</button>
+                                <button onclick="calcInput('6')" class="bg-slate-700 text-white p-2 rounded font-bold">6</button>
+                                <button onclick="calcInput('=')" class="row-span-2 bg-emerald-600 text-white p-2 rounded font-bold flex items-center justify-center">=</button>
+                                
+                                <button onclick="calcInput('1')" class="bg-slate-700 text-white p-2 rounded font-bold">1</button>
+                                <button onclick="calcInput('2')" class="bg-slate-700 text-white p-2 rounded font-bold">2</button>
+                                <button onclick="calcInput('3')" class="bg-slate-700 text-white p-2 rounded font-bold">3</button>
+                                
+                                <button onclick="calcInput('0')" class="col-span-2 bg-slate-700 text-white p-2 rounded font-bold">0</button>
+                                <button onclick="calcInput('.')" class="bg-slate-700 text-white p-2 rounded font-bold">.</button>
+                            </div>
+                        </div>
+
+                        <!-- SCRATCHPAD CORAT-CORET -->
+                        <div class="bg-white p-2 rounded-xl border border-slate-300">
+                            <div class="flex justify-between items-center mb-1 text-xs">
+                                <span class="font-bold text-slate-600">✏️ Paparan Coretan:</span>
+                                <button onclick="clearScratchpad()" class="text-red-500 hover:text-red-700 font-bold">Hapus</button>
+                            </div>
+                            <canvas id="scratchpadCanvas" width="220" height="130" class="scratchpad-canvas w-full rounded"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER ELEGANT -->
+        <footer class="mt-8 text-center text-slate-300 text-xs py-4 border-t border-slate-700/50">
+            <p>© 2026 Pendidikan Pancasila - SMP Negeri 4 Kalibening. All Rights Reserved.</p>
+            <p class="mt-1 text-amber-300 font-medium">Dirancang khusus untuk persiapan Tes Tengah Semester (Selasa, 27 Oktober 2026)</p>
+        </footer>
+
+    </div>
+
+    <!-- AUDIO EFFECTS (Web Audio API Synthesizer) -->
+    <script>
+        // Web Audio API Audio Effects Generator
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioCtx();
+            }
+        }
+
+        function playSound(type) {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+                    osc.frequency.exponentialRampToValueAtTime(783.99, audioCtx.currentTime + 0.2); // G5
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.4);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
+                    osc.frequency.exponentialRampToValueAtTime(130.81, audioCtx.currentTime + 0.2); // C3
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                } else if (type === 'click') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.05);
+                }
+            } catch(e) {}
+        }
+    </script>
+
+    <!-- MAIN DATA & APP LOGIC -->
+    <script>
+        // DATA 35 SOAL SESUAI KISI-KISI ASLI SMPN 4 KALIBENING
+        const datasetSoal = [
+            {
+                no: 1, sila: 1, cp: "Perumusan Dasar Negara", level: "L1",
+                indikator: "Menyebutkan usulan asas M. Yamin",
+                soal: "Dalam Sidang I BPUPKI tanggal 29 Mei 1945, Mr. Mohammad Yamin mengusulkan 5 asas dasar negara secara lisan. Asas pertama yang beliau sampaikan adalah...",
+                options: ["Peri Kebangsaan", "Peri Kemanusiaan", "Peri Ketuhanan", "Kesejahteraan Rakyat"],
+                jawaban: 0,
+                hint: "Usulan pertama lisan Mr. Mohammad Yamin berkaitan dengan rasa kebangsaan.",
+                npc: "Mohammad Yamin", avatar: "👨‍⚖️",
+                penjelasan: "Mr. Mohammad Yamin mengusulkan 5 asas secara lisan pada 29 Mei 1945: (1) Peri Kebangsaan, (2) Peri Kemanusiaan, (3) Peri Ketuhanan, (4) Peri Kerakyatan, dan (5) Kesejahteraan Rakyat."
+            },
+            {
+                no: 2, sila: 3, cp: "Perumusan Dasar Negara", level: "L2",
+                indikator: "Menentukan inti pemikiran integralistik",
+                soal: "Dr. Soepomo mengemukakan teori paham negara integralistik pada tanggal 31 Mei 1945. Makna utama paham integralistik bagi negara Indonesia adalah...",
+                options: ["Negara mengutamakan kepentingan individualistis", "Negara bersatu dengan seluruh rakyatnya mengatasi golongan", "Negara mendasarkan pada kekuasaan militer mutlak", "Negara memisahkan urusan agama dan sosial"],
+                jawaban: 1,
+                hint: "Integralistik menekankan persatuan total antara negara dan seluruh rakyat tanpa membedakan golongan.",
+                npc: "Dr. Soepomo", avatar: "👨‍🏫",
+                penjelasan: "Paham integralistik Soepomo memandang negara tidak memihak pada satu golongan, melainkan bersatu dengan seluruh rakyatnya demi persatuan nasional."
+            },
+            {
+                no: 3, sila: 1, cp: "Perumusan Dasar Negara", level: "L1",
+                indikator: "Mengidentifikasi peringatan 1 Juni",
+                soal: "Tanggal 1 Juni diperingati sebagai Hari Lahir Pancasila. Hal ini didasarkan pada peristiwa sejarah yaitu...",
+                options: ["Pengesahan UUD 1945 oleh PPKI", "Pidato Ir. Soekarno yang menyampaikan usulan dasar negara 'Pancasila'", "Penandatanganan Piagam Jakarta oleh Panitia Sembilan", "Pembentukan BPUPKI oleh pemerintah Jepang"],
+                jawaban: 1,
+                hint: "1 Juni 1945 adalah saat Ir. Soekarno menyampaikan pidato monumental yang pertama kali memperkenalkan nama Pancasila.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "Pada 1 Juni 1945, Ir. Soekarno menyampaikan pidatonya mengenai lima prinsip dasar negara yang dinamakan Pancasila."
+            },
+            {
+                no: 4, sila: 3, cp: "Perumusan Dasar Negara", level: "L1",
+                indikator: "Menjelaskan tugas Panitia Sembilan",
+                soal: "Panitia Sembilan dibentuk oleh BPUPKI untuk menyelesaikan perbedaan pendapat mengenai dasar negara. Tugas utama Panitia Sembilan adalah...",
+                options: ["Menyusun teks Proklamasi Kemerdekaan", "Menyelaraskan usulan-usulan dasar negara dan menyusun rancangan Pembukaan UUD", "Memilih Presiden dan Wakil Presiden pertama", "Merancang bendera dan lagu kebangsaan"],
+                jawaban: 1,
+                hint: "Panitia Sembilan bertugas mengolah berbagai usulan dasar negara hingga menghasilkan Piagam Jakarta.",
+                npc: "Dr. Radjiman Wedyodiningrat", avatar: "👨‍⚕️",
+                penjelasan: "Panitia Sembilan mengolah usulan dasar negara dari para anggota dan berhasil menyusun Piagam Jakarta (Jakarta Charter) pada 22 Juni 1945."
+            },
+            {
+                no: 5, sila: 1, cp: "Perumusan Dasar Negara", level: "L3",
+                indikator: "Menganalisis nilai toleransi perubahan sila 1",
+                soal: "Perubahan kalimat 'Ketuhanan dengan kewajiban menjalankan syariat Islam bagi pemeluk-pemeluknya' menjadi 'Ketuhanan Yang Maha Esa' mencerminkan nilai luhur pendiri bangsa yaitu...",
+                options: ["Sikap memaksakan kehendak mayoritas", "Toleransi, jiwa besar, dan menjaga persatuan bangsa", "Kepasrahan pada situasi geopolitik dunia", "Keinginan mempercepat pembentukan tentara nasional"],
+                jawaban: 1,
+                hint: "Pendiri bangsa dari kalangan Islam rela mengubah kalimat demi menjaga keutuhan Indonesia dari Sabang sampai Merauke.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "Sikap jiwa besar para tokoh Islam demi menjaga persatuan NKRI menunjukkan toleransi dan kebangsaan yang luar biasa."
+            },
+            {
+                no: 6, sila: 3, cp: "Perumusan Dasar Negara", level: "L2",
+                indikator: "Menghitung total durasi sidang (Numerasi)",
+                soal: "Sidang resmi I BPUPKI berlangsung selama 4 hari (29 Mei - 1 Juni 1945) dan Sidang resmi II berlangsung selama 8 hari (10 - 17 Juli 1945). Berapakah total durasi hari sidang resmi BPUPKI tersebut?",
+                options: ["10 hari", "12 hari", "14 hari", "16 hari"],
+                jawaban: 1,
+                hint: "Tambahkan durasi Sidang I (4 hari) dengan Sidang II (8 hari).",
+                npc: "Mohammad Yamin", avatar: "👨‍⚖️",
+                penjelasan: "Total durasi = 4 hari (Sidang I) + 8 hari (Sidang II) = 12 hari sidang resmi."
+            },
+            {
+                no: 7, sila: 3, cp: "Penerapan Nilai Pancasila", level: "L2",
+                indikator: "Mengaitkan kerja bakti dengan sila 3",
+                soal: "Warga desa Kalibening rutin mengadakan kerja bakti membersihkan lingkungan setiap hari Minggu. Kegiatan bersama tanpa memandang perbedaan ini sesuai dengan pengamalan Pancasila sila ke-...",
+                options: ["Sila Pertama", "Sila Kedua", "Sila Ketiga", "Sila Kelima"],
+                jawaban: 2,
+                hint: "Kerja bakti dan gotong royong membina rasa persatuan dan kebersamaan.",
+                npc: "Dr. Soepomo", avatar: "👨‍🏫",
+                penjelasan: "Gotong royong dan kerja bakti memupuk persatuan nasional yang tercermin dalam Sila ke-3: Persatuan Indonesia."
+            },
+            {
+                no: 8, sila: 4, cp: "Penerapan Nilai Pancasila", level: "L2",
+                indikator: "Mengidentifikasi musyawarah sebagai sila 4",
+                soal: "Ketika ada perbedaan pendapat dalam menentukan jadwal ronda malam di RT, Pak Budi mengusulkan untuk mengadakan musyawarah mufakat. Perilaku ini mencerminkan Sila ke-...",
+                options: ["2", "3", "4", "5"],
+                jawaban: 2,
+                hint: "Musyawarah untuk mufakat adalah ciri khas utama sila ke-4 Pancasila.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "Penyelesaian masalah bersama dengan musyawarah mufakat merupakan pengamalan Sila ke-4: Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan."
+            },
+            {
+                no: 9, sila: 5, cp: "Penerapan Nilai Pancasila", level: "L2",
+                indikator: "Mengaitkan Bansos dengan sila 5",
+                soal: "Pemerintah membagikan Bantuan Sosial (Bansos) secara adil dan tepat sasaran kepada warga masyarakat yang kurang mampu. Hal ini merupakan wujud penerapan Pancasila sila ke-...",
+                options: ["Sila ke-2", "Sila ke-3", "Sila ke-4", "Sila ke-5"],
+                jawaban: 3,
+                hint: "Pemerataan dan keadilan sosial bagi seluruh rakyat merupakan sila ke-5.",
+                npc: "Dr. Radjiman Wedyodiningrat", avatar: "👨‍⚕️",
+                penjelasan: "Bantuan sosial yang adil dan merata bertujuan mewujudkan Keadilan Sosial bagi Seluruh Rakyat Indonesia (Sila ke-5)."
+            },
+            {
+                no: 10, sila: 2, cp: "Penerapan Nilai Pancasila", level: "L3",
+                indikator: "Membedakan penerapan & pelanggaran Pancasila",
+                soal: "Manakah di antara tindakan berikut yang termasuk PELANGGARAN terhadap nilai-nilai Kemanusiaan yang Adil dan Beradab (Sila ke-2)?",
+                options: ["Menghormati teman yang sedang beribadah", "Melakukan aksi perundungan (bullying) di sekolah", "Mengikuti pemilihan ketua OSIS secara demokratis", "Menggalang dana untuk korban bencana alam"],
+                jawaban: 1,
+                hint: "Perundungan (bullying) merendahkan martabat manusia dan menyakiti sesama.",
+                npc: "Mohammad Yamin", avatar: "👨‍⚖️",
+                penjelasan: "Perundungan/bullying merusak nilai kemanusiaan dan merendahkan martabat orang lain, sehingga bertentangan dengan Sila ke-2."
+            },
+            {
+                no: 11, sila: 1, cp: "Perumusan Dasar Negara", level: "L1",
+                indikator: "Mengidentifikasi Ketua BPUPKI",
+                soal: "Ketua Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan Indonesia (BPUPKI) yang memimpin jalannya sidang-sidang perumusan dasar negara adalah...",
+                options: ["Ir. Soekarno", "Drs. Mohammad Hatta", "Dr. K.R.T. Radjiman Wedyodiningrat", "Mr. Kasman Singodimedjo"],
+                jawaban: 2,
+                hint: "Beliau adalah seorang dokter senior yang arif dan bijaksana memimpin BPUPKI.",
+                npc: "Dr. Radjiman Wedyodiningrat", avatar: "👨‍⚕️",
+                penjelasan: "Dr. K.R.T. Radjiman Wedyodiningrat ditunjuk sebagai Ketua BPUPKI (Dokuritsu Junbi Cosakai)."
+            },
+            {
+                no: 12, sila: 2, cp: "Penerapan Nilai Pancasila", level: "L2",
+                indikator: "Menentukan perilaku tidak sesuai sila 2",
+                soal: "Siswa kelas VII SMPN 4 Kalibening sedang belajar saling menghargai. Perilaku yang TIDAK sesuai dengan nilai Sila ke-2 adalah...",
+                options: ["Menolong teman yang jatuh dari sepeda", "Mengejek fisik atau latar belakang teman", "Berbicara dengan bahasa yang santun", "Bersikap adil saat membagi kelompok belajar"],
+                jawaban: 1,
+                hint: "Mengejek teman merendahkan martabat manusia.",
+                npc: "Dr. Soepomo", avatar: "👨‍🏫",
+                penjelasan: "Mengejek teman bertentangan dengan Sila ke-2 yang mengajarkan kita untuk memperlakukan manusia sesuai harkat dan martabatnya."
+            },
+            {
+                no: 13, sila: 3, cp: "Perumusan Dasar Negara", level: "L2",
+                indikator: "Menghitung persentase anggota luar biasa (Numerasi)",
+                soal: "Jumlah total anggota BPUPKI adalah 67 orang, terdiri dari 60 anggota aktif Indonesia dan 7 anggota luar biasa dari Jepang. Berapakah persentase anggota luar biasa Jepang tersebut? (Pembulatan 1 desimal)",
+                options: ["8,5%", "10,4%", "12,1%", "15,0%"],
+                jawaban: 1,
+                hint: "Hitung dengan rumus: (7 / 67) × 100%.",
+                npc: "Mohammad Yamin", avatar: "👨‍⚖️",
+                penjelasan: "Persentase = (7 / 67) × 100% ≈ 10,44% (dibulatkan menjadi 10,4%)."
+            },
+            {
+                no: 14, sila: 3, cp: "Perumusan Dasar Negara", level: "L1",
+                indikator: "Menyebutkan Ketua PPKI",
+                soal: "Setelah BPUPKI dibubarkan, dibentuklah Panitia Persiapan Kemerdekaan Indonesia (PPKI) pada 7 Agustus 1945. PPKI diketuai oleh...",
+                options: ["Ir. Soekarno", "Drs. Mohammad Hatta", "Mr. Soepomo", "Sutan Sjahrir"],
+                jawaban: 0,
+                hint: "Beliau yang kemudian menjadi Presiden Pertama Republik Indonesia.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "PPKI (Dokuritsu Junbi Inkai) diketuai oleh Ir. Soekarno dan wakilnya Drs. Mohammad Hatta."
+            },
+            {
+                no: 15, sila: 1, cp: "Era Digital & Globalisasi", level: "L3",
+                indikator: "Menentukan sikap kritis terhadap hoaks",
+                soal: "Di era digital saat ini, marak beredar berita hoaks berunsur SARA di media sosial. Sikap siswa yang mencerminkan kecerdasan Pancasila adalah...",
+                options: ["Langsung membagikan berita tersebut ke grup WA kelas", "Menyaring informasi (tabayyun) dan mengecek kebenaran berita sebelum membagikannya", "Membalas dengan ujaran kebencian di kolom komentar", "Apatis dan tidak peduli pada lingkungan sekitar"],
+                jawaban: 1,
+                hint: "Saring sebelum saring. Tabayyun dan cek fakta adalah kunci menghadapi hoaks.",
+                npc: "Dr. Radjiman Wedyodiningrat", avatar: "👨‍⚕️",
+                penjelasan: "Kritis terhadap berita hoaks dengan saring sebelum sharing menjaga perdamaian dan persatuan bangsa."
+            },
+            {
+                no: 16, sila: 1, cp: "Penerapan Nilai Pancasila", level: "L2",
+                indikator: "Mengidentifikasi toleransi sebagai sila 1",
+                soal: "Siswa SMPN 4 Kalibening memberikan kesempatan kepada temannya yang beragama lain untuk beribadah saat kegiatan ekstrakurikuler. Perilaku ini mencerminkan Sila ke-...",
+                options: ["Sila 1", "Sila 2", "Sila 3", "Sila 4"],
+                jawaban: 0,
+                hint: "Kebebasan menjalankan ibadah sesuai agama masing-masing adalah sila ke-1.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "Sila Pertama: Ketuhanan Yang Maha Esa mengajarkan sikap toleransi dan menghormati kebebasan beragama."
+            },
+            {
+                no: 17, sila: 5, cp: "Numerasi Konteks Pancasila", level: "L2",
+                indikator: "Menghitung jumlah pemilih sila 5 (Numerasi)",
+                soal: "Dari hasil survei terhadap 200 responden siswa mengenai pengamalan Pancasila, sebanyak 20% siswa paling terkesan dengan pengamalan Sila ke-5 (Keadilan Sosial). Berapakah jumlah siswa pemilih Sila ke-5 tersebut?",
+                options: ["30 siswa", "40 siswa", "50 siswa", "60 siswa"],
+                jawaban: 1,
+                hint: "Hitung 20% dari 200 = (20 / 100) × 200.",
+                npc: "Mohammad Yamin", avatar: "👨‍⚖️",
+                penjelasan: "Jumlah siswa = (20 / 100) × 200 = 40 siswa."
+            },
+            {
+                no: 18, sila: 1, cp: "Kedudukan & Pemikiran Pancasila", level: "L1",
+                indikator: "Menyebutkan inti Ekasila",
+                soal: "Dalam pidato 1 Juni 1945, Ir. Soekarno menjelaskan jika Pancasila diperas menjadi Trisila, dan jika diperas lagi menjadi Ekasila, maka inti dari Ekasila adalah...",
+                options: ["Keadilan", "Gotong Royong", "Demokrasi", "Ketuhanan"],
+                jawaban: 1,
+                hint: "Semangat asli kebersamaan masyarakat Indonesia adalah gotong royong.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "Ir. Soekarno menegaskan bahwa inti dari Ekasila adalah 'Gotong Royong'."
+            },
+            {
+                no: 19, sila: 4, cp: "Penerapan Nilai Pancasila", level: "L2",
+                indikator: "Mengidentifikasi musyawarah sebagai sila 4",
+                soal: "Musyawarah pemilihan ketua kelas VII A berlangsung secara terbuka dan demokratis. Setiap siswa memiliki hak suara yang sama. Kegiatan ini berlandaskan Sila ke-...",
+                options: ["Sila 2", "Sila 3", "Sila 4", "Sila 5"],
+                jawaban: 2,
+                hint: "Hak demokrasi dan musyawarah adalah wujud Sila ke-4.",
+                npc: "Dr. Soepomo", avatar: "👨‍🏫",
+                penjelasan: "Pemilihan dan keputusan bersama melalui musyawarah merupakan wujud pelaksanaan Sila ke-4 Pancasila."
+            },
+            {
+                no: 20, sila: 1, cp: "Kedudukan & Pemikiran Pancasila", level: "L1",
+                indikator: "Menunjukkan dokumen penetapan Pancasila",
+                soal: "Pancasila secara resmi disahkan sebagai dasar negara Indonesia yang sah pada tanggal 18 Agustus 1945 dalam dokumen...",
+                options: ["Teks Proklamasi", "Pembukaan UUD 1945 Alinea IV", "Piagam Jakarta", "Batang Tubuh UUD"],
+                jawaban: 1,
+                hint: "Rumusan Pancasila yang sah dan berlaku hingga kini terdapat pada Pembukaan UUD 1945 alinea ke-4.",
+                npc: "Dr. Radjiman Wedyodiningrat", avatar: "👨‍⚕️",
+                penjelasan: "Pada 18 Agustus 1945, PPKI mengesahkan Pembukaan UUD 1945 yang di dalamnya memuat rumusan sah 5 sila Pancasila."
+            },
+            {
+                no: 21, sila: 3, cp: "Numerasi Konteks Pancasila", level: "L2",
+                indikator: "Menentukan sikap teladan pendiri bangsa",
+                soal: "Para pendiri bangsa mengutamakan kepentingan bangsa di atas kepentingan pribadi/golongan. Nilai teladan utama ini sangat relevan untuk memperkuat...",
+                options: ["Persatuan dan kesatuan nasional", "Keuntungan ekonomi pribadi", "Kekuasaan politik kelompok", "Popularitas di media sosial"],
+                jawaban: 0,
+                hint: "Mengutamakan kepentingan umum menjaga keutuhan NKRI.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "Sikap rela berkorban dan mengutamakan bangsa di atas kepentingan pribadi memupuk persatuan nasional."
+            },
+            {
+                no: 22, sila: 2, cp: "Penerapan Nilai Pancasila", level: "L3",
+                indikator: "Mengidentifikasi pengamalan sila 2 & 5",
+                soal: "Siswa SMPN 4 Kalibening mengumpulkan bantuan uang duka untuk keluarga teman yang sedang tertimpa musibah. Kegiatan ini menunjukkan perpaduan pengamalan Sila ke-...",
+                options: ["Sila 1 dan 3", "Sila 2 (Kemanusiaan) dan Sila 5 (Kepedulian Sosial)", "Sila 3 dan 4", "Sila 1 dan 4"],
+                jawaban: 1,
+                hint: "Menolong sesama manusia yang menderita adalah wujud Sila 2 dan Keadilan/Kepedulian Sosial Sila 5.",
+                npc: "Mohammad Yamin", avatar: "👨‍⚖️",
+                penjelasan: "Aksi empati dan bantuan sosial menggabungkan nilai tenggang rasa (Sila 2) dan kepedulian sosial (Sila 5)."
+            },
+            {
+                no: 23, sila: 3, cp: "Kedudukan & Pemikiran Pancasila", level: "L3",
+                indikator: "Menyimpulkan kesamaan usulan tokoh",
+                soal: "Meski ketiga tokoh (M. Yamin, Soepomo, Soekarno) menggunakan istilah berbeda, terdapat satu prinsip kesamaan dasar yang diusulkan semuanya yaitu...",
+                options: ["Prinsip paham negara kerajaan", "Prinsip Ketuhanan dan Persatuan Kebangsaan", "Prinsip kapitalisme modern", "Prinsip negara bagian/federal"],
+                jawaban: 1,
+                hint: "Ketiga tokoh selalu memasukkan unsur Ketuhanan dan Kebangsaan/Persatuan.",
+                npc: "Dr. Soepomo", avatar: "👨‍🏫",
+                penjelasan: "Seluruh perumus dasar negara sepakat bahwa Indonesia harus berdasar pada Ketuhanan dan Kebangsaan yang bersatu."
+            },
+            {
+                no: 24, sila: 5, cp: "Numerasi Konteks Pancasila", level: "L2",
+                indikator: "Menghitung sisa uang tunai disalurkan (Numerasi)",
+                soal: "Panitia bakti sosial SMPN 4 Kalibening memiliki anggaran Rp 10.000.000,00. Sebanyak Rp 7.000.000,00 dibelikan sembako, dan sisanya disalurkan dalam bentuk tunai. Berapakah sisa uang tunai tersebut?",
+                options: ["Rp 2.000.000,00", "Rp 3.000.000,00", "Rp 4.000.000,00", "Rp 5.000.000,00"],
+                jawaban: 1,
+                hint: "Sisa = Rp 10.000.000 - Rp 7.000.000.",
+                npc: "Dr. Radjiman Wedyodiningrat", avatar: "👨‍⚕️",
+                penjelasan: "Sisa uang tunai = Rp 10.000.000 - Rp 7.000.000 = Rp 3.000.000,00."
+            },
+            {
+                no: 25, sila: 3, cp: "Era Digital & Globalisasi", level: "L2",
+                indikator: "Menjelaskan makna gotong royong",
+                soal: "Gotong royong merupakan warisan budaya leluhur bangsa Indonesia. Makna utama gotong royong dalam kehidupan bermasyarakat adalah...",
+                options: ["Bekerja bersama-sama untuk mencapai tujuan bersama secara sukarela", "Mencari keuntungan finansial pribadi", "Memaksa orang lain bekerja tanpa imbalan", "Menunjukkan kekuatan kelompok tertentu"],
+                jawaban: 0,
+                hint: "Gotong royong didasari semangat sukarela dan kebersamaan.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "Gotong royong adalah bekerja bersama demi kepentingan bersama tanpa mengharapkan imbalan secara pribadi."
+            },
+            {
+                no: 26, sila: 3, cp: "Era Digital & Globalisasi", level: "L3",
+                indikator: "Menentukan solusi filter budaya asing",
+                soal: "Masuknya budaya asing melalui media sosial seringkali tidak sesuai dengan adat ketimuran. Solusi terbaik generasi muda Indonesia adalah...",
+                options: ["Menolak semua budaya dari luar tanpa terkecuali", "Menerima seluruh budaya asing agar dianggap modern", "Menyaring (memfilter) budaya asing sesuai nilai-nilai Pancasila", "Menghapus akun media sosial"],
+                jawaban: 2,
+                hint: "Pancasila berfungsi sebagai filter/penyaring budaya asing.",
+                npc: "Dr. Soepomo", avatar: "👨‍🏫",
+                penjelasan: "Pancasila menjadi benteng dan filter budaya: mengambil sisi positif teknologi & ilmu pengetahuan asing tanpa merusak identitas bangsa."
+            },
+            {
+                no: 27, sila: 4, cp: "Penerapan Nilai Pancasila", level: "L2",
+                indikator: "Mengidentifikasi musyawarah sebagai sila 4",
+                soal: "Apabila dalam musyawarah keputusan mufakat sulit dicapai, tindakan bermartabat yang sesuai dengan Sila ke-4 adalah...",
+                options: ["Meninggalkan ruangan sidang dengan marah", "Memaksa pendapat pribadi harus diterima", "Mengutamakan voting/pemungutan suara secara jujur dan menerima hasilnya", "Mengancam peserta sidang lainnya"],
+                jawaban: 2,
+                hint: "Menerima hasil keputusan bersama dengan lapang dada adalah etika musyawarah.",
+                npc: "Mohammad Yamin", avatar: "👨‍⚖️",
+                penjelasan: "Menghormati dan melaksanakan hasil keputusan musyawarah/voting dengan ikhlas merupakan wujud pengamalan Sila ke-4."
+            },
+            {
+                no: 28, sila: 5, cp: "Penerapan Nilai Pancasila", level: "L3",
+                indikator: "Mengidentifikasi pengamalan sila 2 & 5",
+                soal: "Membiasakan hidup hemat, tidak pemboros, dan tidak bergaya hidup mewah merupakan contoh pengamalan Pancasila Sila ke-...",
+                options: ["Sila 2", "Sila 3", "Sila 4", "Sila 5"],
+                jawaban: 3,
+                hint: "Tidak melakukan perbuatan yang merugikan kepentingan umum dan tidak bergaya hidup mewah ada di Sila ke-5.",
+                npc: "Dr. Radjiman Wedyodiningrat", avatar: "👨‍⚕️",
+                penjelasan: "Sila ke-5 mengajarkan kita bersikap hemat, tidak bergaya hidup mewah, dan menghargai hasil karya orang lain."
+            },
+            {
+                no: 29, sila: 3, cp: "Penerapan Nilai Pancasila", level: "L3",
+                indikator: "Menentukan upaya persatuan di atas perbedaan",
+                soal: "Saat terjadi perbedaan pilihan dalam pemilihan Kepala Desa (Pilkades), warga desa tetap saling menyapa dan menjaga silaturahmi. Tindakan ini mencerminkan slogan...",
+                options: ["Tut Wuri Handayani", "Bhinneka Tunggal Ika", "Habis Gelap Terbitlah Terang", "Ing Ngarso Sung Tulodho"],
+                jawaban: 1,
+                hint: "Semboyan bangsa yang artinya Berbeda-beda tetapi tetap satu jua.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "Bhinneka Tunggal Ika mengajarkan kita untuk tetap bersatu di tengah berbagai perbedaan pilihan dan latar belakang."
+            },
+            {
+                no: 30, sila: 4, cp: "Numerasi Konteks Pancasila", level: "L2",
+                indikator: "Menghitung rasio penghijauan vs renovasi (Numerasi)",
+                soal: "Dalam musyawarah RT yang dihadiri 50 warga, sebanyak 30 warga memilih program penghijauan desa dan 20 warga memilih renovasi balai RT. Berapakah perbandingan (rasio) sederhana warga pemilih penghijauan dibanding renovasi?",
+                options: ["2 : 3", "3 : 2", "3 : 5", "5 : 3"],
+                jawaban: 1,
+                hint: "Bandingkan 30 : 20 lalu sederhanakan dengan membagi 10.",
+                npc: "Mohammad Yamin", avatar: "👨‍⚖️",
+                penjelasan: "Rasio Penghijauan : Renovasi = 30 : 20 = 3 : 2."
+            },
+            {
+                no: 31, sila: 1, cp: "Perumusan Dasar Negara", level: "L1",
+                indikator: "Menentukan agenda utama Sidang I",
+                soal: "Agenda utama yang dibahas oleh para pendiri bangsa pada Sidang Pertama BPUPKI (29 Mei - 1 Juni 1945) adalah...",
+                options: ["Merumuskan Dasar Negara Indonesia Merdeka", "Menyusun teks Proklamasi", "Memilih Presiden Pertama", "Membuat Bendera Merah Putih"],
+                jawaban: 0,
+                hint: "Dr. Radjiman bertanya pada pembukaan sidang: 'Apa dasar negara yang akan kita bentuk?'",
+                npc: "Dr. Radjiman Wedyodiningrat", avatar: "👨‍⚕️",
+                penjelasan: "Agenda utama Sidang I BPUPKI adalah membahas dan merumuskan dasar negara Indonesia merdeka."
+            },
+            {
+                no: 32, sila: 2, cp: "Penerapan Nilai Pancasila", level: "L3",
+                indikator: "Mengidentifikasi pengamalan sila 2 & 5",
+                soal: "Menghormati hak-hak orang lain serta menyeimbangkan antara hak dan kewajiban merupakan cerminan pengamalan Sila ke-...",
+                options: ["Sila 1", "Sila 2", "Sila 4", "Sila 5"],
+                jawaban: 3,
+                hint: "Keseimbangan antara hak dan kewajiban ditegaskan pada Sila Keadilan Sosial.",
+                npc: "Dr. Soepomo", avatar: "👨‍🏫",
+                penjelasan: "Keseimbangan antara hak dan kewajiban serta menghormati hak orang lain adalah butir pengamalan Sila ke-5."
+            },
+            {
+                no: 33, sila: 4, cp: "Kedudukan & Pemikiran Pancasila", level: "L3",
+                indikator: "Mengidentifikasi nilai musyawarah pendiri bangsa",
+                soal: "Kunci utama keberhasilan pendiri bangsa dalam mencapai mufakat dasar negara meskipun memiliki perbedaan pandangan adalah...",
+                options: ["Sikap egois dan keras kepala", "Mengedepankan dialog, musyawarah, dan toleransi tinggi", "Membiarkan konflik berlarut-larut", "Menggunakan kekuatan senjata"],
+                jawaban: 1,
+                hint: "Dialog yang santun dan toleransi adalah kunci kesepakatan nasional.",
+                npc: "Ir. Soekarno", avatar: "🇮🇩",
+                penjelasan: "Semangat musyawarah, kebesaran jiwa, dan toleransi antar pendiri bangsa melahirkan konsensus Pancasila."
+            },
+            {
+                no: 34, sila: 5, cp: "Penerapan Nilai Pancasila", level: "L3",
+                indikator: "Mengidentifikasi pengamalan sila 2 & 5",
+                soal: "Menghargai hasil karya orang lain yang bermanfaat bagi kemajuan dan kesejahteraan bersama termasuk sikap yang sesuai dengan Sila ke-...",
+                options: ["Sila 2", "Sila 3", "Sila 4", "Sila 5"],
+                jawaban: 3,
+                hint: "Menghargai karya orang lain merupakan salah satu butir Sila ke-5.",
+                npc: "Mohammad Yamin", avatar: "👨‍⚖️",
+                penjelasan: "Sila ke-5 menekankan pentingnya menghargai karya dan jerih payah orang lain demi keadilan sosial."
+            },
+            {
+                no: 35, sila: 1, cp: "Kedudukan & Pemikiran Pancasila", level: "L2",
+                indikator: "Menjelaskan makna pandangan hidup",
+                soal: "Pancasila bertindak sebagai Weltanschauung (Pandangan Hidup Bangsa). Artinya Pancasila dijadikan sebagai...",
+                options: ["Alat pemisah antar suku", "Petunjuk arah, pedoman, dan pegangan dalam kehidupan sehari-hari", "Hiasan di dinding sekolah semata", "Dokumen rahasia pemerintah"],
+                jawaban: 1,
+                hint: "Pandangan hidup menjadi kompas/petunjuk arah perilaku bangsa Indonesia.",
+                npc: "Dr. Radjiman Wedyodiningrat", avatar: "👨‍⚕️",
+                penjelasan: "Sebagai Weltanschauung / pandangan hidup, Pancasila menjadi pedoman moral dan pegangan hidup seluruh rakyat Indonesia."
+            }
+        ];
+
+        // DATA 5 PULAU SILA UNTUK MODE PETUALANGAN
+        const islandsData = [
+            { id: 1, title: "Pulau Sila 1", subtitle: "Ketuhanan", icon: "🕌", color: "bg-amber-500", text: "text-amber-900" },
+            { id: 2, title: "Pulau Sila 2", subtitle: "Kemanusiaan", icon: "🤝", color: "bg-red-500", text: "text-red-900" },
+            { id: 3, title: "Pulau Sila 3", subtitle: "Persatuan", icon: "🌳", color: "bg-emerald-600", text: "text-emerald-900" },
+            { id: 4, title: "Pulau Sila 4", subtitle: "Kerakyatan", icon: "🐂", color: "bg-blue-600", text: "text-blue-900" },
+            { id: 5, title: "Pulau Sila 5", subtitle: "Keadilan", icon: "🌾", color: "bg-yellow-500", text: "text-yellow-900" }
+        ];
+
+        // APP STATE
+        let activeIsland = null;
+        let adventureProgress = {}; // posIndex: true/false
+        let currentQuizIndex = 0;
+        let quizAnswers = new Array(35).fill(null);
+        let quizDoubts = new Array(35).fill(false);
+        let quizTimerSeconds = 15 * 60;
+        let timerInterval = null;
+
+        // INITIALIZATION
+        window.onload = function() {
+            renderIslands();
+            initScratchpad();
+            loadNumeracySoal(0);
+        };
+
+        function goHome() {
+            playSound('click');
+            document.getElementById('adventureSection').classList.add('hidden');
+            document.getElementById('quizSection').classList.add('hidden');
+            document.getElementById('quizResultSection').classList.add('hidden');
+            document.getElementById('numeracySection').classList.add('hidden');
+            document.getElementById('mainMenu').classList.remove('hidden');
+            if (timerInterval) clearInterval(timerInterval);
+        }
+
+        function switchMode(mode) {
+            playSound('click');
+            document.getElementById('mainMenu').classList.add('hidden');
+            
+            if (mode === 'adventure') {
+                document.getElementById('adventureSection').classList.remove('hidden');
+                updateAdvProgressBadge();
+            } else if (mode === 'quiz') {
+                document.getElementById('quizSection').classList.remove('hidden');
+                document.getElementById('quizResultSection').classList.add('hidden');
+                startQuiz();
+            } else if (mode === 'numeracy') {
+                document.getElementById('numeracySection').classList.remove('hidden');
+            }
+        }
+
+        /* ================= MODE 1: PETUALANGAN LOGIC ================= */
+        function renderIslands() {
+            const grid = document.getElementById('islandGrid');
+            grid.innerHTML = '';
+            islandsData.forEach(island => {
+                const card = document.createElement('div');
+                card.className = `${island.color} text-white p-4 rounded-xl cursor-pointer pulau-card shadow-md border-2 border-white/30 text-center flex flex-col items-center justify-center`;
+                card.onclick = () => selectIsland(island.id);
+                card.innerHTML = `
+                    <div class="text-3xl mb-1">${island.icon}</div>
+                    <div class="font-extrabold text-sm">${island.title}</div>
+                    <div class="text-xs opacity-90">${island.subtitle}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function selectIsland(islandId) {
+            playSound('click');
+            activeIsland = islandId;
+            const container = document.getElementById('posContainer');
+            container.classList.remove('hidden');
+            
+            const island = islandsData.find(i => i.id === islandId);
+            document.getElementById('selectedIslandTitle').innerHTML = `
+                <span>${island.icon} ${island.title}: ${island.subtitle} (6 Pos)</span>
+                <span class="text-xs font-normal text-slate-500">Pilih Pos untuk Memulai Soal</span>
+            `;
+
+            const posGrid = document.getElementById('posButtonsGrid');
+            posGrid.innerHTML = '';
+
+            // Get 6 questions belonging to this sila
+            const questionsInSila = datasetSoal.filter(q => q.sila === islandId).slice(0, 6);
+
+            questionsInSila.forEach((q, idx) => {
+                const posNum = idx + 1;
+                const isDone = adventureProgress[q.no];
+                const btn = document.createElement('button');
+                btn.className = `p-3 rounded-xl font-bold text-xs flex flex-col items-center justify-center gap-1 transition shadow ${isDone ? 'bg-amber-400 text-slate-900 border-2 border-yellow-200' : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-300'}`;
+                btn.onclick = () => loadAdventureQuestion(q);
+                btn.innerHTML = `
+                    <span>Pos ${posNum}</span>
+                    <span class="text-[10px] ${isDone ? 'text-slate-900 font-extrabold' : 'text-slate-500'}">Soal #${q.no}</span>
+                    ${isDone ? '<i class="fa-solid fa-star text-amber-700"></i>' : '<i class="fa-regular fa-circle text-slate-400"></i>'}
+                `;
+                posGrid.appendChild(btn);
+            });
+        }
+
+        function loadAdventureQuestion(q) {
+            playSound('click');
+            const box = document.getElementById('adventureQuestionBox');
+            box.classList.remove('hidden');
+
+            document.getElementById('advMetaNo').innerText = `No Soal: ${q.no}`;
+            document.getElementById('advMetaIndikator').innerText = `Indikator: ${q.indikator}`;
+            document.getElementById('advMetaLevel').innerText = `Level: ${q.level}`;
+            document.getElementById('advQuestionText').innerText = q.soal;
+
+            // Hide NPC and Hint initially
+            document.getElementById('npcBox').classList.add('hidden');
+            document.getElementById('hintBox').classList.add('hidden');
+
+            const optionsGrid = document.getElementById('advOptionsGrid');
+            optionsGrid.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3 rounded-xl border border-slate-200 hover:border-amber-400 hover:bg-amber-50 text-xs sm:text-sm font-medium transition flex items-center gap-3";
+                btn.onclick = () => checkAdventureAnswer(q, idx, btn);
+                btn.innerHTML = `
+                    <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-xs flex-shrink-0">${String.fromCharCode(65 + idx)}</span>
+                    <span>${opt}</span>
+                `;
+                optionsGrid.appendChild(btn);
+            });
+
+            // Scroll down to question box
+            box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function checkAdventureAnswer(q, selectedIdx, btnElement) {
+            if (selectedIdx === q.jawaban) {
+                // BENAR!
+                playSound('correct');
+                confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 } });
+                
+                adventureProgress[q.no] = true;
+                updateAdvProgressBadge();
+                selectIsland(activeIsland); // Refresh pos stars
+
+                // Show NPC
+                const npcBox = document.getElementById('npcBox');
+                npcBox.classList.remove('hidden');
+                document.getElementById('hintBox').classList.add('hidden');
+
+                document.getElementById('npcAvatar').innerText = q.avatar;
+                document.getElementById('npcName').innerText = q.npc;
+                document.getElementById('npcDialog').innerText = `⭐⭐⭐ "Bagus Sekali! ${q.penjelasan}"`;
+
+            } else {
+                // SALAH
+                playSound('wrong');
+                const hintBox = document.getElementById('hintBox');
+                hintBox.classList.remove('hidden');
+                document.getElementById('npcBox').classList.add('hidden');
+                document.getElementById('hintText').innerText = `Petunjuk: ${q.hint}`;
+            }
+        }
+
+        function updateAdvProgressBadge() {
+            const count = Object.keys(adventureProgress).length;
+            document.getElementById('advProgressBadge').innerText = `Progres: ${count}/30 Pos Selesai`;
+        }
+
+        /* ================= MODE 2: KUIS CEPAT LOGIC ================= */
+        function startQuiz() {
+            currentQuizIndex = 0;
+            quizAnswers = new Array(35).fill(null);
+            quizDoubts = new Array(35).fill(false);
+            quizTimerSeconds = 15 * 60;
+
+            renderQuizNav();
+            loadQuizQuestion(0);
+
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                quizTimerSeconds--;
+                const m = Math.floor(quizTimerSeconds / 60);
+                const s = quizTimerSeconds % 60;
+                document.getElementById('quizTimer').innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+
+                if (quizTimerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    finishQuiz();
+                }
+            }, 1000);
+        }
+
+        function renderQuizNav() {
+            const nav = document.getElementById('quizNavGrid');
+            nav.innerHTML = '';
+            datasetSoal.forEach((q, idx) => {
+                const btn = document.createElement('button');
+                btn.id = `qNav_${idx}`;
+                btn.onclick = () => loadQuizQuestion(idx);
+                updateQuizNavBtnStyle(btn, idx);
+                btn.innerText = idx + 1;
+                nav.appendChild(btn);
+            });
+        }
+
+        function updateQuizNavBtnStyle(btn, idx) {
+            let cls = "w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-xs font-bold transition flex items-center justify-center ";
+            if (idx === currentQuizIndex) {
+                cls += "ring-2 ring-red-600 bg-red-600 text-white ";
+            } else if (quizDoubts[idx]) {
+                cls += "bg-amber-400 text-slate-900 ";
+            } else if (quizAnswers[idx] !== null) {
+                cls += "bg-emerald-600 text-white ";
+            } else {
+                cls += "bg-white text-slate-700 border border-slate-300 ";
+            }
+            btn.className = cls;
+        }
+
+        function loadQuizQuestion(idx) {
+            playSound('click');
+            currentQuizIndex = idx;
+            const q = datasetSoal[idx];
+
+            document.getElementById('quizQuestionNum').innerText = `Soal #${idx + 1} dari 35`;
+            document.getElementById('quizQuestionMeta').innerText = `Level ${q.level} - ${q.cp}`;
+            document.getElementById('quizQuestionText').innerText = q.soal;
+
+            const grid = document.getElementById('quizOptionsGrid');
+            grid.innerHTML = '';
+
+            q.options.forEach((opt, optIdx) => {
+                const isSelected = quizAnswers[idx] === optIdx;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left p-3 rounded-xl border text-xs sm:text-sm font-medium transition flex items-center gap-3 ${isSelected ? 'border-red-600 bg-red-50 text-red-900 font-bold' : 'border-slate-200 hover:bg-slate-50 text-slate-700'}`;
+                btn.onclick = () => selectQuizAnswer(optIdx);
+                btn.innerHTML = `
+                    <span class="w-6 h-6 rounded-full ${isSelected ? 'bg-red-600 text-white' : 'bg-slate-200 text-slate-700'} text-xs font-bold flex items-center justify-center">${String.fromCharCode(65 + optIdx)}</span>
+                    <span>${opt}</span>
+                `;
+                grid.appendChild(btn);
+            });
+
+            // Refresh nav grid styles
+            datasetSoal.forEach((_, i) => {
+                const navBtn = document.getElementById(`qNav_${i}`);
+                if (navBtn) updateQuizNavBtnStyle(navBtn, i);
+            });
+
+            // Update answered count badge
+            const answeredCount = quizAnswers.filter(a => a !== null).length;
+            document.getElementById('answeredCount').innerText = answeredCount;
+        }
+
+        function selectQuizAnswer(optIdx) {
+            playSound('click');
+            quizAnswers[currentQuizIndex] = optIdx;
+            loadQuizQuestion(currentQuizIndex);
+        }
+
+        function toggleDoubt() {
+            playSound('click');
+            quizDoubts[currentQuizIndex] = !quizDoubts[currentQuizIndex];
+            loadQuizQuestion(currentQuizIndex);
+        }
+
+        function prevQuiz() {
+            if (currentQuizIndex > 0) loadQuizQuestion(currentQuizIndex - 1);
+        }
+
+        function nextQuiz() {
+            if (currentQuizIndex < 35 - 1) loadQuizQuestion(currentQuizIndex + 1);
+        }
+
+        function finishQuizConfirmation() {
+            const answered = quizAnswers.filter(a => a !== null).length;
+            if (confirm(`Kamu baru menjawab ${answered} dari 35 soal. Yakin ingin mengumpulkan sekarang?`)) {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            if (timerInterval) clearInterval(timerInterval);
+            playSound('correct');
+
+            // Calculate Score
+            let correctCount = 0;
+            let silaScore = [0, 0, 0, 0, 0]; // Sila 1..5
+            let silaTotal = [0, 0, 0, 0, 0];
+
+            datasetSoal.forEach((q, idx) => {
+                const sIndex = q.sila - 1;
+                silaTotal[sIndex]++;
+                if (quizAnswers[idx] === q.jawaban) {
+                    correctCount++;
+                    silaScore[sIndex]++;
+                }
+            });
+
+            const score = Math.round((correctCount / 35) * 100);
+
+            // Display Result Section
+            document.getElementById('quizSection').classList.add('hidden');
+            document.getElementById('quizResultSection').classList.remove('hidden');
+
+            document.getElementById('finalScoreDisplay').innerText = score;
+
+            const badge = document.getElementById('kktpBadge');
+            if (score >= 90) {
+                badge.innerText = "90-100: Istimewa - Duta Pancasila 🎉";
+                badge.className = "inline-block px-4 py-1.5 rounded-full text-xs font-bold bg-amber-200 text-amber-900 border border-yellow-400 shadow";
+            } else if (score >= 75) {
+                badge.innerText = "75-89: Tuntas 👍";
+                badge.className = "inline-block px-4 py-1.5 rounded-full text-xs font-bold bg-emerald-200 text-emerald-900 border border-emerald-400 shadow";
+            } else {
+                badge.innerText = "< 75: Belum Tuntas (Remedial) 📖";
+                badge.className = "inline-block px-4 py-1.5 rounded-full text-xs font-bold bg-red-200 text-red-900 border border-red-400 shadow";
+            }
+
+            // Draw Radar Chart for 5 Sila
+            drawRadarChart(silaScore, silaTotal);
+        }
+
+        // CUSTOM CANVAS RADAR CHART FOR 5 SILA
+        function drawRadarChart(scores, totals) {
+            const canvas = document.getElementById('radarChartCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = 80;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const numAxes = 5;
+            const angleStep = (Math.PI * 2) / numAxes;
+            const labels = ["Sila 1", "Sila 2", "Sila 3", "Sila 4", "Sila 5"];
+
+            // Draw Web Grid
+            for (let level = 1; level <= 4; level++) {
+                const r = (radius / 4) * level;
+                ctx.beginPath();
+                for (let i = 0; i < numAxes; i++) {
+                    const angle = i * angleStep - Math.PI / 2;
+                    const x = centerX + r * Math.cos(angle);
+                    const y = centerY + r * Math.sin(angle);
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = '#E2E8F0';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            // Draw Axes & Labels
+            ctx.font = '10px Poppins';
+            ctx.fillStyle = '#334155';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            for (let i = 0; i < numAxes; i++) {
+                const angle = i * angleStep - Math.PI / 2;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(x, y);
+                ctx.strokeStyle = '#CBD5E1';
+                ctx.stroke();
+
+                // Label Position
+                const lx = centerX + (radius + 20) * Math.cos(angle);
+                const ly = centerY + (radius + 15) * Math.sin(angle);
+                const percent = totals[i] > 0 ? Math.round((scores[i] / totals[i]) * 100) : 0;
+                ctx.fillText(`${labels[i]} (${percent}%)`, lx, ly);
+            }
+
+            // Draw Score Shape
+            ctx.beginPath();
+            for (let i = 0; i < numAxes; i++) {
+                const ratio = totals[i] > 0 ? scores[i] / totals[i] : 0;
+                const r = radius * ratio;
+                const angle = i * angleStep - Math.PI / 2;
+                const x = centerX + r * Math.cos(angle);
+                const y = centerY + r * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(217, 119, 6, 0.4)'; // Amber transparent
+            ctx.fill();
+            ctx.strokeStyle = '#D97706';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        /* ================= MODE 3: NUMERASI LOGIC ================= */
+        const numeracyDataset = [
+            {
+                title: "Soal Numerasi 1: Survei Responden Sila 5",
+                soal: "Dari hasil survei pengamalan Pancasila terhadap 200 responden warga Kalibening, terdapat 40 orang warga yang memilih penerapan Sila ke-5 sebagai fokus utama. Berapakah persentase warga yang memilih Sila ke-5 tersebut?",
+                options: ["15%", "20%", "25%", "30%"],
+                jawaban: 1,
+                penjelasan: "Cara Hitung: (40 / 200) × 100% = 0,2 × 100% = 20%."
+            },
+            {
+                title: "Soal Numerasi 2: Pengelolaan Dana Bansos",
+                soal: "Panitia gotong royong mengumpulkan dana bansos sebesar Rp 10.000.000,00. Jika dana yang telah dibelikan bahan pokok adalah Rp 7.000.000,00 dan sisanya dibagikan tunai kepada warga miskin, berapakah sisa uang tunai yang disalurkan?",
+                options: ["Rp 2.000.000,00", "Rp 3.000.000,00", "Rp 3.500.000,00", "Rp 4.000.000,00"],
+                jawaban: 1,
+                penjelasan: "Cara Hitung: Rp 10.000.000,00 - Rp 7.000.000,00 = Rp 3.000.000,00."
+            },
+            {
+                title: "Soal Numerasi 3: Rasio Musyawarah RT",
+                soal: "Musyawarah RT dihadiri oleh 50 warga. Sebanyak 30 warga setuju program penghijauan desa, dan sisanya (20 warga) memilih renovasi balai desa. Berapakah rasio paling sederhana antara warga pemilih penghijauan dibanding renovasi?",
+                options: ["3 : 5", "3 : 2", "2 : 3", "5 : 3"],
+                jawaban: 1,
+                penjelasan: "Rasio = 30 : 20. Dibagi 10 menjadi 3 : 2."
+            },
+            {
+                title: "Soal Numerasi 4: Persentase Anggota BPUPKI",
+                soal: "BPUPKI memiliki total 67 anggota, di mana 7 di antaranya adalah anggota luar biasa perwakilan dari Jepang. Berapakah persentase anggota luar biasa Jepang tersebut (dibulatkan ke 1 desimal)?",
+                options: ["9,5%", "10,4%", "11,2%", "12,0%"],
+                jawaban: 1,
+                penjelasan: "Cara Hitung: (7 / 67) × 100% = 10,447% ≈ 10,4%."
+            }
+        ];
+
+        let activeNumIndex = 0;
+
+        function loadNumeracySoal(idx) {
+            playSound('click');
+            activeNumIndex = idx;
+            const item = numeracyDataset[idx];
+
+            // Update Tab Active
+            const tabs = document.querySelectorAll('.num-tab-btn');
+            tabs.forEach((t, i) => {
+                if (i === idx) {
+                    t.className = "num-tab-btn active bg-emerald-600 text-white text-xs px-3 py-2 rounded-lg font-semibold whitespace-nowrap shadow";
+                } else {
+                    t.className = "num-tab-btn bg-slate-200 text-slate-700 text-xs px-3 py-2 rounded-lg font-semibold whitespace-nowrap";
+                }
+            });
+
+            document.getElementById('numTitle').innerText = item.title;
+            document.getElementById('numQuestionText').innerText = item.soal;
+
+            const feedback = document.getElementById('numFeedback');
+            feedback.classList.add('hidden');
+
+            const grid = document.getElementById('numOptionsGrid');
+            grid.innerHTML = '';
+
+            item.options.forEach((opt, optIdx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3 rounded-xl border border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 text-xs sm:text-sm font-medium transition flex items-center gap-3";
+                btn.onclick = () => checkNumeracyAnswer(item, optIdx);
+                btn.innerHTML = `
+                    <span class="w-6 h-6 rounded-full bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-xs">${String.fromCharCode(65 + optIdx)}</span>
+                    <span>${opt}</span>
+                `;
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkNumeracyAnswer(item, selectedIdx) {
+            const feedback = document.getElementById('numFeedback');
+            feedback.classList.remove('hidden');
+
+            if (selectedIdx === item.jawaban) {
+                playSound('correct');
+                confetti({ particleCount: 50, spread: 50 });
+                feedback.className = "p-3 rounded-lg text-xs font-medium bg-emerald-100 text-emerald-800 border border-emerald-300";
+                feedback.innerHTML = `✅ <b>Jawaban Benar!</b> ${item.penjelasan}`;
+            } else {
+                playSound('wrong');
+                feedback.className = "p-3 rounded-lg text-xs font-medium bg-red-100 text-red-800 border border-red-300";
+                feedback.innerHTML = `❌ <b>Kurang Tepat.</b> Mari gunakan kalkulator atau coretan di samping! ${item.penjelasan}`;
+            }
+        }
+
+        /* KALKULATOR MINI LOGIC */
+        let calcVal = "0";
+
+        function calcInput(char) {
+            playSound('click');
+            const display = document.getElementById('calcDisplay');
+            if (char === 'C') {
+                calcVal = "0";
+            } else if (char === '=') {
+                try {
+                    calcVal = String(eval(calcVal));
+                } catch {
+                    calcVal = "Error";
+                }
+            } else {
+                if (calcVal === "0" || calcVal === "Error") calcVal = char;
+                else calcVal += char;
+            }
+            display.value = calcVal;
+        }
+
+        /* SCRATCHPAD CANVAS LOGIC */
+        let scratchpadCanvas, scratchCtx, isDrawing = false;
+
+        function initScratchpad() {
+            scratchpadCanvas = document.getElementById('scratchpadCanvas');
+            scratchCtx = scratchpadCanvas.getContext('2d');
+            scratchCtx.strokeStyle = "#1E293B";
+            scratchCtx.lineWidth = 2;
+
+            scratchpadCanvas.addEventListener('mousedown', startDraw);
+            scratchpadCanvas.addEventListener('mousemove', draw);
+            scratchpadCanvas.addEventListener('mouseup', stopDraw);
+
+            scratchpadCanvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent("mousedown", { clientX: touch.clientX, clientY: touch.clientY });
+                scratchpadCanvas.dispatchEvent(mouseEvent);
+            });
+
+            scratchpadCanvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent("mousemove", { clientX: touch.clientX, clientY: touch.clientY });
+                scratchpadCanvas.dispatchEvent(mouseEvent);
+            });
+
+            scratchpadCanvas.addEventListener('touchend', () => {
+                const mouseEvent = new MouseEvent("mouseup", {});
+                scratchpadCanvas.dispatchEvent(mouseEvent);
+            });
+        }
+
+        function getCanvasPos(e) {
+            const rect = scratchpadCanvas.getBoundingClientRect();
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function startDraw(e) {
+            isDrawing = true;
+            const pos = getCanvasPos(e);
+            scratchCtx.beginPath();
+            scratchCtx.moveTo(pos.x, pos.y);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const pos = getCanvasPos(e);
+            scratchCtx.lineTo(pos.x, pos.y);
+            scratchCtx.stroke();
+        }
+
+        function stopDraw() {
+            isDrawing = false;
+        }
+
+        function clearScratchpad() {
+            playSound('click');
+            scratchCtx.clearRect(0, 0, scratchpadCanvas.width, scratchpadCanvas.height);
+        }
+    </script>
+</body>
+</html>
+```
