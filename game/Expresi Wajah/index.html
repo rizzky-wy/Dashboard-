@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Ekspresi & Literasi - Kelas 2 SD</title>
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Fredoka', 'Segoe UI', Roboto, sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --purple: #A66CFF;
+            --green: #6BCB77;
+            --dark: #2C3E50;
+            --bg-light: #F7F9FC;
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, #a8edd9 0%, #fed6e3 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            color: var(--dark);
+        }
+
+        /* CONTAINER MAIN */
+        .app-container {
+            width: 100%;
+            max-width: 650px;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            border: 5px solid #FFF;
+            position: relative;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(90deg, #FF9A9E 0%, #FECFEF 99%, #FECFEF 100%);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px dashed #FFF;
+            position: relative;
+        }
+
+        .header h1 {
+            color: #C0392B;
+            font-size: 24px;
+            text-shadow: 2px 2px 0px #FFF;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #555;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* SCREEN MANAGEMENT */
+        .screen {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* FORM STYLES */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 3px solid #E0E0E0;
+            border-radius: 16px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            background: #FDFDFD;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            background: #FFF;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+            transition: all 0.15s ease;
+            text-decoration: none;
+        }
+
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+        }
+
+        .btn-start {
+            background: linear-gradient(180deg, #FF6B6B, #EE5253);
+            margin-top: 10px;
+        }
+
+        .btn-wa {
+            background: linear-gradient(180deg, #2ECC71, #27AE60);
+            margin-bottom: 12px;
+        }
+
+        .btn-restart {
+            background: linear-gradient(180deg, #48DBFB, #0ABDE3);
+        }
+
+        /* QUIZ HEADER & PROGRESS */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            background: var(--purple);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 16px;
+            background: #EAEAEA;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 2px solid #DDD;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #FFE66D, #FF6B6B);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        /* QUESTION CARD */
+        .question-card {
+            background: #FFF;
+            border: 3px solid #F0F0F0;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+        }
+
+        .svg-container {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .svg-container svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.1));
+        }
+
+        .literacy-box {
+            background: #FFF9E6;
+            border: 2px dashed #F1C40F;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #444;
+            text-align: left;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2C3E50;
+            line-height: 1.4;
+        }
+
+        /* OPTIONS GRID */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: #F8F9FA;
+            border: 3px solid #E9ECEF;
+            border-radius: 16px;
+            padding: 14px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #495057;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-btn:hover {
+            border-color: var(--secondary);
+            background: #E8F8F5;
+        }
+
+        .option-prefix {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+            color: #4A5568;
+            flex-shrink: 0;
+        }
+
+        .option-btn.correct {
+            background: #D4EDDA !important;
+            border-color: #28A745 !important;
+            color: #155724 !important;
+        }
+
+        .option-btn.correct .option-prefix {
+            background: #28A745;
+            color: white;
+        }
+
+        .option-btn.wrong {
+            background: #F8D7DA !important;
+            border-color: #DC3545 !important;
+            color: #721C24 !important;
+        }
+
+        .option-btn.wrong .option-prefix {
+            background: #DC3545;
+            color: white;
+        }
+
+        /* RESULT SCREEN */
+        .result-card {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .stars-container {
+            font-size: 45px;
+            margin: 10px 0;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px auto;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+            border: 4px solid #FFF;
+        }
+
+        .score-number {
+            font-size: 38px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .result-message {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+
+        .summary-box {
+            background: #F8F9FA;
+            border-radius: 16px;
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 2px solid #E9ECEF;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #DDD;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .offline-notice {
+            background: #FFF3CD;
+            color: #856404;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            text-align: center;
+            border: 1px solid #FFEBAA;
+        }
+
+        /* RESPONSIVE */
+        @media (max-height: 650px) {
+            .app-container { border-radius: 0; }
+            .svg-container { width: 90px; height: 90px; }
+            .screen { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <!-- HEADER -->
+    <div class="header">
+        <h1>😊 Dunia Ekspresi & Literasi 📚</h1>
+        <p>Bahasa Indonesia - Kelas 2 SD</p>
+    </div>
+
+    <!-- 1. SCREEN REGISTRASI -->
+    <div id="screen-register" class="screen active">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <p style="font-size: 16px; color: #666;">Halo! Masukkan datamu sebelum mulai bermain ya!</p>
+        </div>
+        
+        <form id="form-register" onsubmit="event.preventDefault(); startQuiz();">
+            <div class="form-group">
+                <label for="input-nama">👤 Nama Lengkap Siswa:</label>
+                <input type="text" id="input-nama" class="form-control" placeholder="Contoh: Budi Santoso" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="input-kelas">🏫 Kelas:</label>
+                <input type="text" id="input-kelas" class="form-control" placeholder="Contoh: 2A / 2B" value="2A" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="input-wa">📱 Nomor WhatsApp Guru:</label>
+                <input type="tel" id="input-wa" class="form-control" placeholder="Contoh: 081234567890" required>
+            </div>
+
+            <button type="submit" class="btn btn-start">🚀 MULAI BERMAIN!</button>
+        </form>
+    </div>
+
+    <!-- 2. SCREEN KUIS -->
+    <div id="screen-quiz" class="screen">
+        <div class="quiz-header">
+            <span class="badge" id="question-count">Soal 1 / 5</span>
+            <span class="badge" style="background: var(--secondary);" id="player-info-tag">Budi (2A)</span>
+        </div>
+
+        <div class="progress-bar-bg">
+            <div id="progress-bar" class="progress-bar-fill"></div>
+        </div>
+
+        <div class="question-card">
+            <!-- Tempat SVG Ilustrasi jika ada -->
+            <div id="svg-holder" class="svg-container" style="display: none;"></div>
+            
+            <!-- Tempat Teks Bacaan Literasi jika ada -->
+            <div id="literacy-holder" class="literacy-box" style="display: none;"></div>
+
+            <!-- Teks Pertanyaan -->
+            <div id="question-text" class="question-text">Loading Soal...</div>
+        </div>
+
+        <!-- Pilihan Jawaban -->
+        <div id="options-container" class="options-grid"></div>
+    </div>
+
+    <!-- 3. SCREEN HASIL -->
+    <div id="screen-result" class="screen">
+        <div class="result-card">
+            <div class="score-circle">
+                <span class="score-number" id="final-score">0</span>
+                <span class="score-label">NILAI</span>
+            </div>
+
+            <div class="stars-container" id="stars-holder">⭐⭐⭐</div>
+            <div class="result-message" id="result-message">Hibat Sekali!</div>
+
+            <div class="summary-box">
+                <div class="summary-item">
+                    <span>Nama Siswa:</span>
+                    <strong id="res-nama">-</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Kelas:</span>
+                    <strong id="res-kelas">-</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Jawaban Benar:</span>
+                    <strong id="res-correct" style="color: #27AE60;">0 / 5</strong>
+                </div>
+                <div class="summary-item">
+                    <span>Tanggal Main:</span>
+                    <span id="res-date">-</span>
+                </div>
+            </div>
+
+            <div class="offline-notice">
+                💡 <strong>Catatan:</strong> Hasil permainan sudah tersimpan secara otomatis di HP/Laptop. Jika offline, klik tombol kirim di bawah saat HP sudah terhubung ke internet!
+            </div>
+
+            <button onclick="sendToWhatsApp()" class="btn btn-wa">📲 Kirim Hasil ke WA Guru</button>
+            <button onclick="restartQuiz()" class="btn btn-restart" style="margin-top: 8px;">🔄 Main Lagi (Soal Baru)</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ==========================================
+       1. WEB AUDIO API (SOUND EFFECTS GENERATOR)
+       ========================================== */
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new AudioContext();
+        }
+    }
+
+    function playSound(type) {
+        if (!audioCtx) return;
+        
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'correct') {
+            // Suara Ting-Ting Ceria (Arpeggio)
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(523.25, now); // C5
+            osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+            osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+            gain.gain.setValueAtTime(0.3, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+            osc.start(now);
+            osc.stop(now + 0.4);
+        } else if (type === 'wrong') {
+            // Suara Tet-Tot
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(180, now);
+            osc.frequency.setValueAtTime(130, now + 0.15);
+            gain.gain.setValueAtTime(0.3, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+            osc.start(now);
+            osc.stop(now + 0.35);
+        } else if (type === 'win') {
+            // Fanfare Kemenangan
+            const freqs = [440, 554.37, 659.25, 880];
+            freqs.forEach((freq, idx) => {
+                const subOsc = audioCtx.createOscillator();
+                const subGain = audioCtx.createGain();
+                subOsc.connect(subGain);
+                subGain.connect(audioCtx.destination);
+                subOsc.type = 'triangle';
+                subOsc.frequency.setValueAtTime(freq, now + (idx * 0.12));
+                subGain.gain.setValueAtTime(0.3, now + (idx * 0.12));
+                subGain.gain.exponentialRampToValueAtTime(0.01, now + (idx * 0.12) + 0.3);
+                subOsc.start(now + (idx * 0.12));
+                subOsc.stop(now + (idx * 0.12) + 0.3);
+            });
+        }
+    }
+
+    /* ==========================================
+       2. SVG EMOJI ASSETS (100% OFFLINE VECTOR)
+       ========================================== */
+    const SVG_EMOJIS = {
+        senang: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FFD93D"/><circle cx="35" cy="40" r="6" fill="#2C3E50"/><circle cx="65" cy="40" r="6" fill="#2C3E50"/><path d="M 30 60 Q 50 80 70 60" stroke="#2C3E50" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="25" cy="48" r="5" fill="#FF8E8E" opacity="0.6"/><circle cx="75" cy="48" r="5" fill="#FF8E8E" opacity="0.6"/></svg>`,
+        sedih: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#6C5CE7"/><circle cx="35" cy="42" r="6" fill="#FFF"/><circle cx="65" cy="42" r="6" fill="#FFF"/><path d="M 32 68 Q 50 50 68 68" stroke="#FFF" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M 68 45 Q 70 55 68 60" stroke="#74B9FF" stroke-width="4" fill="none"/></svg>`,
+        marah: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FF6B6B"/><circle cx="35" cy="45" r="5" fill="#2C3E50"/><circle cx="65" cy="45" r="5" fill="#2C3E50"/><path d="M 25 32 L 42 40" stroke="#2C3E50" stroke-width="5" stroke-linecap="round"/><path d="M 75 32 L 58 40" stroke="#2C3E50" stroke-width="5" stroke-linecap="round"/><path d="M 30 68 Q 50 52 70 68" stroke="#2C3E50" stroke-width="6" fill="none" stroke-linecap="round"/></svg>`,
+        takut: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#A8A4CE"/><circle cx="35" cy="38" r="8" fill="#FFF"/><circle cx="35" cy="38" r="4" fill="#2C3E50"/><circle cx="65" cy="38" r="8" fill="#FFF"/><circle cx="65" cy="38" r="4" fill="#2C3E50"/><ellipse cx="50" cy="68" rx="10" ry="14" fill="#2C3E50"/><path d="M 25 28 Q 35 32 40 30" stroke="#2C3E50" stroke-width="4" fill="none"/><path d="M 75 28 Q 65 32 60 30" stroke="#2C3E50" stroke-width="4" fill="none"/></svg>`,
+        terkejut: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FFE66D"/><circle cx="35" cy="38" r="7" fill="#2C3E50"/><circle cx="65" cy="38" r="7" fill="#2C3E50"/><ellipse cx="50" cy="65" rx="12" ry="16" fill="#2C3E50"/><path d="M 30 25 Q 35 20 42 25" stroke="#2C3E50" stroke-width="4" fill="none"/><path d="M 70 25 Q 65 20 58 25" stroke="#2C3E50" stroke-width="4" fill="none"/></svg>`,
+        malu: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#FF8E8E"/><circle cx="35" cy="42" r="5" fill="#2C3E50"/><circle cx="65" cy="42" r="5" fill="#2C3E50"/><path d="M 38 62 Q 50 70 62 62" stroke="#2C3E50" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="22" cy="50" r="8" fill="#FF5252" opacity="0.6"/><circle cx="78" cy="50" r="8" fill="#FF5252" opacity="0.6"/></svg>`,
+        bangga: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#4ECDC4"/><path d="M 25 40 Q 35 32 42 42" stroke="#2C3E50" stroke-width="5" fill="none"/><path d="M 75 40 Q 65 32 58 42" stroke="#2C3E50" stroke-width="5" fill="none"/><path d="M 30 60 Q 50 78 70 60 Z" fill="#2C3E50"/></svg>`,
+        khawatir: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#F7D794"/><circle cx="35" cy="40" r="5" fill="#2C3E50"/><circle cx="65" cy="40" r="5" fill="#2C3E50"/><path d="M 30 28 Q 38 35 42 30" stroke="#2C3E50" stroke-width="4" fill="none"/><path d="M 70 28 Q 62 35 58 30" stroke="#2C3E50" stroke-width="4" fill="none"/><path d="M 32 65 Q 40 60 50 65 T 68 65" stroke="#2C3E50" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`
+    };
+
+    /* ==========================================
+       3. BANK SOAL (20 SOAL LENGKAP KELAS 2 SD)
+       ========================================== */
+    const QUESTION_BANK = [
+        // 1-8: Pengenalan Ekspresi Face
+        { id: 1, type: 'express', svgKey: 'senang', question: 'Lihat gambar di atas! Ekspresi wajah tersebut menunjukkan perasaan...', options: ['Sedih', 'Senang', 'Marah', 'Takut'], answer: 1 },
+        { id: 2, type: 'express', svgKey: 'sedih', question: 'Wajah pada gambar di atas menunjukkan perasaan...', options: ['Malu', 'Gembira', 'Sedih', 'Terkejut'], answer: 2 },
+        { id: 3, type: 'express', svgKey: 'marah', question: 'Ketika alis menyatu dan wajah memerah seperti gambar, itu adalah ekspresi...', options: ['Marah', 'Sedih', 'Senang', 'Bangga'], answer: 0 },
+        { id: 4, type: 'express', svgKey: 'takut', question: 'Mata terbuka lebar dan mulut gemetar pada gambar menandakan perasaan...', options: ['Senang', 'Takut', 'Malu', 'Marah'], answer: 1 },
+        { id: 5, type: 'express', svgKey: 'terkejut', question: 'Gambar di atas menunjukkan ekspresi orang yang sedang...', options: ['Tidur', 'Terkejut / Kaget', 'Sedih', 'Bosan'], answer: 1 },
+        { id: 6, type: 'express', svgKey: 'malu', question: 'Pipi menjadi kemerahan saat dipuji teman. Gambar di atas adalah ekspresi...', options: ['Bangga', 'Malu', 'Marah', 'Takut'], answer: 1 },
+        { id: 7, type: 'express', svgKey: 'bangga', question: 'Tersenyum lebar setelah mendapat nilai 100 menunjukkan perasaan...', options: ['Khawatir', 'Sedih', 'Bangga', 'Takut'], answer: 2 },
+        { id: 8, type: 'express', svgKey: 'khawatir', question: 'Ekspresi wajah pada gambar di atas menunjukkan perasaan...', options: ['Gembira', 'Khawatir', 'Marah', 'Terkejut'], answer: 1 },
+
+        // 9-14: Situasi & Penyebab Emosi
+        { id: 9, type: 'situation', question: 'Doni kehilangan pensil kesayangannya di kelas. Perasaan Doni adalah...', options: ['Senang', 'Sedih', 'Bangga', 'Tertawa'], answer: 1 },
+        { id: 10, type: 'situation', question: 'Siti mendapat hadiah sepeda baru dari Ayah. Perasaan Siti adalah...', options: ['Marah', 'Takut', 'Gembira', 'Sedih'], answer: 2 },
+        { id: 11, type: 'situation', question: 'Mainan Edo dirusak oleh adiknya. Edo merasa...', options: ['Marah', 'Senang', 'Bangga', 'Malu'], answer: 0 },
+        { id: 12, type: 'situation', question: 'Lani harus maju berpidato di depan banyak orang. Lani merasa deg-degan dan...', options: ['Gembira', 'Malu / Grogi', 'Bosan', 'Kenyang'], answer: 1 },
+        { id: 13, type: 'situation', question: 'Lampu di kamar tiba-tiba padam dan menjadi sangat gelap. Perasaan kita adalah...', options: ['Bangga', 'Takut', 'Senang', 'Lucu'], answer: 1 },
+        { id: 14, type: 'situation', question: 'Budi berhasil menolong kucing yang terjebak di selokan. Budi merasa...', options: ['Kecewa', 'Bangga dan Senang', 'Marah', 'Takut'], answer: 1 },
+
+        // 15-20: Literasi Bacaan Pendek
+        { id: 15, type: 'literacy', story: 'Kucing Miko sangat suka minum susu. Setiap pagi, Miko mengeong di depan dapur untuk meminta susu segar.', question: 'Apa minuman kesukaan Miko?', options: ['Air Putih', 'Susu', 'Jus Apel', 'Teh Manis'], answer: 1 },
+        { id: 16, type: 'literacy', story: 'Hari Minggu, Rina membantu Ibu menyiram bunga di halaman rumah. Bunga mawar Rina tumbuh sangat subur dan indah.', question: 'Kapan Rina membantu Ibu menyiram bunga?', options: ['Hari Senin', 'Hari Minggu', 'Hari Jumat', 'Malam Hari'], answer: 1 },
+        { id: 17, type: 'literacy', story: 'Beni membawa bekal roti selai cokelat ke sekolah. Beni berbagi setengah rotinya kepada Udin yang lupa membawa bekal.', question: 'Sifat Beni pada cerita di atas adalah...', options: ['Pelit', 'Suka Berbagi / Baik', 'Pemarah', 'Penakut'], answer: 1 },
+        { id: 18, type: 'literacy', story: 'Deni tidak lupa mencuci tangan memakai sabun sebelum makan. Deni ingin kuman di tangannya hilang agar tidak sakit perut.', question: 'Mengapa Deni mencuci tangan memakai sabun?', options: ['Supaya wangi saja', 'Agar kuman hilang & tidak sakit perut', 'Agar dipuji teman', 'Karena disuruh guru'], answer: 1 },
+        { id: 19, type: 'literacy', story: 'Di perpustakaan sekolah, anak-anak membaca buku dengan tenang. Mereka tidak bersuara nyaring agar tidak mengganggu teman lain.', question: 'Aturan saat berada di perpustakaan adalah...', options: ['Boleh berlari-lari', 'Membaca dengan tenang & tidak gaduh', 'Makan makanan berat', 'Berteriak panggil teman'], answer: 1 },
+        { id: 20, type: 'literacy', story: 'Ayam jantan milik Kakek berkokok nyaring di pagi hari. Suaranya membangunkan Rani untuk segera bersiap pergi sekolah.', question: 'Siapa yang membangunkan Rani di pagi hari?', options: ['Jam Weker', 'Suara Ayam Jantan Kakek', 'Ibu Rani', 'Suara Mobil'], answer: 1 }
+    ];
+
+    /* ==========================================
+       4. STATE MANAGEMENT & GAME LOGIC
+       ========================================== */
+    let studentData = { nama: '', kelas: '', wa: '' };
+    let currentSessionQuestions = [];
+    let currentIndex = 0;
+    let score = 0;
+    let userAnswers = [];
+
+    // Fungsi Mengacak Array (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        let arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // Pindah Tampilan Screen
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    // 1. Start Game
+    function startQuiz() {
+        initAudio();
+        
+        const nama = document.getElementById('input-nama').value.trim();
+        const kelas = document.getElementById('input-kelas').value.trim();
+        const wa = document.getElementById('input-wa').value.trim();
+
+        if (!nama || !kelas || !wa) {
+            alert('Mohon lengkapi semua data ya!');
+            return;
+        }
+
+        studentData = { nama, kelas, wa };
+        document.getElementById('player-info-tag').innerText = `${nama} (${kelas})`;
+
+        // Pilih 5 Soal Secara Acak dari Bank 20 Soal
+        currentSessionQuestions = shuffleArray(QUESTION_BANK).slice(0, 5);
+        currentIndex = 0;
+        score = 0;
+        userAnswers = [];
+
+        showScreen('screen-quiz');
+        renderQuestion();
+    }
+
+    // 2. Render Soal
+    function renderQuestion() {
+        const q = currentSessionQuestions[currentIndex];
+        
+        // Progress Bar & Counter
+        document.getElementById('question-count').innerText = `Soal ${currentIndex + 1} / 5`;
+        document.getElementById('progress-bar').style.width = `${((currentIndex) / 5) * 100}%`;
+
+        // SVG Container
+        const svgHolder = document.getElementById('svg-holder');
+        if (q.svgKey && SVG_EMOJIS[q.svgKey]) {
+            svgHolder.innerHTML = SVG_EMOJIS[q.svgKey];
+            svgHolder.style.display = 'flex';
+        } else {
+            svgHolder.style.display = 'none';
+        }
+
+        // Teks Cerita Literasi Container
+        const literacyHolder = document.getElementById('literacy-holder');
+        if (q.story) {
+            literacyHolder.innerText = `📖 " ${q.story} "`;
+            literacyHolder.style.display = 'block';
+        } else {
+            literacyHolder.style.display = 'none';
+        }
+
+        // Teks Soal
+        document.getElementById('question-text').innerText = q.question;
+
+        // Render Options
+        const optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+
+        const prefixes = ['A', 'B', 'C', 'D'];
+        q.options.forEach((optText, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerHTML = `
+                <span class="option-prefix">${prefixes[idx]}</span>
+                <span>${optText}</span>
+            `;
+            btn.onclick = () => selectAnswer(idx, btn);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    // 3. Eksekusi Jawaban
+    function selectAnswer(selectedIndex, btnElement) {
+        // Disable semua tombol opsi sementara
+        const allBtns = document.querySelectorAll('.option-btn');
+        allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+        const currentQ = currentSessionQuestions[currentIndex];
+        const isCorrect = (selectedIndex === currentQ.answer);
+
+        if (isCorrect) {
+            btnElement.classList.add('correct');
+            playSound('correct');
+            score += 20; // 5 soal = Max Score 100
+        } else {
+            btnElement.classList.add('wrong');
+            // Tunjukkan yang benar
+            allBtns[currentQ.answer].classList.add('correct');
+            playSound('wrong');
+        }
+
+        // Simpan Record Jawaban
+        userAnswers.push({
+            soal: currentQ.question,
+            jawabanSiswa: currentQ.options[selectedIndex],
+            jawabanBenar: currentQ.options[currentQ.answer],
+            isCorrect: isCorrect
+        });
+
+        // Lanjut ke soal berikutnya setelah delay 1.3 detik
+        setTimeout(() => {
+            currentIndex++;
+            if (currentIndex < 5) {
+                renderQuestion();
+            } else {
+                finishQuiz();
+            }
+        }, 1300);
+    }
+
+    // 4. Selesai Permainan
+    function finishQuiz() {
+        document.getElementById('progress-bar').style.width = '100%';
+        playSound('win');
+
+        // Render Tampilan Hasil
+        document.getElementById('final-score').innerText = score;
+        document.getElementById('res-nama').innerText = studentData.nama;
+        document.getElementById('res-kelas').innerText = studentData.kelas;
+        document.getElementById('res-correct').innerText = `${score / 20} / 5 Soal`;
+
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        document.getElementById('res-date').innerText = dateStr;
+
+        // Bintang & Pesan Motivasi
+        const starsHolder = document.getElementById('stars-holder');
+        const msgHolder = document.getElementById('result-message');
+
+        if (score === 100) {
+            starsHolder.innerText = '⭐⭐⭐';
+            msgHolder.innerText = 'Sempurna! Kamu Hebat Sekali! 🎉';
+        } else if (score >= 60) {
+            starsHolder.innerText = '⭐⭐☆';
+            msgHolder.innerText = 'Bagus Sekali! Tingkatkan Lagi Ya! 👍';
+        } else {
+            starsHolder.innerText = '⭐☆☆';
+            msgHolder.innerText = 'Jangan Patah Semangat! Ayo Belajar Lagi! 💪';
+        }
+
+        // Simpan Hasil ke LocalStorage (Fitur Akses Offline)
+        saveToLocalStorage();
+
+        showScreen('screen-result');
+    }
+
+    // 5. Simpan ke LocalStorage
+    function saveToLocalStorage() {
+        const gameResult = {
+            studentData,
+            score,
+            userAnswers,
+            date: new Date().toISOString()
+        };
+        
+        let history = JSON.parse(localStorage.getItem('game_ekspresi_history') || '[]');
+        history.push(gameResult);
+        localStorage.setItem('game_ekspresi_history', JSON.stringify(history));
+    }
+
+    // 6. Integrasi WhatsApp Guru
+    function sendToWhatsApp() {
+        // Format Nomor WA
+        let rawWa = studentData.wa.replace(/[^0-9]/g, '');
+        if (rawWa.startsWith('0')) {
+            rawWa = '62' + rawWa.slice(1);
+        }
+
+        // Susun Pesan Rincian Jawaban
+        let detailsText = '';
+        userAnswers.forEach((ans, idx) => {
+            const status = ans.isCorrect ? '✅' : '❌';
+            detailsText += `\n${idx + 1}. ${ans.soal}\n   Jawaban: ${ans.jawabanSiswa} ${status}\n`;
+        });
+
+        const textMessage = `*PAPAN SKOR GAME EKSPRESI & LITERASI SD* 🎓\n` +
+            `=================================\n` +
+            `👤 *Nama:* ${studentData.nama}\n` +
+            `🏫 *Kelas:* ${studentData.kelas}\n` +
+            `🏆 *Nilai Akhir:* ${score} / 100\n` +
+            `📊 *Benar:* ${score / 20} dari 5 Soal\n` +
+            `=================================\n` +
+            `*Rincian Jawaban:*` + detailsText + `\n` +
+            `_Pesan dikirim otomatis dari Game Edukasi Bahasa Indonesia Kelas 2 SD_`;
+
+        const encodedMessage = encodeURIComponent(textMessage);
+        const waUrl = `https://wa.me/${rawWa}?text=${encodedMessage}`;
+
+        window.open(waUrl, '_blank');
+    }
+
+    // 7. Restart Quiz
+    function restartQuiz() {
+        showScreen('screen-register');
+    }
+</script>
+</body>
+</html>
