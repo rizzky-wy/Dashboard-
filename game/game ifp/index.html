@@ -1,1 +1,730 @@
-s.id/ifpmtk1
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Game Matematika Seru (Offline)</title>
+    <style>
+        /* Base Reset & Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Screen Wrapper */
+        .screen {
+            display: none;
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            padding: 1.5rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { font-size: 2.4rem; font-weight: 800; text-align: center; margin-bottom: 0.5rem; color: #38bdf8; }
+        h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        p { font-size: 1rem; opacity: 0.9; text-align: center; margin-bottom: 1rem; }
+
+        /* Form Inputs */
+        .form-group {
+            width: 100%;
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: #94a3b8;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border-radius: 14px;
+            border: 2px solid #475569;
+            background: #0f172a;
+            color: white;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #38bdf8;
+        }
+
+        /* Level Selector Buttons */
+        .btn-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-level {
+            padding: 1.2rem;
+            border-radius: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-level:active { transform: scale(0.97); }
+        .btn-sd { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+        .btn-smp { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
+        .btn-sma { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; }
+
+        .btn-level .lvl-title { font-size: 1.4rem; font-weight: 800; }
+        .btn-level .lvl-desc { font-size: 0.9rem; opacity: 0.9; margin-top: 0.2rem; }
+
+        .btn-main {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, #38bdf8, #0284c7);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(2, 132, 199, 0.4);
+            margin-top: 0.5rem;
+        }
+        .btn-main:active { transform: scale(0.97); }
+
+        /* Game Header & Info */
+        .game-header {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1e293b;
+            padding: 0.8rem 1.2rem;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .badge-info {
+            background: #334155;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #38bdf8;
+            border: 1px solid #475569;
+        }
+
+        /* Single Player Container */
+        .game-container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .question-card {
+            background: rgba(15, 23, 42, 0.8);
+            width: 100%;
+            padding: 1.5rem 1rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .question-text {
+            font-size: 3.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #f8fafc;
+        }
+
+        .answer-display {
+            font-size: 2.8rem;
+            font-weight: 800;
+            min-height: 4rem;
+            width: 100%;
+            background: #0f172a;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            color: #38bdf8;
+            border: 2px inset rgba(255,255,255,0.15);
+        }
+
+        /* Large Touch Numpad */
+        .numpad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            width: 100%;
+        }
+
+        .num-btn {
+            background: #1e293b;
+            color: #f8fafc;
+            border: 2px solid #475569;
+            border-radius: 16px;
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 0.9rem 0;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #0f172a;
+            transition: all 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .num-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #0f172a;
+        }
+
+        .btn-delete {
+            background: #7f1d1d;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        .btn-submit {
+            background: #14532d;
+            border-color: #22c55e;
+            color: white;
+            grid-column: span 2;
+        }
+
+        /* Result Screen */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            width: 100%;
+            margin: 1.2rem 0;
+        }
+
+        .stat-box {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 16px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .stat-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #38bdf8;
+            margin-top: 0.2rem;
+        }
+
+        .btn-wa {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+
+        .btn-secondary {
+            background: #475569;
+            color: white;
+        }
+
+        /* Toast Feedback */
+        .feedback-pop {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            padding: 1.2rem 2.5rem;
+            border-radius: 20px;
+            font-size: 2.2rem;
+            font-weight: 900;
+            z-index: 100;
+            pointer-events: none;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .feedback-pop.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .pop-correct { background: #22c55e; color: white; }
+        .pop-wrong { background: #ef4444; color: white; }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8rem; }
+            .question-text { font-size: 2.5rem; }
+            .num-btn { font-size: 1.6rem; padding: 0.7rem 0; }
+            .answer-display { font-size: 2.2rem; min-height: 3.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. FORMULIR AWAL DATA SISWA -->
+    <div id="screen-form" class="screen active">
+        <div class="card">
+            <h1>✏️ DATA SISWA</h1>
+            <p>Isi data diri sebelum memulai latihan matematika</p>
+
+            <form id="student-form" onsubmit="saveStudentData(event)" style="width: 100%;">
+                <div class="form-group">
+                    <label for="input-name">Nama Lengkap:</label>
+                    <input type="text" id="input-name" class="form-input" placeholder="Masukkan nama..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-class">Kelas:</label>
+                    <input type="text" id="input-class" class="form-input" placeholder="Contoh: 5A / 8B / 10 IPA 1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-wa">Nomor WhatsApp Guru:</label>
+                    <input type="tel" id="input-wa" class="form-input" placeholder="Contoh: 08123456789" required>
+                </div>
+
+                <button type="submit" class="btn-main">LANJUT PILIH LEVEL ➔</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. PILIH LEVEL -->
+    <div id="screen-level" class="screen">
+        <div class="card">
+            <h1>🎯 PILIH LEVEL</h1>
+            <p id="player-greeting">Selamat datang!</p>
+            
+            <div class="btn-grid">
+                <button class="btn-level btn-sd" onclick="selectLevel('sd')">
+                    <span class="lvl-title">SD (Rendah)</span>
+                    <span class="lvl-desc">Penjumlahan & Pengurangan 20 - 200</span>
+                </button>
+                <button class="btn-level btn-smp" onclick="selectLevel('smp')">
+                    <span class="lvl-title">SMP (Sedang)</span>
+                    <span class="lvl-desc">Penjumlahan & Pengurangan 20 - 600</span>
+                </button>
+                <button class="btn-level btn-sma" onclick="selectLevel('sma')">
+                    <span class="lvl-title">SMA (Tinggi)</span>
+                    <span class="lvl-desc">Penjumlahan & Pengurangan hingga 1000</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. GAMEPLAY SCREEN -->
+    <div id="screen-game" class="screen">
+        <div class="game-header">
+            <div class="badge-info" id="level-badge">SD</div>
+            <div class="badge-info" id="score-badge">Poin: 0</div>
+            <div class="badge-info" id="progress-badge">Soal 1/10</div>
+        </div>
+
+        <div class="game-container">
+            <div class="question-card">
+                <div class="question-text" id="q-text">---</div>
+                <div class="answer-display" id="ans-display">?</div>
+            </div>
+
+            <div class="numpad">
+                <button class="num-btn" onclick="pressKey('1')">1</button>
+                <button class="num-btn" onclick="pressKey('2')">2</button>
+                <button class="num-btn" onclick="pressKey('3')">3</button>
+                <button class="num-btn" onclick="pressKey('4')">4</button>
+                <button class="num-btn" onclick="pressKey('5')">5</button>
+                <button class="num-btn" onclick="pressKey('6')">6</button>
+                <button class="num-btn" onclick="pressKey('7')">7</button>
+                <button class="num-btn" onclick="pressKey('8')">8</button>
+                <button class="num-btn" onclick="pressKey('9')">9</button>
+                <button class="num-btn btn-delete" onclick="pressKey('DEL')">⌫</button>
+                <button class="num-btn" onclick="pressKey('0')">0</button>
+                <button class="num-btn btn-submit" onclick="submitAnswer()">JAWAB ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. RESULT SCREEN & SEND TO WA -->
+    <div id="screen-result" class="screen">
+        <div class="card">
+            <h1>🏆 HASIL PERMAINAN</h1>
+            <p id="result-subtitle">Kerja bagus!</p>
+
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <div style="opacity:0.8; font-size:0.9rem;">SKOR AKHIR</div>
+                    <div class="stat-val" id="res-score">0</div>
+                </div>
+                <div class="stat-box">
+                    <div style="opacity:0.8; font-size:0.9rem;">AKURASI</div>
+                    <div class="stat-val" id="res-accuracy">0%</div>
+                </div>
+                <div class="stat-box">
+                    <div style="opacity:0.8; font-size:0.9rem;">BENAR / SALAH</div>
+                    <div class="stat-val" id="res-correct-wrong" style="color:#22c55e;">0 / 0</div>
+                </div>
+                <div class="stat-box">
+                    <div style="opacity:0.8; font-size:0.9rem;">WAKTU</div>
+                    <div class="stat-val" id="res-time" style="color:#f59e0b;">0s</div>
+                </div>
+            </div>
+
+            <button class="btn-main btn-wa" onclick="sendToWhatsApp()">📲 KIRIM HASIL KE WA GURU</button>
+            <button class="btn-main btn-secondary" onclick="restartSession()">🔄 Main Lagi (10 Soal)</button>
+            <button class="btn-main btn-secondary" style="margin-top:0.5rem;" onclick="showScreen('screen-level')">⚙️ Ganti Level</button>
+        </div>
+    </div>
+
+    <!-- Feedback Popup -->
+    <div id="pop-feedback" class="feedback-pop pop-correct">BENAR! +10</div>
+
+    <script>
+        /* =========================================================
+           1. WEB AUDIO API SYNTHESIZER (100% OFFLINE AUDIO)
+           ========================================================= */
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioContext();
+        }
+
+        function playSound(type) {
+            initAudio();
+            if (!audioCtx) return;
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, now);
+                gain.gain.setValueAtTime(0.08, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now);
+                osc.stop(now + 0.05);
+            } else if (type === 'correct') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.08);
+                osc.frequency.setValueAtTime(783.99, now + 0.16);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.setValueAtTime(130, now + 0.12);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } else if (type === 'win') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, now);
+                osc.frequency.setValueAtTime(554.37, now + 0.12);
+                osc.frequency.setValueAtTime(659.25, now + 0.24);
+                osc.frequency.setValueAtTime(880, now + 0.36);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
+                osc.start(now);
+                osc.stop(now + 0.7);
+            }
+        }
+
+        /* =========================================================
+           2. STATE MANAGEMENT & GAME LOGIC
+           ========================================================= */
+        let studentData = { name: '', class: '', wa: '' };
+        let currentLevel = 'sd';
+        let questionBank = [];
+        let sessionQuestions = [];
+        let currentIndex = 0;
+        let currentInput = '';
+        let score = 0;
+        let correctCount = 0;
+        let wrongCount = 0;
+        let startTime = 0;
+        let totalTimeSeconds = 0;
+
+        function saveStudentData(e) {
+            e.preventDefault();
+            playSound('click');
+            
+            studentData.name = document.getElementById('input-name').value.trim();
+            studentData.class = document.getElementById('input-class').value.trim();
+            let rawWa = document.getElementById('input-wa').value.trim();
+
+            // Format nomor WA ke 62xxx jika diawali '0'
+            if (rawWa.startsWith('0')) {
+                rawWa = '62' + rawWa.slice(1);
+            }
+            studentData.wa = rawWa.replace(/[^0-9]/g, '');
+
+            document.getElementById('player-greeting').innerText = `Halo ${studentData.name} (${studentData.class}), pilih level latihanmu:`;
+            showScreen('screen-level');
+        }
+
+        function generate200Questions(level) {
+            const bank = [];
+            for (let i = 0; i < 200; i++) {
+                let num1, num2, isPlus, answer;
+                
+                if (level === 'sd') {
+                    // SD: 20-200
+                    isPlus = Math.random() > 0.4;
+                    if (isPlus) {
+                        num1 = Math.floor(Math.random() * 90) + 20;
+                        num2 = Math.floor(Math.random() * 90) + 20;
+                        answer = num1 + num2;
+                    } else {
+                        num1 = Math.floor(Math.random() * 150) + 50;
+                        num2 = Math.floor(Math.random() * (num1 - 20)) + 20;
+                        answer = num1 - num2;
+                    }
+                } else if (level === 'smp') {
+                    // SMP: 20-600
+                    isPlus = Math.random() > 0.5;
+                    if (isPlus) {
+                        num1 = Math.floor(Math.random() * 300) + 50;
+                        num2 = Math.floor(Math.random() * 250) + 20;
+                        answer = num1 + num2;
+                    } else {
+                        num1 = Math.floor(Math.random() * 550) + 50;
+                        num2 = Math.floor(Math.random() * (num1 - 20)) + 20;
+                        answer = num1 - num2;
+                    }
+                } else {
+                    // SMA: 20-1000
+                    isPlus = Math.random() > 0.5;
+                    if (isPlus) {
+                        num1 = Math.floor(Math.random() * 500) + 100;
+                        num2 = Math.floor(Math.random() * 400) + 50;
+                        answer = num1 + num2;
+                    } else {
+                        num1 = Math.floor(Math.random() * 900) + 100;
+                        num2 = Math.floor(Math.random() * (num1 - 50)) + 20;
+                        answer = num1 - num2;
+                    }
+                }
+
+                const operator = isPlus ? '+' : '-';
+                bank.push({ text: `${num1} ${operator} ${num2}`, answer: answer });
+            }
+            return bank;
+        }
+
+        function selectLevel(level) {
+            playSound('click');
+            currentLevel = level;
+            questionBank = generate200Questions(level);
+            restartSession();
+        }
+
+        function restartSession() {
+            playSound('click');
+            // Shuffle & pick 10 random questions
+            const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+            sessionQuestions = shuffled.slice(0, 10);
+            
+            currentIndex = 0;
+            score = 0;
+            correctCount = 0;
+            wrongCount = 0;
+            currentInput = '';
+            startTime = Date.now();
+
+            document.getElementById('level-badge').innerText = levelTitle(currentLevel);
+            updateScoreUI();
+            loadQuestion();
+            showScreen('screen-game');
+        }
+
+        function levelTitle(lvl) {
+            if (lvl === 'sd') return 'SD';
+            if (lvl === 'smp') return 'SMP';
+            return 'SMA';
+        }
+
+        function loadQuestion() {
+            if (currentIndex >= sessionQuestions.length) {
+                endGame();
+                return;
+            }
+
+            const q = sessionQuestions[currentIndex];
+            document.getElementById('q-text').innerText = q.text;
+            document.getElementById('progress-badge').innerText = `Soal ${currentIndex + 1}/10`;
+            currentInput = '';
+            updateInputDisplay();
+        }
+
+        function pressKey(key) {
+            playSound('click');
+            if (key === 'DEL') {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                if (currentInput.length < 5) {
+                    currentInput += key;
+                }
+            }
+            updateInputDisplay();
+        }
+
+        function updateInputDisplay() {
+            document.getElementById('ans-display').innerText = currentInput !== '' ? currentInput : '?';
+        }
+
+        function submitAnswer() {
+            if (currentInput === '') return;
+
+            const userAns = parseInt(currentInput, 10);
+            const currentQ = sessionQuestions[currentIndex];
+
+            if (userAns === currentQ.answer) {
+                playSound('correct');
+                score += 10;
+                correctCount++;
+                showFeedback('BENAR! +10', true);
+
+                currentIndex++;
+                updateScoreUI();
+                setTimeout(() => {
+                    loadQuestion();
+                }, 600);
+            } else {
+                playSound('wrong');
+                wrongCount++;
+                currentInput = '';
+                updateInputDisplay();
+                showFeedback('SALAH!', false);
+            }
+        }
+
+        function showFeedback(msg, isCorrect) {
+            const pop = document.getElementById('pop-feedback');
+            pop.innerText = msg;
+            pop.className = `feedback-pop ${isCorrect ? 'pop-correct' : 'pop-wrong'} show`;
+            
+            setTimeout(() => {
+                pop.classList.remove('show');
+            }, 700);
+        }
+
+        function updateScoreUI() {
+            document.getElementById('score-badge').innerText = `Poin: ${score}`;
+        }
+
+        function endGame() {
+            playSound('win');
+            totalTimeSeconds = Math.round((Date.now() - startTime) / 1000);
+            const accuracy = Math.round((correctCount / (correctCount + wrongCount || 1)) * 100);
+
+            document.getElementById('res-score').innerText = score;
+            document.getElementById('res-accuracy').innerText = `${accuracy}%`;
+            document.getElementById('res-correct-wrong').innerText = `${correctCount} / ${wrongCount}`;
+            document.getElementById('res-time').innerText = `${totalTimeSeconds}s`;
+
+            document.getElementById('result-subtitle').innerText = `Selesai 10 Soal! Hebat ${studentData.name}!`;
+
+            showScreen('screen-result');
+        }
+
+        /* =========================================================
+           3. AUTOMATIC WHATSAPP REPORT GENERATOR
+           ========================================================= */
+        function sendToWhatsApp() {
+            playSound('click');
+            const accuracy = Math.round((correctCount / (correctCount + wrongCount || 1)) * 100);
+            
+            const message = 
+`*LAPORAN HASIL LATIHAN MATEMATIKA* 📊
+
+*Data Siswa:*
+• Nama: *${studentData.name}*
+• Kelas: *${studentData.class}*
+
+*Detail Hasil Game:*
+• Level: *${levelTitle(currentLevel)}*
+• Total Skor: *${score} Poin*
+• Jawaban Benar: *${correctCount}*
+• Jawaban Salah: *${wrongCount}*
+• Akurasi: *${accuracy}%*
+• Waktu Tempuh: *${totalTimeSeconds} detik*
+
+_Pesan ini dikirim secara otomatis melalui Game Matematika._`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const waUrl = `https://wa.me/${studentData.wa}?text=${encodedMessage}`;
+
+            // Open WhatsApp link directly
+            window.open(waUrl, '_blank');
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
