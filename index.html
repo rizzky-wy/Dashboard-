@@ -6,52 +6,64 @@
 <title>I'am Ok - I'am Fine - fine.my.id</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<style>body{font-family:'Inter',sans-serif}</style>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    /* Ubah URL di bawah ini dengan link/path gambar yang Anda inginkan */
+    background-image: url('URL_FOTO_ANDA_DI_SINI');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+</style>
 </head>
-<body class="bg-[#F2F3F5] text-slate-900">
+<body class="text-slate-900 min-h-screen">
 
-<!-- NAV - jadi putih biar melayang -->
-<nav class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center bg-white rounded-full mt-4 mx-4 md:mx-auto shadow-sm">
+<!-- NAV - melayang dengan efek blur agar tetap terbaca jelas di atas gambar -->
+<nav class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center bg-white/90 backdrop-blur-md rounded-full mt-4 mx-4 md:mx-auto shadow-sm sticky top-4 z-50">
   <a href="/" class="font-bold text-[15px]">I'am Ok - I'am Fine</a>
   <div class="flex gap-5 text-[13px] text-slate-600">
-    <a href="/">Dashboard</a>
-    <a href="/media/">Media</a>
-    <a href="/game/">Game Edu</a>
-    <a href="/tutorial/">Tutorial</a>
+    <a href="/" class="hover:text-slate-900 transition">Dashboard</a>
+    <a href="/media/" class="hover:text-slate-900 transition">Media</a>
+    <a href="/game/" class="hover:text-slate-900 transition">Game Edu</a>
+    <a href="/tutorial/" class="hover:text-slate-900 transition">Tutorial</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="text-center pt-24 pb-16 px-6">
-  <h1 class="text-[38px] md:text-[48px] font-bold tracking-tight">
-    Halo, Saya Rizky Wijayanto 👋
-  </h1>
-  <p class="text-slate-500 mt-3 text-[15px]">Guru Sekolah Dasar</p>
-  <a href="#karya" class="inline-block mt-8 bg-[#3B9EFF] hover:bg-[#2d8af0] text-white text-[14px] font-medium px-6 py-3 rounded-full shadow">
-    Lihat Karya Saya
-  </a>
+  <div class="inline-block bg-white/80 backdrop-blur-sm px-6 py-8 rounded-3xl shadow-sm border border-slate-100 max-w-2xl">
+    <h1 class="text-[38px] md:text-[48px] font-bold tracking-tight">
+      Halo, Saya Rizky Wijayanto 👋
+    </h1>
+    <p class="text-slate-600 mt-3 text-[15px]">Guru Sekolah Dasar</p>
+    <a href="#karya" class="inline-block mt-8 bg-[#3B9EFF] hover:bg-[#2d8af0] text-white text-[14px] font-medium px-6 py-3 rounded-full shadow transition">
+      Lihat Karya Saya
+    </a>
+  </div>
 </section>
 
-<!-- KARYA - kartu jadi putih -->
+<!-- KARYA -->
 <section id="karya" class="max-w-5xl mx-auto px-6 py-16">
-  <h2 class="font-semibold">Karya Saya</h2>
+  <h2 class="font-semibold text-slate-800 bg-white/80 backdrop-blur-sm inline-block px-4 py-1 rounded-lg">Karya Saya</h2>
   <div class="grid md:grid-cols-3 gap-4 mt-6">
-    <a href="/media/" class="bg-white border border-slate-100 rounded-2xl p-5 hover:shadow-md transition">
+    <a href="/media/" class="bg-white/95 backdrop-blur-sm border border-slate-100 rounded-2xl p-5 hover:shadow-md transition">
       <h3 class="font-semibold text-[14px]">📁 Media</h3>
       <p class="text-[12px] text-slate-500 mt-1">Video & modul pembelajaran</p>
     </a>
-       <a href="/game/" class="bg-white border border-slate-100 rounded-2xl p-5 hover:shadow-md transition">
+    <a href="/game/" class="bg-white/95 backdrop-blur-sm border border-slate-100 rounded-2xl p-5 hover:shadow-md transition">
       <h3 class="font-semibold text-[14px]">🎮 Game Edu</h3>
       <p class="text-[12px] text-slate-500 mt-1">Game edukasi interaktif</p>
     </a>
-      <a href="/tutorial/" class="bg-white border border-slate-100 rounded-2xl p-5 hover:shadow-md transition">
-      <h3 class="font-semibold text-[14px]">🎮 Tutorial</h3>
+    <a href="/tutorial/" class="bg-white/95 backdrop-blur-sm border border-slate-100 rounded-2xl p-5 hover:shadow-md transition">
+      <h3 class="font-semibold text-[14px]">📚 Tutorial</h3>
       <p class="text-[12px] text-slate-500 mt-1">Tutorial Kegiatan</p>
     </a>
   </div>
 </section>
 
-<footer class="text-center py-10 text-[12px] text-slate-400">
+<footer class="text-center py-10 text-[12px] text-slate-600 bg-white/60 backdrop-blur-sm mt-10">
   © 2026 fine.my.id — Rizky Wijayanto
 </footer>
 
