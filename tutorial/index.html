@@ -1,35 +1,113 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tutorial - fine.my.id</title>
-<script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#F2F3F5]">
-
-<nav class="max-w-5xl mx-auto px-6 py-4 flex justify-between bg-white rounded-full mt-4 mx-4 md:mx-auto shadow-sm text-[13px]">
-  <b>Creator</b>
-  <div class="flex gap-4 text-slate-600">
-    <a href="/">Dashboard</a>
-    <a href="/game/" class="font-bold text-black">Tutorial</a>
-  </div>
-</nav>
-
-<div class="max-w-5xl mx-auto px-6 pt-10">
-  <h1 class="text-2xl font-bold">Tutorial</h1>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial - fine.my.id</title>
   
-  <div class="grid gap-3 mt-6">
-    <a href="/game/digital.game/" class="bg-white rounded-xl p-4 border flex justify-between">
-      <span>tutor 1</span><span>→</span>
-    </a>
-    <a href="/game/Zoo Keper/" class="bg-white rounded-xl p-4 border flex justify-between">
-      <span>tutor 2</span><span>→</span>
-    </a>
-  </div>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      /* Path/URL gambar background yang konsisten */
+      background-image: url('image/Gemini_Generated_Image_cufva8cufva8cufv.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+  </style>
+</head>
+<body class="bg-slate-900/10 text-slate-800 min-h-screen flex flex-col justify-between antialiased selection:bg-indigo-500 selection:text-white">
 
-  <p class="text-[10px] text-slate-400 mt-6"> ----2026---- </p>
-</div>
+  <!-- Header Navigasi -->
+  <header class="sticky top-4 z-50 px-4">
+    <nav class="max-w-2xl mx-auto bg-white/80 backdrop-blur-md border border-white/40 rounded-2xl px-5 py-3 flex items-center justify-between shadow-lg shadow-slate-900/5">
+      <a href="/" class="flex items-center gap-2.5 font-bold text-slate-900 tracking-tight text-sm hover:opacity-80 transition-opacity">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
+        I'm Ok - I'm Fine
+      </a>
+      
+      <div class="flex items-center gap-1 text-xs font-semibold">
+        <a href="/" class="px-3 py-1.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 transition-all">
+          Dashboard
+        </a>
+        <a href="/tutorial/" class="px-3.5 py-1.5 rounded-xl bg-slate-900 text-white shadow-sm transition-all">
+          Tutorial
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Konten Utama -->
+  <main class="max-w-2xl mx-auto px-4 py-8 w-full my-auto">
+    <div class="bg-white/85 backdrop-blur-md border border-white/60 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-900/10">
+      
+      <!-- Section Header/Title -->
+      <div class="mb-6">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-semibold mb-2">
+          <span>📖</span> Panduan & Petunjuk
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Tutorial</h1>
+        <p class="text-slate-500 text-sm mt-1">Pilih materi tutorial di bawah ini untuk mempelajari cara penggunaannya.</p>
+      </div>
+    
+      <!-- List Tutorial -->
+      <div class="space-y-3">
+        
+        <!-- Tutor 1 -->
+        <a href="/tutorial/digital/" class="group bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg group-hover:scale-105 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+              💡
+            </div>
+            <div>
+              <h2 class="font-semibold text-sm sm:text-base text-slate-900 group-hover:text-indigo-600 transition-colors">Tutorial 1</h2>
+              <p class="text-xs text-slate-500">Panduan dasar penggunaan aplikasi</p>
+            </div>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 group-hover:border-indigo-200 transition-all shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </div>
+        </a>
+
+        <!-- Tutor 2 -->
+        <a href="/tutorial/advanced/" class="group bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-emerald-300 hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-between">
+          <div class="flex items-center gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg group-hover:scale-105 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+              🚀
+            </div>
+            <div>
+              <h2 class="font-semibold text-sm sm:text-base text-slate-900 group-hover:text-emerald-600 transition-colors">Tutorial 2</h2>
+              <p class="text-xs text-slate-500">Panduan lanjutan & fitur interaktif</p>
+            </div>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-400 group-hover:bg-emerald-50 group-hover:text-emerald-600 group-hover:border-emerald-200 transition-all shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 px-4 mt-auto">
+    <p class="text-xs font-medium text-slate-700/80 bg-white/60 backdrop-blur-sm inline-block px-4 py-1.5 rounded-full border border-white/40">
+      © 2026 fine.my.id • All rights reserved
+    </p>
+  </footer>
 
 </body>
 </html>
