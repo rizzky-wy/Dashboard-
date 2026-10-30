@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Latihan Membaca 2 Suku Kata</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f0fdf4;
+            color: #1e293b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 540px;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+            border: 4px solid #bbf7d0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-title {
+            text-align: center;
+            color: #15803d;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+
+        .input-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.2s;
+            background-color: #f8fafc;
+        }
+
+        .input-control:focus {
+            border-color: #16a34a;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.15);
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .btn-level {
+            padding: 12px 8px;
+            border: 2px solid #cbd5e1;
+            background: #f8fafc;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #475569;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-level.active {
+            border-color: #16a34a;
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .session-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding: 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+        }
+
+        .btn-session {
+            padding: 10px 4px;
+            border: 2px solid #cbd5e1;
+            background: #ffffff;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #334155;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .btn-session:hover {
+            border-color: #16a34a;
+            background: #f0fdf4;
+        }
+
+        .btn-session.active {
+            border-color: #16a34a;
+            background: #16a34a;
+            color: #ffffff;
+        }
+
+        .btn-main {
+            width: 100%;
+            padding: 16px;
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(22, 163, 74, 0.3);
+            transition: all 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-main:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px dashed #e2e8f0;
+        }
+
+        .player-tag {
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 1rem;
+        }
+
+        .badge-info {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .progress-bar-container {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #16a34a;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .word-display-container {
+            background: #f8fafc;
+            border: 3px dashed #cbd5e1;
+            border-radius: 18px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .word-syllables {
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+        }
+
+        .s1 { color: #dc2626; }
+        .s2 { color: #2563eb; }
+
+        .btn-audio {
+            background: #e2e8f0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #475569;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            .word-syllables {
+                font-size: 3rem;
+            }
+        }
+
+        .btn-option {
+            background: #ffffff;
+            border: 3px solid #cbd5e1;
+            border-radius: 16px;
+            padding: 16px 8px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.15s;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .btn-option:active {
+            transform: scale(0.97);
+        }
+
+        .btn-option.correct {
+            background: #dcfce7 !important;
+            border-color: #16a34a !important;
+            color: #15803d !important;
+        }
+
+        .btn-option.wrong {
+            background: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+        }
+
+        .result-screen {
+            text-align: center;
+        }
+
+        .score-box {
+            background: #f0fdf4;
+            border: 2px solid #bbf7d0;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 16px 0 24px 0;
+        }
+
+        .score-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #16a34a;
+            line-height: 1;
+        }
+
+        .score-label {
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        .btn-wa {
+            background: #25d366;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px -1px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+            border: 2px solid #cbd5e1;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .hidden { display: none; }
+
+        canvas#confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <canvas id="confetti"></canvas>
+
+        <!-- SCREEN 1: IDENTITAS & PILIH SESI -->
+        <div id="screen-setup">
+            <h1 class="header-title">📖 Ayo Membaca!</h1>
+            <p class="subtitle">Latihan Membaca 2 Suku Kata (200 Soal)</p>
+
+            <div class="input-group">
+                <label for="player-name">Nama Siswa:</label>
+                <input type="text" id="player-name" class="input-control" placeholder="Masukkan nama..." autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <label>Pilih Level Kesulitan:</label>
+                <div class="level-grid">
+                    <button type="button" class="btn-level active" onclick="selectLevel('mudah')">Mudah</button>
+                    <button type="button" class="btn-level" onclick="selectLevel('sedang')">Sedang</button>
+                    <button type="button" class="btn-level" onclick="selectLevel('sulit')">Sulit</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label id="session-label">Pilih Sesi (5 Soal per Sesi):</label>
+                <div id="session-grid" class="session-grid"></div>
+            </div>
+
+            <button class="btn-main" onclick="startGame()">Mulai Bermain 🎮</button>
+        </div>
+
+        <!-- SCREEN 2: GAMEPLAY -->
+        <div id="screen-game" class="hidden">
+            <div class="game-header">
+                <div class="player-tag">
+                    👤 <span id="display-name">Siswa</span>
+                </div>
+                <div class="badge-info" id="display-info">Mudah • Sesi 1</div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div class="word-display-container">
+                <div class="word-syllables" id="syllables-container">
+                    <span class="s1">BO</span><span class="s2">LA</span>
+                </div>
+                <button class="btn-audio" onclick="playAudioPrompt()">🔊 Suara Kata</button>
+            </div>
+
+            <div class="options-grid" id="options-container"></div>
+        </div>
+
+        <!-- SCREEN 3: HASIL -->
+        <div id="screen-result" class="hidden result-screen">
+            <h2 style="color: #15803d; font-size: 1.8rem; font-weight: 800;">Hebat! Sesi Selesai 🎉</h2>
+            <p style="color: #64748b; font-weight: 600; margin-top: 4px;" id="result-student-name">Nama Siswa</p>
+
+            <div class="score-box">
+                <div class="score-number" id="final-score">100</div>
+                <div class="score-label" id="final-stats">Benar 5 dari 5 soal</div>
+            </div>
+
+            <button class="btn-wa" onclick="sendToWhatsApp()">
+                📲 Kirim Hasil ke WA Guru
+            </button>
+            <button class="btn-secondary" onclick="resetToSetup()">Pilih Sesi / Level Lain</button>
+        </div>
+    </div>
+
+    <script>
+        // Database 200 Soal 2 Suku Kata
+        const rawDatabase = {
+            mudah: [
+                "BABA","BABI","BABU","BACA","BACI","BADI","BADU","BAGA","BAGI","BAJA",
+                "BAJU","BAKA","BAKI","BAKU","BALA","BALI","BALU","BAMA","BAMI","BANA",
+                "BANI","BAPA","BAPI","RARA","RARI","RARO","SASA","SASI","SASU","TATA",
+                "TATI","TATU","TATO","CACA","CACI","CACU","CADA","CADI","DADA","DADI",
+                "DADU","DAGA","DAGI","DAGU","DASI","DATA","DATI","DATU","DUA","DUFA",
+                "DUKA","DUKU","GAGA","GAGI","GAJA","GAJI","GIGI","GILA","GITA","JAGA",
+                "JAHE","JARI","JASA","KACA","KAKI","KAKU","KALI","KAMA","KAMI","KAMU"
+            ],
+            sedang: [
+                "BOLA","BOLE","BOLI","BOLO","BULA","BULI","BULU","BILO","BELA","BELI",
+                "BELU","BELO","KALA","KALI","KALU","KALO","KILA","KILI","KILU","KILO",
+                "KULA","KULI","KULU","KULO","KELA","KELI","KELU","KELO","KOLA","KOLI",
+                "KOLU","KOLO","MALA","MALI","MALU","MILA","MILI","MILU","MULA","MULI",
+                "MULU","MELA","MELI","MELU","MOLA","MOLI","MOLU","SALA","SALI","SALU",
+                "ROTI","RUSA","SAPU","SAPI","SATE","TOPI","YOYO","DONI","DINI","GURU",
+                "PAPA","PAPI","MAMA","MAMI","LIMA","LARI","LURU","NURI","PARI","RATU"
+            ],
+            sulit: [
+                "BANTU","PINTU","MANDI","LAMPU","PASTA","BANJIR","BANGKU","CANGKUL","MANGKUK","TANGKI",
+                "CINTA","MINTA","TINTA","PINTA","DINDING","CANDI","PANDAN","SANDAL","EMBER","CANGKIR",
+                "KERTAS","KAMPUNG","GANDA","GANTI","GANTUNG","GENTENG","LOMPAT","RUMPUT","SUMPIT","MAMPU",
+                "PANTAI","PANTUN","PANJANG","PANGGANG","RANTAI","RANTING","RAMBUT","SANTAI","SANTAN","SAMBAL",
+                "SANGKAR","TANDUK","TANGGA","TANGAN","TANGKAP","TUNGGAL","TONGKAT","WALANG","WAYANG","WARUNG",
+                "WARNA","ZAMRUD","ZAMAN","ZAMZAM","BANDUNG","BANTEN","MEDAN","MONAS","KERA","DURI",
+                "PERI","GURU","CILACAP","PURA","PURI","PERA","DORA","DURA","KIRA","KURO"
+            ]
+        };
+
+        const TEACHER_PHONE = "088983836162";
+        const QUESTIONS_PER_SESSION = 5;
+
+        let selectedLevel = 'mudah';
+        let selectedSession = 1;
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let playerName = "";
+
+        // Audio Effects (Web Audio API)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playTone(freq, type, duration) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        function soundCorrect() {
+            playTone(523.25, 'sine', 0.15);
+            setTimeout(() => playTone(659.25, 'sine', 0.25), 120);
+        }
+
+        function soundWrong() {
+            playTone(220, 'triangle', 0.2);
+            setTimeout(() => playTone(180, 'triangle', 0.3), 150);
+        }
+
+        function soundComplete() {
+            const notes = [440, 554.37, 659.25, 880];
+            notes.forEach((freq, idx) => {
+                setTimeout(() => playTone(freq, 'sine', 0.3), idx * 100);
+            });
+        }
+
+        function playAudioPrompt() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const word = currentQuestions[currentIndex].word;
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'id-ID';
+                utterance.rate = 0.8;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function renderSessions() {
+            const sessionGrid = document.getElementById('session-grid');
+            sessionGrid.innerHTML = '';
+            
+            const totalWords = rawDatabase[selectedLevel].length;
+            const totalSessions = Math.ceil(totalWords / QUESTIONS_PER_SESSION);
+
+            if (selectedSession > totalSessions) selectedSession = 1;
+
+            for (let i = 1; i <= totalSessions; i++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `btn-session ${i === selectedSession ? 'active' : ''}`;
+                btn.innerText = `Sesi ${i}`;
+                btn.onclick = () => {
+                    selectedSession = i;
+                    document.querySelectorAll('.btn-session').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                };
+                sessionGrid.appendChild(btn);
+            }
+        }
+
+        function selectLevel(level) {
+            selectedLevel = level;
+            document.querySelectorAll('.btn-level').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.toLowerCase() === level) btn.classList.add('active');
+            });
+            selectedSession = 1;
+            renderSessions();
+        }
+
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function prepareQuestions() {
+            const pool = rawDatabase[selectedLevel];
+            const startIndex = (selectedSession - 1) * QUESTIONS_PER_SESSION;
+            const sessionWords = pool.slice(startIndex, startIndex + QUESTIONS_PER_SESSION);
+
+            currentQuestions = sessionWords.map(word => {
+                const mid = Math.ceil(word.length / 2);
+                const s1 = word.substring(0, mid);
+                const s2 = word.substring(mid);
+
+                let distractors = pool.filter(w => w !== word);
+                distractors = shuffleArray(distractors).slice(0, 2);
+
+                const options = shuffleArray([word, ...distractors]);
+
+                return { word, s1, s2, options };
+            });
+        }
+
+        function startGame() {
+            const input = document.getElementById('player-name').value.trim();
+            if (!input) {
+                alert('Silakan masukkan nama siswa terlebih dahulu!');
+                return;
+            }
+            playerName = input;
+
+            prepareQuestions();
+            currentIndex = 0;
+            score = 0;
+
+            document.getElementById('screen-setup').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+
+            document.getElementById('display-name').innerText = playerName;
+            document.getElementById('display-info').innerText = `${selectedLevel.toUpperCase()} • Sesi ${selectedSession}`;
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = currentQuestions[currentIndex];
+
+            const progressPct = ((currentIndex) / QUESTIONS_PER_SESSION) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPct}%`;
+
+            const syllablesContainer = document.getElementById('syllables-container');
+            syllablesContainer.innerHTML = `<span class="s1">${q.s1}</span><span class="s2">${q.s2}</span>`;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-option';
+                btn.innerText = opt;
+                btn.onclick = () => handleAnswer(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+
+            setTimeout(playAudioPrompt, 300);
+        }
+
+        function handleAnswer(selectedOpt, btnElement) {
+            const correctOpt = currentQuestions[currentIndex].word;
+            const allButtons = document.querySelectorAll('.btn-option');
+            allButtons.forEach(b => b.style.pointerEvents = 'none');
+
+            if (selectedOpt === correctOpt) {
+                btnElement.classList.add('correct');
+                soundCorrect();
+                score++;
+            } else {
+                btnElement.classList.add('wrong');
+                soundWrong();
+                allButtons.forEach(b => {
+                    if (b.innerText === correctOpt) b.classList.add('correct');
+                });
+            }
+
+            setTimeout(() => {
+                currentIndex++;
+                if (currentIndex < QUESTIONS_PER_SESSION) {
+                    loadQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1200);
+        }
+
+        function showResult() {
+            document.getElementById('progress-bar').style.width = '100%';
+            soundComplete();
+            startConfetti();
+
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+
+            const finalScoreVal = Math.round((score / QUESTIONS_PER_SESSION) * 100);
+            document.getElementById('result-student-name').innerText = playerName;
+            document.getElementById('final-score').innerText = finalScoreVal;
+            document.getElementById('final-stats').innerText = `Benar ${score} dari ${QUESTIONS_PER_SESSION} soal`;
+        }
+
+        function sendToWhatsApp() {
+            const finalScoreVal = Math.round((score / QUESTIONS_PER_SESSION) * 100);
+            const levelText = selectedLevel.charAt(0).toUpperCase() + selectedLevel.slice(1);
+            
+            const message = `Assalamu'alaikum Ibu/Bapak Guru, berikut hasil latihan membaca:\n\n` +
+                `👤 *Nama:* ${playerName}\n` +
+                `🎯 *Tingkat:* ${levelText}\n` +
+                `📌 *Sesi:* Sesi ${selectedSession}\n` +
+                `📊 *Skor Akhir:* ${finalScoreVal}\n` +
+                `✅ *Jawaban Benar:* ${score} dari ${QUESTIONS_PER_SESSION} soal\n\n` +
+                `Terima kasih!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${TEACHER_PHONE}?text=${encodedMessage}`, '_blank');
+        }
+
+        function resetToSetup() {
+            stopConfetti();
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-setup').classList.remove('hidden');
+        }
+
+        // Confetti Animation
+        let confettiInterval;
+        function startConfetti() {
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+
+            const pieces = Array.from({ length: 45 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                size: Math.random() * 8 + 4,
+                color: ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'][Math.floor(Math.random() * 5)],
+                speed: Math.random() * 3 + 2
+            }));
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                pieces.forEach(p => {
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.size, p.size);
+                    p.y += p.speed;
+                    if (p.y > canvas.height) p.y = -10;
+                });
+            }
+
+            confettiInterval = setInterval(draw, 20);
+        }
+
+        function stopConfetti() {
+            clearInterval(confettiInterval);
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        renderSessions();
+    </script>
+</body>
+</html>
