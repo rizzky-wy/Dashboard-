@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Latihan Praktik Sholat - Rizky Wijayanto (2026)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins & Amiri for Arabic text -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #031716;
+            color: #e2e8f0;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            overflow-x: hidden;
+        }
+        .font-arabic {
+            font-family: 'Amiri', serif;
+        }
+        /* Custom Neon & Emerald Glassmorphism styling */
+        .glass-panel {
+            background: rgba(6, 44, 38, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glass-card {
+            background: rgba(10, 61, 53, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: #34d399;
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
+        }
+        .neon-text-emerald {
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.7), 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+        .neon-text-gold {
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.8), 0 0 20px rgba(245, 158, 11, 0.4);
+        }
+        .neon-text-cyan {
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.8), 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+        .neon-border-gold {
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.3), inset 0 0 10px rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+        }
+        /* 3D Card Flip Animation */
+        .card-container {
+            perspective: 1000px;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .card-front {
+            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+            border: 2px solid #10b981;
+        }
+        .card-back {
+            background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+            border: 2px solid #34d399;
+            transform: rotateY(180deg);
+        }
+        /* Dice Animation */
+        @keyframes roll {
+            0% { transform: rotate(0deg) scale(0.8); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        .rolling {
+            animation: roll 0.5s ease-out;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(3, 23, 22, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b981;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-950 via-teal-950 to-black">
+
+    <!-- Glowing Background Decorative Elements -->
+    <div class="fixed top-[-10%] left-[-10%] w-96 h-96 bg-emerald-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-96 h-96 bg-amber-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <!-- MAIN CONTAINER -->
+    <div id="app-container" class="relative z-10 max-w-4xl mx-auto w-full min-h-screen flex flex-col justify-between p-4 md:p-6">
+
+        <!-- HEADER BANNER -->
+        <header class="glass-panel rounded-2xl p-4 mb-4 flex justify-between items-center border-b border-emerald-500/30">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-300 flex items-center justify-center text-slate-950 font-bold text-xl shadow-lg shadow-emerald-500/30">
+                    🕋
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold tracking-wide text-emerald-300 neon-text-emerald">Latihan Praktik Sholat</h1>
+                    <p class="text-xs text-emerald-400/80 font-medium">Karya Rizky Wijayanto (2026)</p>
+                </div>
+            </div>
+            <!-- Audio Toggle & Reset -->
+            <div class="flex items-center gap-2">
+                <button id="sound-btn" onclick="toggleSound()" class="p-2.5 rounded-xl bg-emerald-900/50 hover:bg-emerald-800/60 border border-emerald-500/40 text-emerald-300 transition-all">
+                    🔊
+                </button>
+                <button onclick="showScreen('screen-menu')" class="p-2.5 rounded-xl bg-emerald-900/50 hover:bg-emerald-800/60 border border-emerald-500/40 text-emerald-300 transition-all text-xs font-bold">
+                    🏠 Menu
+                </button>
+            </div>
+        </header>
+
+        <!-- SCREEN 1: MENU UTAMA -->
+        <main id="screen-menu" class="flex-1 flex flex-col justify-center items-center py-6 space-y-6">
+            <!-- Hero Banner -->
+            <div class="text-center space-y-3 max-w-md">
+                <span class="px-3 py-1 text-xs font-semibold uppercase tracking-widest text-emerald-300 bg-emerald-900/60 rounded-full border border-emerald-500/30">Futuristic Islamic Learning</span>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-amber-300 drop-shadow-md">
+                    Kuis & Card Match Sholat
+                </h2>
+                <p class="text-sm text-slate-300">Uji hafalan urutan rukun sholat dan pengetahuan fikih melawan AI Bot rival dalam permainan kartu futuristik!</p>
+            </div>
+
+            <!-- Settings Card -->
+            <div class="glass-panel w-full max-w-md rounded-2xl p-6 space-y-5 border-emerald-500/30">
+                <div>
+                    <label class="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">Pilih Kecepatan Bot & Waktu (Timer):</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="setSpeed('slow')" id="speed-slow" class="speed-btn py-2.5 px-3 rounded-xl border border-emerald-500/40 bg-emerald-900/40 text-xs font-bold text-emerald-300 transition-all hover:bg-emerald-800/60">
+                            🐢 Lambat<br><span class="text-[10px] font-normal opacity-80">Timer 20s</span>
+                        </button>
+                        <button onclick="setSpeed('medium')" id="speed-medium" class="speed-btn py-2.5 px-3 rounded-xl border border-emerald-500/40 bg-emerald-600/50 text-xs font-bold text-white transition-all shadow-lg shadow-emerald-600/30">
+                            ⚡ Sedang<br><span class="text-[10px] font-normal opacity-80">Timer 12s</span>
+                        </button>
+                        <button onclick="setSpeed('fast')" id="speed-fast" class="speed-btn py-2.5 px-3 rounded-xl border border-emerald-500/40 bg-emerald-900/40 text-xs font-bold text-emerald-300 transition-all hover:bg-emerald-800/60">
+                            🚀 Cepat<br><span class="text-[10px] font-normal opacity-80">Timer 7s</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mode Game Selection -->
+                <div class="space-y-3 pt-2">
+                    <button onclick="startGame('memory')" class="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-extrabold text-base tracking-wide shadow-lg shadow-emerald-500/30 transition-all hover:scale-[1.02] flex items-center justify-center gap-2">
+                        <span>🎴</span> MAIN MEMORY MATCH SHOLAT
+                    </button>
+                    <button onclick="startGame('quiz')" class="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-slate-950 font-extrabold text-base tracking-wide shadow-lg shadow-amber-500/30 transition-all hover:scale-[1.02] flex items-center justify-center gap-2">
+                        <span>📜</span> MAIN KUIS & DADU RUKUN
+                    </button>
+                </div>
+
+                <div class="flex gap-2">
+                    <button onclick="showScreen('screen-tutorial')" class="flex-1 py-2.5 rounded-xl glass-card text-xs font-bold text-emerald-300 hover:bg-emerald-800/40 transition-all">
+                        📖 Tutorial
+                    </button>
+                    <button onclick="showScreen('screen-about')" class="flex-1 py-2.5 rounded-xl glass-card text-xs font-bold text-amber-300 hover:bg-emerald-800/40 transition-all">
+                        👨‍💻 Pembuat
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- SCREEN 2: GAME BOARD (CARD MATCHING / MEMORY) -->
+        <main id="screen-game-memory" class="hidden flex-1 flex flex-col justify-between py-2 space-y-4">
+            <!-- Score & Turn Bar -->
+            <div class="glass-panel rounded-2xl p-4 flex justify-between items-center border-emerald-500/30">
+                <!-- Player Info -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-lg">
+                        👤
+                    </div>
+                    <div>
+                        <div class="text-xs text-emerald-400 font-semibold">Pemain (Anda)</div>
+                        <div class="text-xl font-black text-amber-300 neon-text-gold" id="player-score">0 Pts</div>
+                    </div>
+                </div>
+
+                <!-- Timer & Turn Indicator -->
+                <div class="text-center">
+                    <div id="turn-indicator" class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mb-1">
+                        Giliran Anda
+                    </div>
+                    <div id="timer-display" class="text-2xl font-black text-cyan-300 neon-text-cyan">12s</div>
+                </div>
+
+                <!-- Bot Info -->
+                <div class="flex items-center gap-3 flex-row-reverse text-right">
+                    <div class="w-10 h-10 rounded-full bg-rose-500/20 border border-rose-400 flex items-center justify-center text-lg">
+                        🤖
+                    </div>
+                    <div>
+                        <div class="text-xs text-rose-400 font-semibold">Bot Rival AI</div>
+                        <div class="text-xl font-black text-rose-300" id="bot-score">0 Pts</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Grid Matrix -->
+            <div id="cards-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-3 my-auto max-w-2xl mx-auto w-full">
+                <!-- Cards injected dynamically via JS -->
+            </div>
+
+            <!-- Extra Info Footer -->
+            <div class="glass-panel rounded-xl p-3 text-center text-xs text-emerald-300/80">
+                💡 Cocokkan pasangan rukun sholat yang sama. Setiap pasangan benar memberikan +10 Skor & Bonus Langkah!
+            </div>
+        </main>
+
+        <!-- SCREEN 3: GAME BOARD (QUIZ & DICE) -->
+        <main id="screen-game-quiz" class="hidden flex-1 flex flex-col justify-between py-2 space-y-4">
+            <!-- Status Bar -->
+            <div class="glass-panel rounded-2xl p-4 flex justify-between items-center border-emerald-500/30">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold text-emerald-400">Pemain:</span>
+                    <span id="quiz-player-score" class="text-lg font-black text-amber-300">0</span>
+                    <span class="text-xs text-amber-400">⭐</span>
+                </div>
+                <div class="text-center">
+                    <span id="quiz-timer" class="text-xl font-bold text-cyan-300 neon-text-cyan">12s</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-sm font-bold text-rose-400">Bot:</span>
+                    <span id="quiz-bot-score" class="text-lg font-black text-rose-300">0</span>
+                    <span class="text-xs text-rose-400">⭐</span>
+                </div>
+            </div>
+
+            <!-- Quiz Card Panel -->
+            <div class="glass-panel rounded-2xl p-5 md:p-6 space-y-4 max-w-xl mx-auto w-full relative">
+                <div class="flex justify-between items-center text-xs font-semibold text-emerald-400 border-b border-emerald-500/20 pb-2">
+                    <span id="quiz-category">Rukun Sholat #1</span>
+                    <span id="quiz-streak" class="text-amber-300">🔥 Streak: 0</span>
+                </div>
+
+                <!-- Arabic / Question Text -->
+                <div class="text-center py-2 space-y-2">
+                    <div id="quiz-arabic" class="font-arabic text-3xl md:text-4xl text-amber-300 leading-relaxed font-bold min-h-[50px]">
+                        <!-- Arabic Text Here -->
+                    </div>
+                    <p id="quiz-question" class="text-base md:text-lg font-semibold text-slate-100">
+                        <!-- Question Text Here -->
+                    </p>
+                </div>
+
+                <!-- Options Grid -->
+                <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <!-- Option Buttons Injected via JS -->
+                </div>
+            </div>
+
+            <!-- Dice Roll Action Area -->
+            <div class="glass-panel rounded-2xl p-4 text-center max-w-xl mx-auto w-full flex items-center justify-between">
+                <div class="text-left">
+                    <div class="text-xs text-slate-400">Bonus Langkah Dadu</div>
+                    <div id="dice-result" class="text-sm font-bold text-emerald-300">Kocok Dadu untuk Bonus Skor</div>
+                </div>
+                <button id="roll-dice-btn" onclick="rollDice()" class="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-sm shadow-lg shadow-amber-500/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
+                    <span id="dice-icon" class="text-lg">🎲</span> LEMPAR DADU
+                </button>
+            </div>
+        </main>
+
+        <!-- SCREEN: TUTORIAL -->
+        <main id="screen-tutorial" class="hidden flex-1 flex flex-col justify-center max-w-xl mx-auto w-full my-auto">
+            <div class="glass-panel rounded-2xl p-6 space-y-4">
+                <h3 class="text-xl font-bold text-amber-300 flex items-center gap-2 border-b border-emerald-500/20 pb-3">
+                    📖 Cara Bermain & Rules Game
+                </h3>
+                <div class="space-y-3 text-xs md:text-sm text-slate-200 leading-relaxed overflow-y-auto max-h-[60vh] pr-2">
+                    <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/30">
+                        <strong class="text-emerald-300 block mb-1">1. Mode Card Match (Memory Sholat)</strong>
+                        Balikkan kartu dan temukan pasangan rukun sholat yang sama (Gambar/Lafadz & Arti). Jika berhasil, Anda akan mendapat poin dan ekstra langkah.
+                    </div>
+                    <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/30">
+                        <strong class="text-amber-300 block mb-1">2. Mode Kuis & Dadu Rukun</strong>
+                        Jawab pertanyaan fikih dan bacaan sholat sebelum waktu habis. Setiap jawaban benar memberikan koin & kesempatan lempar dadu untuk menggandakan poin.
+                    </div>
+                    <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/30">
+                        <strong class="text-cyan-300 block mb-1">3. Bot Rival & Waktu</strong>
+                        Bot AI akan otomatis beraksi saat gilirannya. Atur kecepatan (Lambat, Sedang, Cepat) di Menu Utama sesuai kemampuan fokus Anda!
+                    </div>
+                </div>
+                <button onclick="showScreen('screen-menu')" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-all">
+                    Kembali ke Menu
+                </button>
+            </div>
+        </main>
+
+        <!-- SCREEN: ABOUT CREATOR -->
+        <main id="screen-about" class="hidden flex-1 flex flex-col justify-center max-w-md mx-auto w-full my-auto">
+            <div class="glass-panel rounded-2xl p-6 text-center space-y-4 border-amber-500/30">
+                <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-amber-400 to-emerald-400 mx-auto flex items-center justify-center text-4xl shadow-xl shadow-amber-500/20">
+                    🕋
+                </div>
+                <div>
+                    <h3 class="text-xl font-black text-amber-300 neon-text-gold">Latihan Praktik Sholat</h3>
+                    <p class="text-xs text-emerald-400 font-semibold mt-1">Edisi Edukasi Futuristik 2026</p>
+                </div>
+                <div class="text-xs text-slate-300 space-y-2 border-t border-b border-emerald-500/20 py-4">
+                    <p><strong>Pencipta:</strong> Rizky Wijayanto</p>
+                    <p><strong>Tahun Rilis:</strong> 2026</p>
+                    <p><strong>Teknologi:</strong> HTML5, Tailwind CSS, Web Audio API, Vanilla JS (Single-File Offline Ready)</p>
+                    <p class="italic text-emerald-400/80 pt-2">"Mari tingkatkan kualitas ibadah sholat melalui media pembelajaran digital yang interaktif dan menyenangkan."</p>
+                </div>
+                <button onclick="showScreen('screen-menu')" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition-all">
+                    Tutup & Kembali
+                </button>
+            </div>
+        </main>
+
+        <!-- MODAL GAME OVER / RESULT -->
+        <div id="result-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+            <div class="glass-panel rounded-2xl max-w-sm w-full p-6 text-center space-y-5 border-amber-500/40 neon-border-gold animate-bounce-short">
+                <div id="modal-icon" class="text-6xl">🏆</div>
+                <div>
+                    <h3 id="modal-title" class="text-2xl font-black text-amber-300 neon-text-gold">KEMENANGAN MUTLAK!</h3>
+                    <p id="modal-desc" class="text-xs text-slate-300 mt-1">Anda berhasil mengalahkan Bot AI dengan skor tertinggi!</p>
+                </div>
+                <div class="bg-emerald-950/80 rounded-xl p-4 border border-emerald-500/30 space-y-2">
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-400">Skor Pemain:</span>
+                        <span id="modal-player-score" class="font-bold text-amber-300">100 Pts</span>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-slate-400">Skor AI Bot:</span>
+                        <span id="modal-bot-score" class="font-bold text-rose-300">40 Pts</span>
+                    </div>
+                    <div class="flex justify-between text-xs pt-1 border-t border-emerald-500/20">
+                        <span class="text-slate-400">Bonus Bintang:</span>
+                        <span id="modal-stars" class="font-bold text-yellow-400">⭐⭐⭐</span>
+                    </div>
+                </div>
+                <button onclick="showScreen('screen-menu'); hideModal();" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-extrabold text-sm transition-all shadow-lg">
+                    Main Lagi 🔄
+                </button>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="text-center py-2 text-[11px] text-emerald-400/60 font-medium">
+            &copy; 2026 Rizky Wijayanto. All Rights Reserved. Single-File Web Game.
+        </footer>
+    </div>
+
+    <!-- AUDIO SYNTHESIZER & GAME LOGIC -->
+    <script>
+        /* ===================================================================
+           1. AUDIO SYNTHESIZER (Web Audio API - Offline Sound Effects)
+           =================================================================== */
+        let audioCtx = null;
+        let isSoundOn = true;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playSound(type) {
+            if (!isSoundOn) return;
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now);
+                osc.stop(now + 0.05);
+            } else if (type === 'correct') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now); // C5
+                osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, now);
+                osc.frequency.setValueAtTime(180, now + 0.15);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } else if (type === 'dice') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.linearRampToValueAtTime(600, now + 0.15);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+                osc.start(now);
+                osc.stop(now + 0.15);
+            } else if (type === 'win') {
+                // Victory Fanfare
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                    const subOsc = audioCtx.createOscillator();
+                    const subGain = audioCtx.createGain();
+                    subOsc.connect(subGain);
+                    subGain.connect(audioCtx.destination);
+                    subOsc.frequency.setValueAtTime(freq, now + (i * 0.12));
+                    subGain.gain.setValueAtTime(0.25, now + (i * 0.12));
+                    subGain.gain.linearRampToValueAtTime(0.01, now + (i * 0.12) + 0.25);
+                    subOsc.start(now + (i * 0.12));
+                    subOsc.stop(now + (i * 0.12) + 0.25);
+                });
+            }
+        }
+
+        function toggleSound() {
+            isSoundOn = !isSoundOn;
+            document.getElementById('sound-btn').innerText = isSoundOn ? '🔊' : '🔇';
+        }
+
+        /* ===================================================================
+           2. GAME DATA (Rukun Sholat & Fikih Quiz Data)
+           =================================================================== */
+        const RUKUN_SHOLAT_DATA = [
+            { id: 1, name: 'Niat & Takbir', arabic: 'TKB', text: 'Takbiratul Ihram', pairId: 1 },
+            { id: 2, name: 'Niat & Takbir', arabic: 'TKB', text: 'Allahu Akbar', pairId: 1 },
+            { id: 3, name: 'Ruku', arabic: 'RKU', text: 'Ruku dengan Thuma\'ninah', pairId: 2 },
+            { id: 4, name: 'Ruku', arabic: 'RKU', text: 'Subhana Rabbiyal Azhiim', pairId: 2 },
+            { id: 5, name: 'I\'tidal', arabic: 'ITD', text: 'I\'tidal Bangkit dari Ruku', pairId: 3 },
+            { id: 6, name: 'I\'tidal', arabic: 'ITD', text: 'Sami\'allahu Liman Hamidah', pairId: 3 },
+            { id: 7, name: 'Sujud', arabic: 'SJD', text: 'Sujud Dua Kali', pairId: 4 },
+            { id: 8, name: 'Sujud', arabic: 'SJD', text: 'Subhana Rabbiyal A\'la', pairId: 4 },
+            { id: 9, name: 'Duduk 2 Sujud', arabic: 'DDK', text: 'Duduk Antara Dua Sujud', pairId: 5 },
+            { id: 10, name: 'Duduk 2 Sujud', arabic: 'DDK', text: 'Rabbighfirli Warhamni', pairId: 5 },
+            { id: 11, name: 'Salam', arabic: 'SLM', text: 'Mengucapkan Salam Pertama', pairId: 6 },
+            { id: 12, name: 'Salam', arabic: 'SLM', text: 'Assalamu\'alaikum Warahmatullah', pairId: 6 }
+        ];
+
+        const QUIZ_QUESTIONS = [
+            {
+                arabic: 'اللهُ أَكْبَرُ',
+                question: 'Bacaan di atas diucapkan saat gerakan...',
+                options: ['Takbiratul Ihram & Perubahan Gerakan', 'Mengucapkan Salam', 'I\'tidal', 'Duduk Tasyahud'],
+                correct: 0,
+                category: 'Bacaan Sholat'
+            },
+            {
+                arabic: 'سُبْحَانَ رَبِّيَ الْعَظِيمِ وَبِحَمْدِهِ',
+                question: 'Bacaan di atas dibaca sebanyak 3x ketika melakukan gerakan...',
+                options: ['Sujud', 'Ruku\'', 'I\'tidal', 'Duduk di antara dua sujud'],
+                correct: 1,
+                category: 'Bacaan Ruku'
+            },
+            {
+                arabic: 'سَمِعَ اللهُ لِمَنْ حَمِدَهُ',
+                question: 'Bacaan I\'tidal di atas dibaca ketika...',
+                options: ['Bangkit dari Ruku\'', 'Hendak Sujud', 'Duduk Tasyahud', 'Awal Sholat'],
+                correct: 0,
+                category: 'I\'tidal'
+            },
+            {
+                arabic: 'سُبْحَانَ رَبِّيَ الْأَعْلَى وَبِحَمْدِهِ',
+                question: 'Lafaz doa di atas dianjurkan dibaca saat gerakan...',
+                options: ['Ruku\'', 'I\'tidal', 'Sujud', 'Salam'],
+                correct: 2,
+                category: 'Bacaan Sujud'
+            },
+            {
+                arabic: 'رَبِّ اغْفِرْ لِي وَارْحَمْنِي...',
+                question: 'Doa memohon ampunan & kasih sayang ini dibaca pada posisi...',
+                options: ['Duduk di antara Dua Sujud', 'Tasyahud Akhir', 'I\'tidal', 'Sujud Pertama'],
+                correct: 0,
+                category: 'Duduk Antara Dua Sujud'
+            },
+            {
+                arabic: 'السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ',
+                question: 'Mengucapkan Salam yang hukumnya RUKUN dalam sholat adalah...',
+                options: ['Salam Pertama (ke kanan)', 'Salam Kedua (ke kiri)', 'Salam Pertama & Kedua', 'Tidak wajib'],
+                correct: 0,
+                category: 'Rukun Salam'
+            }
+        ];
+
+        /* ===================================================================
+           3. GAME STATE MANAGEMENT
+           =================================================================== */
+        let gameMode = 'memory'; // 'memory' or 'quiz'
+        let speedSetting = 'medium'; // 'slow', 'medium', 'fast'
+        let timerSeconds = 12;
+        let timerInterval = null;
+        let currentTimer = 12;
+
+        let playerScore = 0;
+        let botScore = 0;
+        let isPlayerTurn = true;
+        let quizStreak = 0;
+
+        // Memory game variables
+        let cardsData = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let isBotBusy = false;
+
+        // Quiz variables
+        let currentQuizIndex = 0;
+        let diceRolled = false;
+
+        /* ===================================================================
+           4. SCREEN SWITCHING & INITIALIZATION
+           =================================================================== */
+        function showScreen(screenId) {
+            playSound('click');
+            ['screen-menu', 'screen-game-memory', 'screen-game-quiz', 'screen-tutorial', 'screen-about'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+            
+            if (screenId === 'screen-menu') {
+                clearInterval(timerInterval);
+            }
+        }
+
+        function setSpeed(speed) {
+            playSound('click');
+            speedSetting = speed;
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                btn.classList.remove('bg-emerald-600/50', 'text-white', 'shadow-lg');
+                btn.classList.add('bg-emerald-900/40', 'text-emerald-300');
+            });
+
+            const activeBtn = document.getElementById(`speed-${speed}`);
+            activeBtn.classList.remove('bg-emerald-900/40', 'text-emerald-300');
+            activeBtn.classList.add('bg-emerald-600/50', 'text-white', 'shadow-lg');
+
+            if (speed === 'slow') timerSeconds = 20;
+            else if (speed === 'medium') timerSeconds = 12;
+            else if (speed === 'fast') timerSeconds = 7;
+        }
+
+        function startGame(mode) {
+            playSound('click');
+            gameMode = mode;
+            playerScore = 0;
+            botScore = 0;
+            isPlayerTurn = true;
+            quizStreak = 0;
+
+            if (mode === 'memory') {
+                showScreen('screen-game-memory');
+                initMemoryGame();
+            } else {
+                showScreen('screen-game-quiz');
+                initQuizGame();
+            }
+        }
+
+        /* ===================================================================
+           5. MEMORY CARD MATCH LOGIC
+           =================================================================== */
+        function initMemoryGame() {
+            matchedPairs = 0;
+            flippedCards = [];
+            isBotBusy = false;
+            updateScores();
+
+            // Duplicate & Shuffle Cards
+            cardsData = [...RUKUN_SHOLAT_DATA].sort(() => Math.random() - 0.5);
+
+            const grid = document.getElementById('cards-grid');
+            grid.innerHTML = '';
+
+            cardsData.forEach((card, index) => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card-container h-28 sm:h-32 cursor-pointer';
+                cardEl.dataset.index = index;
+                cardEl.onclick = () => handleCardClick(index);
+
+                cardEl.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front flex-col p-2">
+                            <span class="text-2xl">🕌</span>
+                            <span class="text-[10px] font-bold text-emerald-300 mt-1">RUKUN</span>
+                        </div>
+                        <div class="card-back flex-col p-2 text-center">
+                            <span class="text-xs font-black text-amber-300">${card.name}</span>
+                            <span class="text-[11px] font-semibold text-white mt-1 leading-tight">${card.text}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(cardEl);
+            });
+
+            startTurnTimer();
+        }
+
+        function handleCardClick(index) {
+            if (!isPlayerTurn || isBotBusy || flippedCards.length >= 2) return;
+            const cardEl = document.querySelectorAll('.card-container')[index];
+            
+            if (cardEl.classList.contains('flipped') || cardEl.classList.contains('matched')) return;
+
+            flipCard(index);
+            flippedCards.push({ index, card: cardsData[index] });
+
+            if (flippedCards.length === 2) {
+                checkMatch();
+            }
+        }
+
+        function flipCard(index) {
+            playSound('click');
+            const cardEl = document.querySelectorAll('.card-container')[index];
+            cardEl.classList.add('flipped');
+        }
+
+        function unflipCard(index) {
+            const cardEl = document.querySelectorAll('.card-container')[index];
+            cardEl.classList.remove('flipped');
+        }
+
+        function checkMatch() {
+            const [first, second] = flippedCards;
+            if (first.card.pairId === second.card.pairId) {
+                playSound('correct');
+                matchedPairs++;
+                markMatched(first.index, second.index);
+
+                if (isPlayerTurn) {
+                    playerScore += 10;
+                    // Bonus turn for player
+                } else {
+                    botScore += 10;
+                }
+                updateScores();
+                flippedCards = [];
+
+                if (matchedPairs >= RUKUN_SHOLAT_DATA.length / 2) {
+                    endGame();
+                    return;
+                }
+
+                // Reset Turn Timer
+                startTurnTimer();
+            } else {
+                playSound('wrong');
+                setTimeout(() => {
+                    unflipCard(first.index);
+                    unflipCard(second.index);
+                    flippedCards = [];
+                    switchTurn();
+                }, 1000);
+            }
+        }
+
+        function markMatched(idx1, idx2) {
+            const cards = document.querySelectorAll('.card-container');
+            cards[idx1].classList.add('matched', 'opacity-60', 'pointer-events-none');
+            cards[idx2].classList.add('matched', 'opacity-60', 'pointer-events-none');
+        }
+
+        function switchTurn() {
+            isPlayerTurn = !isPlayerTurn;
+            const turnInd = document.getElementById('turn-indicator');
+            if (isPlayerTurn) {
+                turnInd.innerText = 'Giliran Anda';
+                turnInd.className = 'text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mb-1';
+                startTurnTimer();
+            } else {
+                turnInd.innerText = 'Giliran AI Bot...';
+                turnInd.className = 'text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 mb-1';
+                startTurnTimer();
+                botPlayMemory();
+            }
+        }
+
+        function botPlayMemory() {
+            isBotBusy = true;
+            const availableIndices = [];
+            document.querySelectorAll('.card-container').forEach((el, idx) => {
+                if (!el.classList.contains('flipped') && !el.classList.contains('matched')) {
+                    availableIndices.push(idx);
+                }
+            });
+
+            if (availableIndices.length < 2) return;
+
+            // AI delay based on speed setting
+            const botDelay = speedSetting === 'fast' ? 800 : speedSetting === 'medium' ? 1500 : 2500;
+
+            setTimeout(() => {
+                if (isPlayerTurn) return; // Prevent turn clash
+                const firstChoice = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+                flipCard(firstChoice);
+                flippedCards.push({ index: firstChoice, card: cardsData[firstChoice] });
+
+                setTimeout(() => {
+                    const remaining = availableIndices.filter(i => i !== firstChoice);
+                    
+                    // Smart Bot AI: Check if pair exists in cards
+                    let secondChoice = null;
+                    const targetPairId = cardsData[firstChoice].pairId;
+                    for (let idx of remaining) {
+                        if (cardsData[idx].pairId === targetPairId && Math.random() < 0.6) {
+                            secondChoice = idx;
+                            break;
+                        }
+                    }
+                    if (secondChoice === null) {
+                        secondChoice = remaining[Math.floor(Math.random() * remaining.length)];
+                    }
+
+                    flipCard(secondChoice);
+                    flippedCards.push({ index: secondChoice, card: cardsData[secondChoice] });
+                    isBotBusy = false;
+                    checkMatch();
+                }, 800);
+            }, botDelay);
+        }
+
+        /* ===================================================================
+           6. QUIZ & DICE GAME LOGIC
+           =================================================================== */
+        function initQuizGame() {
+            currentQuizIndex = 0;
+            quizStreak = 0;
+            diceRolled = false;
+            updateQuizScores();
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            diceRolled = false;
+            document.getElementById('dice-result').innerText = 'Kocok Dadu untuk Bonus Skor';
+            document.getElementById('roll-dice-btn').disabled = false;
+
+            const q = QUIZ_QUESTIONS[currentQuizIndex % QUIZ_QUESTIONS.length];
+            document.getElementById('quiz-category').innerText = q.category;
+            document.getElementById('quiz-arabic').innerText = q.arabic;
+            document.getElementById('quiz-question').innerText = q.question;
+
+            const optionsGrid = document.getElementById('quiz-options');
+            optionsGrid.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full py-3 px-4 rounded-xl glass-card text-xs md:text-sm font-semibold text-slate-200 text-left hover:bg-emerald-800/50 transition-all flex items-center justify-between';
+                btn.innerHTML = `<span>${opt}</span><span class="text-xs opacity-50">#${idx+1}</span>`;
+                btn.onclick = () => handleQuizAnswer(idx);
+                optionsGrid.appendChild(btn);
+            });
+
+            startTurnTimer();
+        }
+
+        function handleQuizAnswer(selectedIdx) {
+            clearInterval(timerInterval);
+            const q = QUIZ_QUESTIONS[currentQuizIndex % QUIZ_QUESTIONS.length];
+            
+            if (selectedIdx === q.correct) {
+                playSound('correct');
+                quizStreak++;
+                playerScore += 15 + (quizStreak * 2);
+                document.getElementById('quiz-streak').innerText = `🔥 Streak: ${quizStreak}`;
+                alertMessage('Jawaban Benar! +15 Skor (+Bonus Streak)', 'success');
+            } else {
+                playSound('wrong');
+                quizStreak = 0;
+                document.getElementById('quiz-streak').innerText = `🔥 Streak: 0`;
+                botScore += 10;
+                alertMessage('Jawaban Kurang Tepat! Bot dapat +10 Poin.', 'error');
+            }
+
+            updateQuizScores();
+
+            // Bot Turn Sim
+            botQuizSim();
+
+            setTimeout(() => {
+                currentQuizIndex++;
+                if (currentQuizIndex >= QUIZ_QUESTIONS.length * 2) {
+                    endGame();
+                } else {
+                    loadQuestion();
+                }
+            }, 1800);
+        }
+
+        function rollDice() {
+            if (diceRolled) return;
+            diceRolled = true;
+            playSound('dice');
+
+            const diceBtn = document.getElementById('roll-dice-btn');
+            const diceIcon = document.getElementById('dice-icon');
+            diceIcon.classList.add('rolling');
+
+            setTimeout(() => {
+                diceIcon.classList.remove('rolling');
+                const rollVal = Math.floor(Math.random() * 6) + 1;
+                playerScore += rollVal * 5;
+                document.getElementById('dice-result').innerText = `Dadu: 🎲 ${rollVal} (+${rollVal * 5} Bonus Pts!)`;
+                updateQuizScores();
+                playSound('correct');
+            }, 500);
+        }
+
+        function botQuizSim() {
+            // Bot AI answer probability based on speed setting
+            const accuracy = speedSetting === 'fast' ? 0.8 : speedSetting === 'medium' ? 0.6 : 0.4;
+            if (Math.random() < accuracy) {
+                botScore += 12;
+            } else {
+                botScore += 5;
+            }
+            updateQuizScores();
+        }
+
+        /* ===================================================================
+           7. TIMERS & SCORE UPDATES
+           =================================================================== */
+        function startTurnTimer() {
+            clearInterval(timerInterval);
+            currentTimer = timerSeconds;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                currentTimer--;
+                updateTimerDisplay();
+
+                if (currentTimer <= 0) {
+                    clearInterval(timerInterval);
+                    playSound('wrong');
+                    if (gameMode === 'memory') {
+                        switchTurn();
+                    } else {
+                        // Time out on quiz
+                        botScore += 10;
+                        quizStreak = 0;
+                        updateQuizScores();
+                        currentQuizIndex++;
+                        loadQuestion();
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const memTimer = document.getElementById('timer-display');
+            const qzTimer = document.getElementById('quiz-timer');
+
+            if (memTimer) memTimer.innerText = `${currentTimer}s`;
+            if (qzTimer) qzTimer.innerText = `${currentTimer}s`;
+        }
+
+        function updateScores() {
+            document.getElementById('player-score').innerText = `${playerScore} Pts`;
+            document.getElementById('bot-score').innerText = `${botScore} Pts`;
+        }
+
+        function updateQuizScores() {
+            document.getElementById('quiz-player-score').innerText = playerScore;
+            document.getElementById('quiz-bot-score').innerText = botScore;
+        }
+
+        function alertMessage(msg, type) {
+            const diceRes = document.getElementById('dice-result');
+            if (diceRes) {
+                diceRes.innerText = msg;
+            }
+        }
+
+        /* ===================================================================
+           8. GAME OVER & MODAL HANDLER
+           =================================================================== */
+        function endGame() {
+            clearInterval(timerInterval);
+            playSound('win');
+
+            const modal = document.getElementById('result-modal');
+            const title = document.getElementById('modal-title');
+            const desc = document.getElementById('modal-desc');
+            const icon = document.getElementById('modal-icon');
+
+            document.getElementById('modal-player-score').innerText = `${playerScore} Pts`;
+            document.getElementById('modal-bot-score').innerText = `${botScore} Pts`;
+
+            if (playerScore > botScore) {
+                icon.innerText = '🏆';
+                title.innerText = 'KEMENANGAN MUTLAK!';
+                desc.innerText = 'Selamat! Anda berhasil menguasai hafalan & fikih sholat!';
+                document.getElementById('modal-stars').innerText = '⭐⭐⭐';
+            } else if (playerScore === botScore) {
+                icon.innerText = '🤝';
+                title.innerText = 'HASIL SERI!';
+                desc.innerText = 'Kemampuan Anda setara dengan Bot AI Rival!';
+                document.getElementById('modal-stars').innerText = '⭐⭐';
+            } else {
+                icon.innerText = '🦾';
+                title.innerText = 'BOT AI MENANG!';
+                desc.innerText = 'Jangan menyerah! Mari tingkatkan lagi latihan sholat Anda.';
+                document.getElementById('modal-stars').innerText = '⭐';
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function hideModal() {
+            document.getElementById('result-modal').classList.add('hidden');
+        }
+
+        // Initialize default UI settings
+        window.onload = function() {
+            setSpeed('medium');
+        };
+    </script>
+</body>
+</html>
