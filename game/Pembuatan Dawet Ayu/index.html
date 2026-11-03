@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lomba Meracik Dawet Ayu Banjarnegara - Game IFP Kelas 2 SD</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter & Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Fredoka', 'Nunito', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        /* Responsive Glass styling */
+        .glass-container {
+            position: relative;
+            width: 140px;
+            height: 220px;
+            border: 6px solid rgba(255, 255, 255, 0.9);
+            border-top: none;
+            border-radius: 0 0 35px 35px;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15), inset 0 0 15px rgba(255,255,255,0.6);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        @media (min-width: 768px) {
+            .glass-container {
+                width: 180px;
+                height: 270px;
+                border-width: 8px;
+            }
+        }
+
+        /* Liquid layers */
+        .layer {
+            width: 100%;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        .layer.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .layer-juruh { background: linear-gradient(180deg, #78350f, #451a03); height: 22%; }
+        .layer-santan { background: linear-gradient(180deg, #ffffff, #fef3c7); height: 35%; }
+        .layer-cendol { background: radial-gradient(circle, #22c55e 40%, #15803d 90%); height: 25%; position: relative; }
+        .layer-es { background: rgba(224, 242, 254, 0.85); height: 18%; border-top: 2px dashed rgba(255,255,255,0.8); }
+
+        /* Floating elements animations */
+        .pulse-slow {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .shake {
+            animation: shakeAnim 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes shakeAnim {
+            10%, 90% { transform: translate3d(-2px, 0, 0); }
+            20%, 80% { transform: translate3d(4px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+            40%, 60% { transform: translate3d(6px, 0, 0); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 via-green-50 to-emerald-100 min-h-screen flex flex-col justify-between p-2 md:p-6 text-slate-800">
+
+    <!-- TOP HEADER / BANNER -->
+    <header class="w-full bg-white/90 backdrop-blur-md rounded-2xl md:rounded-3xl p-3 md:p-4 shadow-lg border-2 border-emerald-200 flex justify-between items-center max-w-7xl mx-auto mb-2 md:mb-4">
+        <div class="flex items-center gap-2 md:gap-4">
+            <div class="bg-emerald-500 text-white p-2 md:p-3 rounded-2xl shadow-md flex items-center justify-center">
+                <svg class="w-7 h-7 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-xl md:text-3xl font-extrabold text-emerald-800 leading-tight">Lomba Meracik Dawet Ayu</h1>
+                <p class="text-xs md:text-sm font-semibold text-emerald-600">Kuliner Khas Banjarnegara • Media Pembelajaran Kelas 2 SD</p>
+            </div>
+        </div>
+
+        <!-- SOUND & RESET BUTTONS -->
+        <div class="flex items-center gap-2">
+            <button id="btnSound" onclick="toggleSound()" class="bg-amber-100 hover:bg-amber-200 text-amber-800 p-2 md:p-3 rounded-2xl font-bold border-2 border-amber-300 transition flex items-center gap-1 md:gap-2 shadow-sm text-sm md:text-base">
+                <span id="soundIcon">🔊</span>
+                <span class="hidden sm:inline">Suara</span>
+            </button>
+            <button onclick="confirmReset()" class="bg-rose-100 hover:bg-rose-200 text-rose-700 p-2 md:p-3 rounded-2xl font-bold border-2 border-rose-300 transition flex items-center gap-1 md:gap-2 shadow-sm text-sm md:text-base">
+                🔄 <span class="hidden sm:inline">Ulangi</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="w-full max-w-7xl mx-auto flex-grow flex flex-col justify-between gap-3 md:gap-6">
+        
+        <!-- SCOREBOARD & DAWET GLASSES DISPLAY -->
+        <div class="grid grid-cols-2 gap-3 md:gap-6">
+            
+            <!-- PLAYER 1 CARD -->
+            <div id="cardP1" class="bg-white/95 rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-xl border-4 transition-all duration-300 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 border-emerald-500 ring-4 ring-emerald-200">
+                <div class="text-center md:text-left flex-grow">
+                    <div class="inline-block bg-emerald-100 text-emerald-800 font-extrabold text-xs md:text-base px-3 py-1 rounded-full mb-1">
+                        PEMAINKU 1
+                    </div>
+                    <h2 class="text-lg md:text-2xl font-black text-emerald-900">Tim Hijau 🌿</h2>
+                    <div class="mt-1 md:mt-2">
+                        <span class="text-xs md:text-sm font-bold text-slate-500">Skor:</span>
+                        <span id="scoreP1" class="text-2xl md:text-4xl font-black text-emerald-600 ml-1">0</span>
+                    </div>
+                    <div id="statusP1" class="mt-1 md:mt-2 text-xs md:text-sm font-extrabold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-lg">
+                        Giliran Bertanding!
+                    </div>
+                </div>
+
+                <!-- Glass Visual P1 -->
+                <div class="relative flex flex-col items-center">
+                    <div class="text-xs font-bold text-slate-400 mb-1">Gelas Tim A</div>
+                    <div class="glass-container" id="glassP1">
+                        <div id="p1-es" class="layer layer-es flex items-center justify-center text-xs font-bold text-sky-700">🧊 Es Batu</div>
+                        <div id="p1-santan" class="layer layer-santan flex items-center justify-center text-xs font-bold text-amber-900">🥛 Santan</div>
+                        <div id="p1-cendol" class="layer layer-cendol flex items-center justify-center text-xs font-bold text-white">🟢 Cendol</div>
+                        <div id="p1-juruh" class="layer layer-juruh flex items-center justify-center text-xs font-bold text-amber-200">🍯 Juruh</div>
+                    </div>
+                    <!-- Fruit Topping Visual -->
+                    <div id="p1-topping" class="absolute -top-3 right-1 text-2xl md:text-3xl opacity-0 transition-opacity duration-500">
+                        🥭
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLAYER 2 CARD -->
+            <div id="cardP2" class="bg-white/70 rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-xl border-4 transition-all duration-300 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 border-slate-200">
+                <div class="text-center md:text-left flex-grow">
+                    <div class="inline-block bg-amber-100 text-amber-800 font-extrabold text-xs md:text-base px-3 py-1 rounded-full mb-1">
+                        PEMAINKU 2
+                    </div>
+                    <h2 class="text-lg md:text-2xl font-black text-amber-900">Tim Gula Aren 🍯</h2>
+                    <div class="mt-1 md:mt-2">
+                        <span class="text-xs md:text-sm font-bold text-slate-500">Skor:</span>
+                        <span id="scoreP2" class="text-2xl md:text-4xl font-black text-amber-600 ml-1">0</span>
+                    </div>
+                    <div id="statusP2" class="mt-1 md:mt-2 text-xs md:text-sm font-extrabold text-slate-400 bg-slate-100 px-2 py-1 rounded-lg">
+                        Menunggu...
+                    </div>
+                </div>
+
+                <!-- Glass Visual P2 -->
+                <div class="relative flex flex-col items-center">
+                    <div class="text-xs font-bold text-slate-400 mb-1">Gelas Tim B</div>
+                    <div class="glass-container" id="glassP2">
+                        <div id="p2-es" class="layer layer-es flex items-center justify-center text-xs font-bold text-sky-700">🧊 Es Batu</div>
+                        <div id="p2-santan" class="layer layer-santan flex items-center justify-center text-xs font-bold text-amber-900">🥛 Santan</div>
+                        <div id="p2-cendol" class="layer layer-cendol flex items-center justify-center text-xs font-bold text-white">🟢 Cendol</div>
+                        <div id="p2-juruh" class="layer layer-juruh flex items-center justify-center text-xs font-bold text-amber-200">🍯 Juruh</div>
+                    </div>
+                    <!-- Fruit Topping Visual -->
+                    <div id="p2-topping" class="absolute -top-3 right-1 text-2xl md:text-3xl opacity-0 transition-opacity duration-500">
+                        🥭
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- QUESTION & INTERACTION BOX -->
+        <div id="quizContainer" class="bg-white rounded-2xl md:rounded-3xl p-4 md:p-8 shadow-2xl border-4 border-emerald-400 flex flex-col justify-between flex-grow">
+            
+            <!-- QUESTION HEADER -->
+            <div class="flex justify-between items-center border-b-2 border-slate-100 pb-3 mb-3 md:mb-6">
+                <span id="questionNum" class="bg-emerald-600 text-white font-extrabold text-sm md:text-lg px-4 py-1.5 rounded-full shadow-md">
+                    Soal 1 dari 14
+                </span>
+                <span id="turnIndicator" class="font-extrabold text-base md:text-xl text-emerald-700 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+                    Giliran: Tim Hijau
+                </span>
+            </div>
+
+            <!-- QUESTION TEXT -->
+            <div class="my-auto py-2 md:py-4">
+                <h3 id="questionText" class="text-xl md:text-3xl font-black text-slate-800 text-center leading-snug md:leading-relaxed">
+                    Memuat pertanyaan...
+                </h3>
+            </div>
+
+            <!-- OPTIONS BUTTONS (TOUCH FRIENDLY FOR IFP) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5 mt-3 md:mt-6">
+                <button onclick="checkAnswer('A')" id="btnOptA" class="group bg-slate-50 hover:bg-emerald-500 text-slate-800 hover:text-white border-3 border-slate-200 hover:border-emerald-600 rounded-2xl md:rounded-3xl p-4 md:p-6 text-left transition-all duration-200 shadow-md hover:shadow-xl flex items-center gap-4 active:scale-95">
+                    <span class="w-10 h-10 md:w-14 md:h-14 bg-white text-emerald-700 font-black text-lg md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center shadow-inner group-hover:bg-emerald-700 group-hover:text-white border border-slate-200">A</span>
+                    <span id="textOptA" class="text-lg md:text-2xl font-bold flex-grow">Pilihan A</span>
+                </button>
+
+                <button onclick="checkAnswer('B')" id="btnOptB" class="group bg-slate-50 hover:bg-emerald-500 text-slate-800 hover:text-white border-3 border-slate-200 hover:border-emerald-600 rounded-2xl md:rounded-3xl p-4 md:p-6 text-left transition-all duration-200 shadow-md hover:shadow-xl flex items-center gap-4 active:scale-95">
+                    <span class="w-10 h-10 md:w-14 md:h-14 bg-white text-emerald-700 font-black text-lg md:text-2xl rounded-xl md:rounded-2xl flex items-center justify-center shadow-inner group-hover:bg-emerald-700 group-hover:text-white border border-slate-200">B</span>
+                    <span id="textOptB" class="text-lg md:text-2xl font-bold flex-grow">Pilihan B</span>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER / INFO -->
+    <footer class="w-full text-center py-2 text-xs md:text-sm font-bold text-slate-500 mt-2">
+        Dawet Ayu Banjarnegara • Media Pembelajaran Interaktif Layar Sentuh IFP
+    </footer>
+
+    <!-- MODAL POPUP FOR FEEDBACK -->
+    <div id="feedbackModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div id="modalCard" class="bg-white rounded-3xl p-6 md:p-10 max-w-lg w-full text-center shadow-2xl border-4 transform transition-all scale-95 opacity-0 duration-300">
+            <div id="modalIcon" class="text-6xl md:text-8xl mb-3">🎉</div>
+            <h3 id="modalTitle" class="text-2xl md:text-4xl font-black mb-2">Jawaban Benar!</h3>
+            <p id="modalDesc" class="text-base md:text-xl font-bold text-slate-600 mb-6">Kamu mendapatkan bahan baru untuk Dawet Ayu!</p>
+            <button onclick="nextQuestion()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-lg md:text-2xl py-4 rounded-2xl shadow-lg hover:shadow-xl transition active:scale-95">
+                Lanjut ke Soal Berikutnya ➡️
+            </button>
+        </div>
+    </div>
+
+    <!-- WINNER MODAL -->
+    <div id="winnerModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl p-6 md:p-10 max-w-xl w-full text-center shadow-2xl border-4 border-amber-400">
+            <div class="text-7xl md:text-9xl mb-2 animate-bounce">🏆</div>
+            <h2 class="text-3xl md:text-5xl font-black text-amber-600 mb-2">SELESAI!</h2>
+            <h3 id="winnerTitle" class="text-2xl md:text-3xl font-extrabold text-slate-800 mb-4">Tim Hijau Menang!</h3>
+            
+            <div class="bg-amber-50 rounded-2xl p-4 mb-6 border-2 border-amber-200">
+                <p id="winnerText" class="text-base md:text-xl font-bold text-slate-700">Selamat! Racikan Dawet Ayu kalian sudah sempurna dan paling lezat!</p>
+                <div class="flex justify-around mt-4 font-black text-lg md:text-2xl">
+                    <div class="text-emerald-700">Tim Hijau: <span id="finalP1">0</span> Poin</div>
+                    <div class="text-amber-700">Tim Gula Aren: <span id="finalP2">0</span> Poin</div>
+                </div>
+            </div>
+
+            <button onclick="resetGame()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-xl md:text-2xl py-4 rounded-2xl shadow-xl transition active:scale-95">
+                🔄 Main Lagi Dari Awal
+            </button>
+        </div>
+    </div>
+
+    <!-- AUDIO SYNTHESIS & SCRIPT -->
+    <script>
+        // --- 14 SOAL PEMBELAJARAN DAWET AYU BANJARNEGARA ---
+        const questions = [
+            {
+                q: "Bahan utama pembuat cendol hijau adalah campuran tepung beras, garam, air pandan/suji, dan tepung...",
+                a: "Tapioka / Sagu Aren",
+                b: "Terigu",
+                correct: "A",
+                ingredient: "Bahan Cendol 🥣"
+            },
+            {
+                q: "Daun yang digunakan untuk memberikan warna hijau dan aroma wangi alami pada cendol adalah...",
+                a: "Daun Pandan & Suji",
+                b: "Daun Pisang",
+                correct: "A",
+                ingredient: "Pandan & Suji 🌿"
+            },
+            {
+                q: "Agar cendol langsung mengeras dan berbentuk bulir panjang saat dicetak, wadah di bawah cetakan diisi...",
+                a: "Air hangat",
+                b: "Air matang dan es batu",
+                correct: "B",
+                ingredient: "Cendol Hijau 🟢"
+            },
+            {
+                q: "Adonan cendol dipanaskan di atas api sedang sambil terus diaduk hingga...",
+                a: "Mengental dan licin",
+                b: "Encer dan bening",
+                correct: "A",
+                ingredient: "Adonan Matang 🔥"
+            },
+            {
+                q: "Agar kuah santan tidak pecah saat direbus, hal yang harus dilakukan adalah...",
+                a: "Dibiarkan saja",
+                b: "Diaduk perlahan terus-menerus",
+                correct: "B",
+                ingredient: "Kuah Santan 🥛"
+            },
+            {
+                q: "Bahan yang ditambahkan ke dalam rebusan santan agar harum adalah...",
+                a: "Daun Pandan",
+                b: "Daun Salam",
+                correct: "A",
+                ingredient: "Pandan Santan 🍃"
+            },
+            {
+                q: "Garam ditambahkan ke dalam rebusan kuah santan bertujuan untuk memberi rasa...",
+                a: "Gurih",
+                b: "Manis berlebihan",
+                correct: "A",
+                ingredient: "Rasa Gurih 🧂"
+            },
+            {
+                q: "Sirup gula merah pada sajian Dawet Ayu khas Banjarnegara sering disebut...",
+                a: "Juruh",
+                b: "Santan",
+                correct: "A",
+                ingredient: "Juruh Aren 🍯"
+            },
+            {
+                q: "Bahan utama untuk membuat sirup gula merah (juruh) adalah...",
+                a: "Gula merah / aren dan air",
+                b: "Gula pasir dan kecap",
+                correct: "A",
+                ingredient: "Gula Aren 🌴"
+            },
+            {
+                q: "Setelah gula merah larut dan mengental, sebelum didinginkan sirup harus...",
+                a: "Disaring",
+                b: "Dibakar",
+                correct: "A",
+                ingredient: "Juruh Bersih 🥣"
+            },
+            {
+                q: "Langkah pertama saat menyajikan Dawet Ayu di dalam gelas adalah memasukkan...",
+                a: "Es batu secukupnya",
+                b: "Air panas",
+                correct: "A",
+                ingredient: "Es Batu 🧊"
+            },
+            {
+                q: "Buah pelengkap yang sering ditambahkan ke dalam Dawet Ayu sesuai selera adalah...",
+                a: "Nangka atau Durian",
+                b: "Apel atau Jeruk",
+                correct: "A",
+                ingredient: "Buah Nangka 🥭"
+            },
+            {
+                q: "Dawet Ayu merupakan minuman tradisional yang sangat terkenal khas dari daerah...",
+                a: "Banjarnegara",
+                b: "Bandung",
+                correct: "A",
+                ingredient: "Dawet Ayu Spesial 🏆"
+            },
+            {
+                q: "Komponen utama Dawet Ayu terdiri dari 3 hal, yaitu cendol, kuah santan, dan...",
+                a: "Sirup gula merah",
+                b: "Sirup melon",
+                correct: "A",
+                ingredient: "Meracik Sempurna ✨"
+            }
+        ];
+
+        // --- GAME STATE ---
+        let currentQIndex = 0;
+        let currentPlayer = 1; // 1 or 2
+        let scoreP1 = 0;
+        let scoreP2 = 0;
+        let soundEnabled = true;
+
+        // Web Audio API Context
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new AudioContext();
+            }
+        }
+
+        // --- SOUND EFFECTS (Web Audio API) ---
+        function playSound(type) {
+            if (!soundEnabled) return;
+            initAudio();
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.05);
+                osc.start(now);
+                osc.stop(now + 0.05);
+            } else if (type === 'correct') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now); // C5
+                osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                gain.gain.setValueAtTime(0.4, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(250, now);
+                osc.frequency.linearRampToValueAtTime(150, now + 0.2);
+                gain.gain.setValueAtTime(0.4, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            } else if (type === 'win') {
+                // Fanfare sound
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                    const oscW = audioCtx.createOscillator();
+                    const gainW = audioCtx.createGain();
+                    oscW.connect(gainW);
+                    gainW.connect(audioCtx.destination);
+                    oscW.type = 'triangle';
+                    oscW.frequency.setValueAtTime(freq, now + i * 0.12);
+                    gainW.gain.setValueAtTime(0.4, now + i * 0.12);
+                    gainW.gain.linearRampToValueAtTime(0, now + i * 0.12 + 0.3);
+                    oscW.start(now + i * 0.12);
+                    oscW.stop(now + i * 0.12 + 0.3);
+                });
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundIcon').innerText = soundEnabled ? '🔊' : '🔇';
+        }
+
+        // --- INIT GAME ---
+        window.onload = function() {
+            loadQuestion();
+            updateUI();
+        };
+
+        function loadQuestion() {
+            if (currentQIndex >= questions.length) {
+                endGame();
+                return;
+            }
+
+            const q = questions[currentQIndex];
+            document.getElementById('questionNum').innerText = `Soal ${currentQIndex + 1} dari 14`;
+            document.getElementById('questionText').innerText = q.q;
+            document.getElementById('textOptA').innerText = q.a;
+            document.getElementById('textOptB').innerText = q.b;
+
+            // Reset buttons style
+            const btnA = document.getElementById('btnOptA');
+            const btnB = document.getElementById('btnOptB');
+            btnA.disabled = false;
+            btnB.disabled = false;
+            btnA.className = btnA.className.replace(/bg-emerald-\d+/g, '').replace(/bg-rose-\d+/g, '');
+            btnB.className = btnB.className.replace(/bg-emerald-\d+/g, '').replace(/bg-rose-\d+/g, '');
+            
+            // Highlight current player turn
+            const turnText = document.getElementById('turnIndicator');
+            if (currentPlayer === 1) {
+                turnText.innerHTML = `<span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span> Giliran: Tim Hijau (Pemain 1)`;
+                turnText.className = "font-extrabold text-base md:text-xl text-emerald-700 flex items-center gap-2";
+            } else {
+                turnText.innerHTML = `<span class="w-3 h-3 rounded-full bg-amber-500 animate-ping"></span> Giliran: Tim Gula Aren (Pemain 2)`;
+                turnText.className = "font-extrabold text-base md:text-xl text-amber-700 flex items-center gap-2";
+            }
+
+            updateCardsHighlight();
+        }
+
+        function updateCardsHighlight() {
+            const cardP1 = document.getElementById('cardP1');
+            const cardP2 = document.getElementById('cardP2');
+            const statusP1 = document.getElementById('statusP1');
+            const statusP2 = document.getElementById('statusP2');
+
+            if (currentPlayer === 1) {
+                cardP1.className = "bg-white/95 rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-xl border-4 border-emerald-500 ring-4 ring-emerald-200 transition-all duration-300 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 scale-102";
+                cardP2.className = "bg-white/70 rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-sm border-4 border-slate-200 opacity-80 transition-all duration-300 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 scale-98";
+                statusP1.innerText = "Giliran Bertanding! ✨";
+                statusP1.className = "mt-1 md:mt-2 text-xs md:text-sm font-extrabold text-emerald-700 bg-emerald-100 px-2 py-1 rounded-lg";
+                statusP2.innerText = "Menunggu...";
+                statusP2.className = "mt-1 md:mt-2 text-xs md:text-sm font-extrabold text-slate-400 bg-slate-100 px-2 py-1 rounded-lg";
+            } else {
+                cardP2.className = "bg-white/95 rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-xl border-4 border-amber-500 ring-4 ring-amber-200 transition-all duration-300 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 scale-102";
+                cardP1.className = "bg-white/70 rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-sm border-4 border-slate-200 opacity-80 transition-all duration-300 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 scale-98";
+                statusP2.innerText = "Giliran Bertanding! ✨";
+                statusP2.className = "mt-1 md:mt-2 text-xs md:text-sm font-extrabold text-amber-700 bg-amber-100 px-2 py-1 rounded-lg";
+                statusP1.innerText = "Menunggu...";
+                statusP1.className = "mt-1 md:mt-2 text-xs md:text-sm font-extrabold text-slate-400 bg-slate-100 px-2 py-1 rounded-lg";
+            }
+        }
+
+        function checkAnswer(selectedOpt) {
+            playSound('click');
+            const q = questions[currentQIndex];
+            const isCorrect = (selectedOpt === q.correct);
+
+            // Disable buttons temporarily
+            document.getElementById('btnOptA').disabled = true;
+            document.getElementById('btnOptB').disabled = true;
+
+            const modal = document.getElementById('feedbackModal');
+            const modalCard = document.getElementById('modalCard');
+            const modalIcon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+
+            if (isCorrect) {
+                playSound('correct');
+                if (currentPlayer === 1) {
+                    scoreP1 += 10;
+                    document.getElementById('scoreP1').innerText = scoreP1;
+                } else {
+                    scoreP2 += 10;
+                    document.getElementById('scoreP2').innerText = scoreP2;
+                }
+
+                // Add visual ingredient to glass
+                addIngredientVisual(currentPlayer);
+
+                modalIcon.innerText = "🎉";
+                modalTitle.innerText = "HEBAT! JAWABAN BENAR!";
+                modalTitle.className = "text-2xl md:text-4xl font-black text-emerald-600 mb-2";
+                modalDesc.innerText = `Pemain ${currentPlayer} berhasil menambah ${q.ingredient} ke dalam gelas Dawet Ayu! (+10 Poin)`;
+                modalCard.className = "bg-white rounded-3xl p-6 md:p-10 max-w-lg w-full text-center shadow-2xl border-4 border-emerald-400 transform transition-all scale-100 opacity-100 duration-300";
+            } else {
+                playSound('wrong');
+                modalIcon.innerText = "❌";
+                modalTitle.innerText = "HAMPIR BENAR!";
+                modalTitle.className = "text-2xl md:text-4xl font-black text-rose-600 mb-2";
+                modalDesc.innerText = `Jawaban yang benar adalah pilihan ${q.correct}. Jangan menyerah, ayo belajar lagi!`;
+                modalCard.className = "bg-white rounded-3xl p-6 md:p-10 max-w-lg w-full text-center shadow-2xl border-4 border-rose-400 transform transition-all scale-100 opacity-100 duration-300";
+                
+                // Shake effect on question container
+                const qc = document.getElementById('quizContainer');
+                qc.classList.add('shake');
+                setTimeout(() => qc.classList.remove('shake'), 500);
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function addIngredientVisual(player) {
+            const prefix = player === 1 ? 'p1-' : 'p2-';
+            const score = player === 1 ? scoreP1 : scoreP2;
+
+            // Step by step layer reveal based on score
+            if (score >= 10) document.getElementById(prefix + 'juruh').classList.add('active');
+            if (score >= 30) document.getElementById(prefix + 'cendol').classList.add('active');
+            if (score >= 50) document.getElementById(prefix + 'santan').classList.add('active');
+            if (score >= 60) document.getElementById(prefix + 'es').classList.add('active');
+            if (score >= 70) {
+                document.getElementById(prefix + 'topping').classList.remove('opacity-0');
+                document.getElementById(prefix + 'topping').classList.add('pulse-slow');
+            }
+        }
+
+        function nextQuestion() {
+            playSound('click');
+            document.getElementById('feedbackModal').classList.add('hidden');
+            
+            // Switch player turn
+            currentPlayer = currentPlayer === 1 ? 2 : 1;
+            currentQIndex++;
+            loadQuestion();
+        }
+
+        function endGame() {
+            playSound('win');
+            
+            // Confetti effect
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 }
+                });
+            }
+
+            document.getElementById('finalP1').innerText = scoreP1;
+            document.getElementById('finalP2').innerText = scoreP2;
+
+            const winnerTitle = document.getElementById('winnerTitle');
+            const winnerText = document.getElementById('winnerText');
+
+            if (scoreP1 > scoreP2) {
+                winnerTitle.innerText = "🏆 TIM HIJAU MENANG! 🏆";
+                winnerTitle.className = "text-2xl md:text-4xl font-black text-emerald-600 mb-2";
+                winnerText.innerText = "Selamat untuk Tim Hijau! Gelas Dawet Ayu kalian berhasil teracik dengan sempurna!";
+            } else if (scoreP2 > scoreP1) {
+                winnerTitle.innerText = "🏆 TIM GULA AREN MENANG! 🏆";
+                winnerTitle.className = "text-2xl md:text-4xl font-black text-amber-600 mb-2";
+                winnerText.innerText = "Selamat untuk Tim Gula Aren! Dawet Ayu buatan kalian sangat manis dan gurih!";
+            } else {
+                winnerTitle.innerText = "🤝 HASIL SERI! 🤝";
+                winnerTitle.className = "text-2xl md:text-4xl font-black text-sky-600 mb-2";
+                winnerText.innerText = "Kedua tim sama-sama hebat! Dawet Ayu Banjarnegara teracik dengan sangat lezat bersama!";
+            }
+
+            document.getElementById('winnerModal').classList.remove('hidden');
+        }
+
+        function confirmReset() {
+            if (confirm("Apakah ingin mengulang permainan dari awal?")) {
+                resetGame();
+            }
+        }
+
+        function resetGame() {
+            playSound('click');
+            currentQIndex = 0;
+            currentPlayer = 1;
+            scoreP1 = 0;
+            scoreP2 = 0;
+            
+            document.getElementById('scoreP1').innerText = '0';
+            document.getElementById('scoreP2').innerText = '0';
+
+            // Reset liquid visual layers
+            ['p1-', 'p2-'].forEach(prefix => {
+                document.getElementById(prefix + 'juruh').classList.remove('active');
+                document.getElementById(prefix + 'cendol').classList.remove('active');
+                document.getElementById(prefix + 'santan').classList.remove('active');
+                document.getElementById(prefix + 'es').classList.remove('active');
+                document.getElementById(prefix + 'topping').classList.add('opacity-0');
+                document.getElementById(prefix + 'topping').classList.remove('pulse-slow');
+            });
+
+            document.getElementById('winnerModal').classList.add('hidden');
+            document.getElementById('feedbackModal').classList.add('hidden');
+
+            loadQuestion();
+        }
+
+        function updateUI() {
+            updateCardsHighlight();
+        }
+    </script>
+</body>
+</html>
