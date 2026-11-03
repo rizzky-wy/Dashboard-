@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Simulasi Interaktif Pembuatan Dawet Ayu Banjarnegara - IFP SD Kelas 2</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Fredoka', 'Nunito', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        /* Glass container styling for Step 5 */
+        .big-glass {
+            position: relative;
+            width: 220px;
+            height: 320px;
+            border: 10px solid rgba(255, 255, 255, 0.95);
+            border-top: none;
+            border-radius: 0 0 45px 45px;
+            background: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15), inset 0 0 20px rgba(255,255,255,0.7);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        @media (min-width: 768px) {
+            .big-glass {
+                width: 260px;
+                height: 380px;
+                border-width: 12px;
+            }
+        }
+
+        .glass-layer {
+            width: 100%;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        .glass-layer.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .layer-juruh { background: linear-gradient(180deg, #78350f, #451a03); height: 22%; }
+        .layer-santan { background: linear-gradient(180deg, #ffffff, #fef3c7); height: 35%; }
+        .layer-cendol { background: radial-gradient(circle, #22c55e 40%, #15803d 90%); height: 25%; }
+        .layer-es { background: rgba(224, 242, 254, 0.9); height: 18%; border-top: 3px dashed rgba(255,255,255,0.9); }
+
+        /* Animation utilities */
+        .stir-animation {
+            animation: stir 1.2s infinite ease-in-out;
+        }
+        @keyframes stir {
+            0%, 100% { transform: rotate(-8deg) translateX(-5px); }
+            50% { transform: rotate(8deg) translateX(5px); }
+        }
+
+        .press-down {
+            animation: press 1s infinite alternate ease-in-out;
+        }
+        @keyframes press {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(18px); }
+        }
+
+        .drop-cendol {
+            animation: drop 1.5s infinite linear;
+        }
+        @keyframes drop {
+            0% { opacity: 0; transform: translateY(-10px); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(40px); }
+        }
+
+        .steam {
+            animation: rise 2s infinite ease-out;
+        }
+        @keyframes rise {
+            0% { opacity: 0; transform: translateY(0) scale(0.8); }
+            50% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-30px) scale(1.2); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-amber-50 min-h-screen flex flex-col justify-between p-2 md:p-6 text-slate-800">
+
+    <!-- TOP NAVIGATION HEADER -->
+    <header class="w-full bg-white/95 backdrop-blur-md rounded-2xl md:rounded-3xl p-3 md:p-5 shadow-lg border-2 border-emerald-200 flex flex-wrap justify-between items-center max-w-7xl mx-auto mb-3 gap-3">
+        <div class="flex items-center gap-3">
+            <div class="bg-emerald-500 text-white p-3 rounded-2xl shadow-md">
+                <span class="text-2xl md:text-3xl">🥛</span>
+            </div>
+            <div>
+                <h1 class="text-xl md:text-3xl font-black text-emerald-800 leading-tight">Simulasi Dawet Ayu Banjarnegara</h1>
+                <p class="text-xs md:text-base font-bold text-emerald-600">Media Pembelajaran Interaktif Kelas 2 SD</p>
+            </div>
+        </div>
+
+        <!-- SOUND & STEP SELECTOR -->
+        <div class="flex items-center gap-2">
+            <button id="btnSound" onclick="toggleSound()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 px-4 py-3 rounded-2xl font-black border-2 border-amber-300 transition text-base md:text-lg flex items-center gap-2 shadow-sm active:scale-95">
+                <span id="soundIcon">🔊</span>
+                <span class="hidden sm:inline">Suara</span>
+            </button>
+            <button onclick="goToStep(1)" class="bg-rose-100 hover:bg-rose-200 text-rose-800 px-4 py-3 rounded-2xl font-black border-2 border-rose-300 transition text-base md:text-lg shadow-sm active:scale-95">
+                🔄 <span class="hidden sm:inline">Ulangi</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- STEP PROGRESS TABS (TOUCH FRIENDLY FOR IFP) -->
+    <nav class="w-full max-w-7xl mx-auto mb-3">
+        <div class="grid grid-cols-5 gap-1.5 md:gap-3 bg-white/80 p-2 rounded-2xl border-2 border-slate-200 shadow-sm">
+            <button onclick="goToStep(1)" id="tab-1" class="step-tab py-2 md:py-3 px-1 rounded-xl font-black text-xs md:text-lg text-center transition-all bg-emerald-600 text-white shadow-md">
+                1. Bahan 🥣
+            </button>
+            <button onclick="goToStep(2)" id="tab-2" class="step-tab py-2 md:py-3 px-1 rounded-xl font-black text-xs md:text-lg text-center transition-all bg-slate-100 text-slate-600 hover:bg-emerald-100">
+                2. Cendol 🟢
+            </button>
+            <button onclick="goToStep(3)" id="tab-3" class="step-tab py-2 md:py-3 px-1 rounded-xl font-black text-xs md:text-lg text-center transition-all bg-slate-100 text-slate-600 hover:bg-emerald-100">
+                3. Santan 🥛
+            </button>
+            <button onclick="goToStep(4)" id="tab-4" class="step-tab py-2 md:py-3 px-1 rounded-xl font-black text-xs md:text-lg text-center transition-all bg-slate-100 text-slate-600 hover:bg-emerald-100">
+                4. Juruh 🍯
+            </button>
+            <button onclick="goToStep(5)" id="tab-5" class="step-tab py-2 md:py-3 px-1 rounded-xl font-black text-xs md:text-lg text-center transition-all bg-slate-100 text-slate-600 hover:bg-emerald-100">
+                5. Meracik 🍧
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN INTERACTIVE CANVAS AREA -->
+    <main class="w-full max-w-7xl mx-auto flex-grow flex flex-col justify-between">
+        
+        <!-- STEP VIEW CONTENT BOX -->
+        <div class="bg-white rounded-3xl p-4 md:p-8 shadow-xl border-4 border-emerald-300 flex-grow flex flex-col justify-between min-h-[420px]">
+            
+            <!-- STEP TITLE & NARRATION -->
+            <div class="bg-emerald-50 rounded-2xl p-4 border-2 border-emerald-200 mb-4">
+                <div class="flex items-center justify-between mb-1">
+                    <span id="stepBadge" class="bg-emerald-600 text-white text-xs md:text-base font-extrabold px-3 py-1 rounded-full">
+                        TAHAP 1 DARI 5
+                    </span>
+                    <span class="text-xs md:text-sm font-black text-emerald-700">Sentuh Layar IFP Untuk Berinteraksi! 👆</span>
+                </div>
+                <h2 id="stepTitle" class="text-xl md:text-3xl font-black text-emerald-900">
+                    Mengenal Bahan & Alat Dawet Ayu
+                </h2>
+                <p id="stepDesc" class="text-base md:text-2xl font-bold text-slate-700 mt-1 leading-relaxed">
+                    Dawet Ayu khas Banjarnegara terbuat dari tiga komponen utama: Cendol Hijau, Kuah Santan, dan Juruh Gula Merah.
+                </p>
+            </div>
+
+            <!-- ANIMATED DISPLAY WORKSPACE -->
+            <div id="animationWorkspace" class="my-auto flex flex-col items-center justify-center p-4 min-h-[240px] relative overflow-hidden rounded-2xl bg-slate-50 border-2 border-dashed border-slate-200">
+                <!-- Content will be rendered by JS dynamically per step -->
+            </div>
+
+            <!-- INTERACTION CONTROL BAR FOR CURRENT STEP -->
+            <div id="actionControls" class="mt-4 flex flex-wrap justify-center gap-3">
+                <!-- Interactive Action Buttons injected here -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- BOTTOM CONTROL BAR FOR IFP NAVIGATION -->
+    <footer class="w-full max-w-7xl mx-auto mt-3 flex justify-between items-center gap-4 bg-white/90 p-3 md:p-4 rounded-3xl border-2 border-emerald-200 shadow-md">
+        <button id="btnPrev" onclick="prevStep()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-black text-lg md:text-2xl px-6 py-4 rounded-2xl shadow transition active:scale-95 disabled:opacity-40 disabled:pointer-events-none flex items-center gap-2">
+            ⬅️ Kembali
+        </button>
+
+        <div class="text-center font-extrabold text-slate-600 text-sm md:text-lg hidden sm:block">
+            Tekan <span class="text-emerald-700">Lanjut</span> untuk Tahap Berikutnya
+        </div>
+
+        <button id="btnNext" onclick="nextStep()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-lg md:text-2xl px-8 py-4 rounded-2xl shadow-lg transition active:scale-95 flex items-center gap-2">
+            Lanjut ➡️
+        </button>
+    </footer>
+
+    <!-- JS SIMULATION LOGIC -->
+    <script>
+        // Game State
+        let currentStep = 1;
+        let soundEnabled = true;
+        let animState = {
+            cerealStirred: false,
+            cendolPressed: false,
+            santanStirred: false,
+            juruhMelted: false,
+            ingredientsAdded: { es: false, juruh: false, cendol: false, santan: false, topping: false }
+        };
+
+        // Web Audio Synthesizer Context
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new AudioContext();
+        }
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            initAudio();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(500, now);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.08);
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } else if (type === 'stir') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(200, now);
+                osc.frequency.linearRampToValueAtTime(350, now + 0.2);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                osc.start(now);
+                osc.stop(now + 0.25);
+            } else if (type === 'pour') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, now);
+                osc.frequency.exponentialRampToValueAtTime(300, now + 0.4);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.4);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } else if (type === 'complete') {
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                    const oscW = audioCtx.createOscillator();
+                    const gainW = audioCtx.createGain();
+                    oscW.connect(gainW);
+                    gainW.connect(audioCtx.destination);
+                    oscW.type = 'triangle';
+                    oscW.frequency.setValueAtTime(freq, now + i * 0.12);
+                    gainW.gain.setValueAtTime(0.3, now + i * 0.12);
+                    gainW.gain.linearRampToValueAtTime(0, now + i * 0.12 + 0.3);
+                    oscW.start(now + i * 0.12);
+                    oscW.stop(now + i * 0.12 + 0.3);
+                });
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundIcon').innerText = soundEnabled ? '🔊' : '🔇';
+        }
+
+        // NAVIGATION LOGIC
+        function goToStep(step) {
+            playSound('click');
+            currentStep = step;
+            updateStepUI();
+        }
+
+        function nextStep() {
+            if (currentStep < 5) {
+                currentStep++;
+                playSound('click');
+                updateStepUI();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                playSound('click');
+                updateStepUI();
+            }
+        }
+
+        function updateStepUI() {
+            // Update Tab styles
+            for (let i = 1; i <= 5; i++) {
+                const tab = document.getElementById(`tab-${i}`);
+                if (i === currentStep) {
+                    tab.className = "step-tab py-2 md:py-3 px-1 rounded-xl font-black text-xs md:text-lg text-center transition-all bg-emerald-600 text-white shadow-md scale-105";
+                } else {
+                    tab.className = "step-tab py-2 md:py-3 px-1 rounded-xl font-black text-xs md:text-lg text-center transition-all bg-slate-100 text-slate-600 hover:bg-emerald-100";
+                }
+            }
+
+            // Update Navigation Buttons
+            document.getElementById('btnPrev').disabled = (currentStep === 1);
+            document.getElementById('btnNext').innerText = (currentStep === 5) ? "Selesai ✨" : "Lanjut ➡️";
+
+            // Render content for current step
+            const badge = document.getElementById('stepBadge');
+            const title = document.getElementById('stepTitle');
+            const desc = document.getElementById('stepDesc');
+            const ws = document.getElementById('animationWorkspace');
+            const ctrl = document.getElementById('actionControls');
+
+            badge.innerText = `TAHAP ${currentStep} DARI 5`;
+
+            if (currentStep === 1) {
+                title.innerText = "1. Mengenal Bahan Utama Dawet Ayu";
+                desc.innerText = "Sentuh bahan-bahan di bawah ini untuk mengenal kegunaannya!";
+                renderStep1(ws, ctrl);
+            } else if (currentStep === 2) {
+                title.innerText = "2. Proses Pembuatan Cendol Hijau";
+                desc.innerText = "Campurkan tepung beras, tapioka, garam, dan perasan daun pandan/suji. Masak hingga mengental lalu cetak di atas air es!";
+                renderStep2(ws, ctrl);
+            } else if (currentStep === 3) {
+                title.innerText = "3. Proses Pembuatan Kuah Santan";
+                desc.innerText = "Rebus santan bersama daun pandan & garam dengan api kecil. Aduk terus perlahan agar santan tidak pecah!";
+                renderStep3(ws, ctrl);
+            } else if (currentStep === 4) {
+                title.innerText = "4. Proses Pembuatan Sirup Gula Merah (Juruh)";
+                desc.innerText = "Rebus gula merah aren yang disisir bersama air dan pandan hingga larut mengental, lalu saring.";
+                renderStep4(ws, ctrl);
+            } else if (currentStep === 5) {
+                title.innerText = "5. Meracik Dawet Ayu Khas Banjarnegara";
+                desc.innerText = "Tekan tombol bahan satu per satu untuk menyusun Dawet Ayu yang segar dan lezat!";
+                renderStep5(ws, ctrl);
+            }
+        }
+
+        // --- STEP 1: INGREDIENT SHOWCASE ---
+        function renderStep1(ws, ctrl) {
+            ws.innerHTML = `
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
+                    <div onclick="showIngrInfo('Cendol Hijau', 'Terbuat dari tepung beras & tapioka yang diberi warna hijau alami daun pandan/suji.')" class="bg-white p-4 rounded-2xl shadow-md border-2 border-emerald-200 text-center cursor-pointer hover:scale-105 transition active:scale-95">
+                        <div class="text-4xl md:text-6xl mb-2">🟢</div>
+                        <div class="font-black text-lg text-emerald-800">Cendol Hijau</div>
+                        <div class="text-xs font-bold text-slate-500">Kenyal & Segar</div>
+                    </div>
+                    <div onclick="showIngrInfo('Kuah Santan', 'Direbus dengan api kecil, pandan, dan sedikit garam agar rasanya gurih.')" class="bg-white p-4 rounded-2xl shadow-md border-2 border-amber-200 text-center cursor-pointer hover:scale-105 transition active:scale-95">
+                        <div class="text-4xl md:text-6xl mb-2">🥛</div>
+                        <div class="font-black text-lg text-amber-800">Kuah Santan</div>
+                        <div class="text-xs font-bold text-slate-500">Gurih & Harum</div>
+                    </div>
+                    <div onclick="showIngrInfo('Juruh Gula Merah', 'Dibuat dari gula aren asli yang dilarutkan hingga manis dan wangi.')" class="bg-white p-4 rounded-2xl shadow-md border-2 border-amber-300 text-center cursor-pointer hover:scale-105 transition active:scale-95">
+                        <div class="text-4xl md:text-6xl mb-2">🍯</div>
+                        <div class="font-black text-lg text-amber-900">Juruh Aren</div>
+                        <div class="text-xs font-bold text-slate-500">Manis Legit</div>
+                    </div>
+                    <div onclick="showIngrInfo('Es & Pelengkap', 'Es batu membuat minuman dingin segar, ditambah potongan nangka atau durian.')" class="bg-white p-4 rounded-2xl shadow-md border-2 border-sky-200 text-center cursor-pointer hover:scale-105 transition active:scale-95">
+                        <div class="text-4xl md:text-6xl mb-2">🧊🥭</div>
+                        <div class="font-black text-lg text-sky-800">Es & Nangka</div>
+                        <div class="text-xs font-bold text-slate-500">Pelengkap Lezat</div>
+                    </div>
+                </div>
+            `;
+            ctrl.innerHTML = `<div id="ingrPopup" class="text-lg md:text-xl font-extrabold text-emerald-800 bg-emerald-100 px-6 py-3 rounded-2xl border border-emerald-300">Sentuh gambar bahan di atas untuk info detail! 💡</div>`;
+        }
+
+        function showIngrInfo(title, text) {
+            playSound('click');
+            document.getElementById('ingrPopup').innerHTML = `<span class="font-black text-emerald-900">${title}:</span> ${text}`;
+        }
+
+        // --- STEP 2: MAKING CENDOL ---
+        function renderStep2(ws, ctrl) {
+            ws.innerHTML = `
+                <div class="flex flex-col items-center justify-center gap-4 relative">
+                    <!-- Pan / Mold container -->
+                    <div id="cendolPot" class="w-48 h-48 md:w-64 md:h-64 bg-slate-200 rounded-full border-8 border-slate-400 flex items-center justify-center relative shadow-inner overflow-hidden">
+                        <div id="cendolMixture" class="w-full h-full bg-emerald-300 rounded-full transition-all duration-700 flex items-center justify-center font-black text-emerald-900 text-lg md:text-xl text-center p-4">
+                            ${animState.cerealStirred ? 'Adonan Mengental & Licin! 🟢' : 'Campuran Tepung & Pandan 🥣'}
+                        </div>
+                        <div id="stirSpoon" class="hidden absolute top-2 right-4 text-5xl md:text-7xl stir-animation">🥄</div>
+                    </div>
+
+                    <!-- Ice Bowl for Mold step -->
+                    <div id="iceBowl" class="hidden flex flex-col items-center gap-1">
+                        <div class="text-2xl drop-cendol">🟢 🟢 🟢</div>
+                        <div class="bg-sky-100 border-4 border-sky-300 rounded-b-3xl px-8 py-3 text-sky-800 font-extrabold text-lg">
+                            🧊 Wadah Air Matang & Es Batu (Cendol Mengeras)
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            ctrl.innerHTML = `
+                <button onclick="actionStirCendol()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-lg md:text-xl px-6 py-4 rounded-2xl shadow-md active:scale-95 flex items-center gap-2">
+                    🥣 1. Aduk & Masak Adonan
+                </button>
+                <button onclick="actionPressCendol()" class="bg-teal-600 hover:bg-teal-700 text-white font-black text-lg md:text-xl px-6 py-4 rounded-2xl shadow-md active:scale-95 flex items-center gap-2">
+                    🔻 2. Cetak Cendol ke Air Es
+                </button>
+            `;
+        }
+
+        function actionStirCendol() {
+            playSound('stir');
+            animState.cerealStirred = true;
+            const mix = document.getElementById('cendolMixture');
+            const spoon = document.getElementById('stirSpoon');
+            spoon.classList.remove('hidden');
+            mix.className = "w-full h-full bg-emerald-600 rounded-full transition-all duration-700 flex items-center justify-center font-black text-white text-lg md:text-xl text-center p-4 shadow-lg";
+            mix.innerText = "Adonan Matang, Mengental & Licin! 🔥";
+        }
+
+        function actionPressCendol() {
+            if (!animState.cerealStirred) {
+                alert("Aduk dan masak adonan tepung dulu sampai mengental ya!");
+                return;
+            }
+            playSound('pour');
+            const iceBowl = document.getElementById('iceBowl');
+            iceBowl.classList.remove('hidden');
+            const pot = document.getElementById('cendolPot');
+            pot.classList.add('press-down');
+        }
+
+        // --- STEP 3: MAKING SANTAN ---
+        function renderStep3(ws, ctrl) {
+            ws.innerHTML = `
+                <div class="flex flex-col items-center justify-center gap-3">
+                    <div class="relative">
+                        <!-- Steam animation -->
+                        <div class="absolute -top-8 left-12 text-2xl steam">💨</div>
+                        <div class="absolute -top-8 right-12 text-2xl steam" style="animation-delay:0.5s">💨</div>
+                        
+                        <!-- Pot -->
+                        <div class="w-52 h-40 md:w-64 md:h-48 bg-slate-300 rounded-b-3xl border-8 border-slate-400 relative overflow-hidden shadow-md flex flex-col justify-end">
+                            <div id="santanLiquid" class="w-full h-3/4 bg-amber-50 flex items-center justify-center font-black text-amber-900 text-base md:text-lg border-t-4 border-amber-200">
+                                🥛 Santan + Pandan + Garam
+                            </div>
+                        </div>
+                        <div id="santanStir" class="hidden absolute top-4 right-2 text-6xl stir-animation">🥄</div>
+                    </div>
+                    <div class="text-xs md:text-sm font-extrabold text-amber-800 bg-amber-100 px-4 py-2 rounded-xl border border-amber-300">
+                        🔥 Api Kecil (Diaduk Terus Agar Santan Tidak Pecah)
+                    </div>
+                </div>
+            `;
+
+            ctrl.innerHTML = `
+                <button onclick="actionStirSantan()" class="bg-amber-600 hover:bg-amber-700 text-white font-black text-lg md:text-xl px-8 py-4 rounded-2xl shadow-md active:scale-95 flex items-center gap-2">
+                    🥄 Aduk Perlahan Kuah Santan
+                </button>
+            `;
+        }
+
+        function actionStirSantan() {
+            playSound('stir');
+            const stir = document.getElementById('santanStir');
+            const liquid = document.getElementById('santanLiquid');
+            stir.classList.remove('hidden');
+            liquid.innerText = "Santan Mendidih & Gurih Sempurna! ✨";
+            liquid.className = "w-full h-3/4 bg-white flex items-center justify-center font-black text-emerald-900 text-base md:text-lg border-t-4 border-emerald-300 shadow-inner";
+        }
+
+        // --- STEP 4: MAKING JURUH ---
+        function renderStep4(ws, ctrl) {
+            ws.innerHTML = `
+                <div class="flex flex-col items-center justify-center gap-3">
+                    <div class="w-52 h-40 md:w-64 md:h-48 bg-amber-950 rounded-b-3xl border-8 border-amber-900 relative overflow-hidden shadow-md flex flex-col justify-end">
+                        <div id="juruhLiquid" class="w-full h-1/2 bg-amber-800 transition-all duration-700 flex items-center justify-center font-black text-amber-100 text-base md:text-lg">
+                            🌴 Potongan Gula Aren & Pandan
+                        </div>
+                    </div>
+                    <div id="filterInfo" class="hidden text-sm md:text-base font-extrabold text-amber-900 bg-amber-100 px-4 py-2 rounded-xl border border-amber-300">
+                        🥣 Sirup Gula Merah Larut, Mengental & Disaring!
+                    </div>
+                </div>
+            `;
+
+            ctrl.innerHTML = `
+                <button onclick="actionMeltJuruh()" class="bg-amber-800 hover:bg-amber-900 text-white font-black text-lg md:text-xl px-8 py-4 rounded-2xl shadow-md active:scale-95 flex items-center gap-2">
+                    🔥 Rebus & Larutkan Gula Merah
+                </button>
+            `;
+        }
+
+        function actionMeltJuruh() {
+            playSound('pour');
+            const liquid = document.getElementById('juruhLiquid');
+            const filter = document.getElementById('filterInfo');
+            liquid.className = "w-full h-4/5 bg-gradient-to-b from-amber-900 to-black transition-all duration-700 flex items-center justify-center font-black text-amber-200 text-base md:text-lg shadow-inner";
+            liquid.innerText = "🍯 Juruh Manis Legit & Kental";
+            filter.classList.remove('hidden');
+        }
+
+        // --- STEP 5: RECIPE ASSEMBLY (INTERACTIVE GLASS) ---
+        function renderStep5(ws, ctrl) {
+            ws.innerHTML = `
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full">
+                    <!-- Glass Container -->
+                    <div class="relative flex flex-col items-center">
+                        <div class="text-xs md:text-sm font-black text-slate-400 mb-1">Gelas Dawet Ayu Banjarnegara</div>
+                        <div class="big-glass">
+                            <div id="layer-es" class="glass-layer layer-es flex items-center justify-center text-sm md:text-base font-black text-sky-800">🧊 Es Batu</div>
+                            <div id="layer-santan" class="glass-layer layer-santan flex items-center justify-center text-sm md:text-base font-black text-amber-950">🥛 Kuah Santan Gurih</div>
+                            <div id="layer-cendol" class="glass-layer layer-cendol flex items-center justify-center text-sm md:text-base font-black text-white">🟢 Cendol Hijau</div>
+                            <div id="layer-juruh" class="glass-layer layer-juruh flex items-center justify-center text-sm md:text-base font-black text-amber-200">🍯 Juruh Gula Merah</div>
+                        </div>
+                        <div id="layer-topping" class="absolute -top-4 right-2 text-4xl md:text-5xl opacity-0 transition-all duration-500">
+                            🥭
+                        </div>
+                    </div>
+
+                    <!-- Helper instructions -->
+                    <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200 max-w-xs text-center">
+                        <h4 class="font-black text-amber-900 text-lg mb-1">Urutan Meracik:</h4>
+                        <ol class="text-xs md:text-sm font-bold text-slate-700 text-left space-y-1">
+                            <li>1. 🧊 Es Batu secukupnya</li>
+                            <li>2. 🍯 Juruh Gula Merah Aren</li>
+                            <li>3. 🟢 Cendol Hijau Pandan</li>
+                            <li>4. 🥛 Kuah Santan Gurih</li>
+                            <li>5. 🥭 Potongan Buah Nangka/Durian</li>
+                        </ol>
+                    </div>
+                </div>
+            `;
+
+            ctrl.innerHTML = `
+                <button onclick="addGlassIngredient('es')" class="bg-sky-500 hover:bg-sky-600 text-white font-black text-base md:text-lg px-4 py-3 rounded-2xl shadow active:scale-95">
+                    1. 🧊 Es Batu
+                </button>
+                <button onclick="addGlassIngredient('juruh')" class="bg-amber-800 hover:bg-amber-900 text-white font-black text-base md:text-lg px-4 py-3 rounded-2xl shadow active:scale-95">
+                    2. 🍯 Juruh Gula
+                </button>
+                <button onclick="addGlassIngredient('cendol')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-base md:text-lg px-4 py-3 rounded-2xl shadow active:scale-95">
+                    3. 🟢 Cendol
+                </button>
+                <button onclick="addGlassIngredient('santan')" class="bg-amber-600 hover:bg-amber-700 text-white font-black text-base md:text-lg px-4 py-3 rounded-2xl shadow active:scale-95">
+                    4. 🥛 Santan
+                </button>
+                <button onclick="addGlassIngredient('topping')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-black text-base md:text-lg px-4 py-3 rounded-2xl shadow active:scale-95">
+                    5. 🥭 Nangka
+                </button>
+            `;
+
+            // Restore active state if visited before
+            restoreGlassLayers();
+        }
+
+        function addGlassIngredient(type) {
+            playSound('pour');
+            animState.ingredientsAdded[type] = true;
+            document.getElementById(`layer-${type}`).classList.add('active');
+
+            if (type === 'topping') {
+                document.getElementById('layer-topping').classList.remove('opacity-0');
+            }
+
+            // Check if all ingredients added for celebration
+            const allAdded = Object.values(animState.ingredientsAdded).every(v => v === true);
+            if (allAdded) {
+                playSound('complete');
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                }
+            }
+        }
+
+        function restoreGlassLayers() {
+            Object.keys(animState.ingredientsAdded).forEach(type => {
+                if (animState.ingredientsAdded[type]) {
+                    const el = document.getElementById(`layer-${type}`);
+                    if (el) el.classList.add('active');
+                    if (type === 'topping') {
+                        const topEl = document.getElementById('layer-topping');
+                        if (topEl) topEl.classList.remove('opacity-0');
+                    }
+                }
+            });
+        }
+
+        // Initialize on Load
+        window.onload = function() {
+            updateStepUI();
+        };
+    </script>
+</body>
+</html>
