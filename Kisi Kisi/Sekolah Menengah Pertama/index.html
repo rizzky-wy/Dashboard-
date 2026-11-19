@@ -1,1 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kisi-Kisi Sekolah Menengah Pertama</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      padding: 24px 16px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+
+    .breadcrumb a {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .header {
+      margin-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 1.65rem;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    /* Menu Mata Pelajaran */
+    .mapel-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .mapel-btn {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #1e293b;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mapel-btn:hover {
+      border-color: #0284c7;
+    }
+
+    .mapel-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+
+    /* Konten Kisi-Kisi Per Pelajaran */
+    .mapel-content {
+      display: none;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .mapel-content.active {
+      display: block;
+    }
+
+    .mapel-content h2 {
+      font-size: 1.25rem;
+      color: #0f172a;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.92rem;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .btn-latihan {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 16px;
+      background-color: #0284c7;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../../index.html">Beranda</a> / 
+      <a href="../index.html">Kisi-Kisi</a> / 
+      <span>Sekolah Menengah Pertama</span>
+    </div>
+
+    <div class="header">
+      <h1>Kisi-Kisi Sekolah Menengah Pertama (SMP)</h1>
+      <p>Pilih mata pelajaran di bawah ini untuk melihat indikator kisi-kisi.</p>
+    </div>
+
+    <!-- Tombol Sub-Menu Pelajaran -->
+    <div class="mapel-nav">
+      <button class="mapel-btn active" onclick="bukaMapel('pancasila', this)">Pendidikan Pancasila</button>
+      <button class="mapel-btn" onclick="bukaMapel('inggris', this)">Bahasa Inggris</button>
+      <button class="mapel-btn" onclick="bukaMapel('bindo', this)">Bahasa Indonesia</button>
+    </div>
+
+    <!-- Isi Pelajaran 1: Pendidikan Pancasila -->
+    <div id="pancasila" class="mapel-content active">
+      <h2>Kisi-Kisi Pendidikan Pancasila</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 50px;">No</th>
+            <th>Materi Pokok</th>
+            <th>Indikator Soal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Sejarah Kelahiran Pancasila</td>
+            <td>Menjelaskan proses perumusan dasar negara dalam sidang BPUPKI.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Norma dan UUD NRI Tahun 1945</td>
+            <td>Mengidentifikasi penerapan norma kesopanan, kesusilaan, agama, dan hukum di lingkungan sekolah.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Keberagaman dalam Bingkai Bhinneka Tunggal Ika</td>
+            <td>Menunjukkan sikap toleransi terhadap keberagaman suku, agama, dan budaya.</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Opsional: arahkan ke halaman game atau file kisi-kisi lengkap -->
+      <a href="../../game/index.html" class="btn-latihan">Buka Latihan Soal Interaktif</a>
+    </div>
+
+    <!-- Isi Pelajaran 2: Bahasa Inggris -->
+    <div id="inggris" class="mapel-content">
+      <h2>Kisi-Kisi Bahasa Inggris</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 50px;">No</th>
+            <th>Materi Pokok</th>
+            <th>Indikator Soal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Greeting & Introduction</td>
+            <td>Melengkapi dialog sapaan dan perkenalan diri sederhana.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Descriptive Text</td>
+            <td>Menentukan informasi tersurat dari teks deskripsi singkat.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Isi Pelajaran 3: Bahasa Indonesia -->
+    <div id="bindo" class="mapel-content">
+      <h2>Kisi-Kisi Bahasa Indonesia</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 50px;">No</th>
+            <th>Materi Pokok</th>
+            <th>Indikator Soal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Teks Deskripsi</td>
+            <td>Mengidentifikasi struktur dan ciri kebahasaan teks deskripsi.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function bukaMapel(idMapel, tombol) {
+      document.querySelectorAll('.mapel-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.mapel-btn').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(idMapel).classList.add('active');
+      tombol.classList.add('active');
+    }
+  </script>
+</body>
+</html>
