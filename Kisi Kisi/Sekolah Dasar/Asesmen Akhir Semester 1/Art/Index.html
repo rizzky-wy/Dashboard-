@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Seru Seni Rupa Kelas 2 SD - ASAS Gasal 2026/2027</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka (ceria & ramah anak) & Nunito (sangat mudah dibaca) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #FFFBEB;
+            background-image: radial-gradient(#FDE68A 1.5px, transparent 1.5px), radial-gradient(#BFDBFE 1.5px, #FFFBEB 1.5px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            color: #1E293B;
+        }
+        h1, h2, h3, .font-title {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 8px 0 rgba(0, 0, 0, 0.08);
+        }
+        .btn-bounce {
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease;
+        }
+        .btn-bounce:active {
+            transform: translateY(3px);
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-float {
+            animation: floatSlow 3s ease-in-out infinite;
+        }
+        /* Custom Radio & Checkbox Styling for Kids */
+        .option-label:has(input:checked) {
+            background-color: #DBEAFE;
+            border-color: #3B82F6;
+            color: #1E3A8A;
+            transform: scale(1.01);
+        }
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                background-image: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .card-shadow {
+                box-shadow: none !important;
+                border: 2px solid #CBD5E1 !important;
+            }
+            .break-after-page {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-16">
+
+    <!-- STICKY PROGRESS BAR -->
+    <div class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-4 border-amber-300 shadow-sm no-print">
+        <div class="max-w-4xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🎨</span>
+                <span class="font-title font-bold text-amber-600 text-sm sm:text-base hidden sm:inline">Seni Rupa Kelas 2 SD</span>
+            </div>
+            <div class="flex-1 max-w-md">
+                <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                    <span>Progres Belajar</span>
+                    <span id="progress-text">0 / 20 Soal Terisi</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-3.5 overflow-hidden p-0.5">
+                    <div id="progress-bar" class="bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+            <button onclick="window.print()" class="bg-sky-100 hover:bg-sky-200 text-sky-800 font-bold text-xs sm:text-sm px-3 py-2 rounded-xl border-2 border-sky-300 flex items-center gap-1.5 transition">
+                <span>🖨️</span> <span class="hidden sm:inline">Cetak</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-4xl mx-auto px-4 pt-6 space-y-8">
+
+        <!-- HEADER CERIA -->
+        <header class="bg-gradient-to-br from-amber-400 via-orange-400 to-rose-400 rounded-3xl p-6 sm:p-8 text-white card-shadow border-4 border-white relative overflow-hidden">
+            <!-- Dekorasi Latar -->
+            <div class="absolute -right-6 -top-6 text-8xl opacity-20 select-none">🖌️</div>
+            <div class="absolute -left-4 -bottom-6 text-8xl opacity-20 select-none">🌈</div>
+
+            <div class="relative z-10 text-center space-y-2">
+                <div class="inline-block bg-white/25 backdrop-blur-sm px-4 py-1 rounded-full text-xs sm:text-sm font-extrabold tracking-wide uppercase">
+                    Asesmen Sumatif Akhir Semester Gasal • TP 2026/2027
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold drop-shadow-sm">
+                    🎨 Latihan Seru Seni Rupa Kelas 2 SD
+                </h1>
+                <p class="text-amber-50 font-semibold text-base sm:text-lg">
+                    Fase A • 20 Soal Interaktif Penuh Warna • Kecamatan Kalibening
+                </p>
+            </div>
+
+            <!-- Kolom Identitas Siswa -->
+            <div class="relative z-10 mt-6 bg-white rounded-2xl p-4 sm:p-5 text-slate-800 shadow-inner grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="student-name" class="block text-sm font-extrabold text-amber-700 mb-1">✏️ Nama Lengkapku:</label>
+                    <input type="text" id="student-name" placeholder="Tulis namamu di sini ya..." class="w-full px-4 py-2.5 rounded-xl border-2 border-amber-300 focus:border-amber-500 focus:outline-none font-bold text-slate-700 bg-amber-50/50">
+                </div>
+                <div>
+                    <label for="student-class" class="block text-sm font-extrabold text-sky-700 mb-1">🏫 Kelas / No. Absen:</label>
+                    <input type="text" id="student-class" value="Kelas II (Dua)" placeholder="Contoh: Kelas 2A / No. 5" class="w-full px-4 py-2.5 rounded-xl border-2 border-sky-300 focus:border-sky-500 focus:outline-none font-bold text-slate-700 bg-sky-50/50">
+                </div>
+            </div>
+        </header>
+
+        <!-- PETUNJUK SINGKAT -->
+        <div class="bg-sky-50 border-4 border-sky-200 rounded-3xl p-4 sm:p-5 flex items-start gap-4 card-shadow">
+            <div class="text-4xl animate-float">🦉</div>
+            <div>
+                <h2 class="font-title font-bold text-lg text-sky-800">Halo Adik-Adik Hebat! Yuk Baca Petunjuknya:</h2>
+                <ul class="text-sm sm:text-base text-slate-700 font-semibold space-y-1 mt-1 list-disc list-inside">
+                    <li>Berdoalah sebelum mulai mengerjakan soal ya!</li>
+                    <li>Soal dibagi menjadi <strong>4 Pos Petualangan</strong>. Di setiap akhir pos ada waktu istirahat sebentar supaya tidak bosan.</li>
+                    <li>Kerjakan dengan teliti, lalu klik tombol <strong>"Lihat Nilai & Bintangku"</strong> di bagian paling bawah!</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- POS 1: DUNIA WARNA & BENTUK (SOAL 1 - 5)                  -->
+        <!-- ========================================================= -->
+        <section id="pos-1" class="space-y-6">
+            <!-- Banner Pos 1 -->
+            <div class="bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-3xl p-5 border-4 border-white card-shadow flex items-center justify-between">
+                <div>
+                    <span class="bg-white text-rose-600 font-extrabold text-xs px-3 py-1 rounded-full uppercase">Pos 1 dari 4</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold mt-1">🌈 Dunia Warna & Bentuk</h2>
+                    <p class="text-rose-100 text-sm font-semibold">Soal Nomor 1 sampai 5</p>
+                </div>
+                <div class="text-5xl">🎨</div>
+            </div>
+
+            <!-- ILUSTRASI BERSAMA SOAL 1 - 4 -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-rose-200 card-shadow">
+                <div class="inline-block bg-rose-100 text-rose-800 font-extrabold text-xs sm:text-sm px-3.5 py-1.5 rounded-full mb-3">
+                    🖼️ Perhatikan Gambar Ilustrasi Karya Seni Berikut untuk Soal Nomor 1 – 4!
+                </div>
+                <div class="w-full max-w-xl mx-auto rounded-2xl overflow-hidden border-4 border-slate-200 shadow-sm bg-sky-200">
+                    <!-- SVG Pemandangan Ceria (Dominan Biru & Hijau, dengan Matahari Kuning & Bunga Merah) -->
+                    <svg viewBox="0 0 600 320" class="w-full h-auto block" role="img" aria-label="Ilustrasi pemandangan gunung biru, langit biru cerah, padang rumput hijau, matahari kuning, dan bunga merah">
+                        <!-- Langit Biru Muda -->
+                        <rect width="600" height="200" fill="#38BDF8"/>
+                        <!-- Awan Putih -->
+                        <g fill="#FFFFFF" opacity="0.9">
+                            <circle cx="110" cy="65" r="22"/>
+                            <circle cx="135" cy="60" r="28"/>
+                            <circle cx="165" cy="65" r="20"/>
+                            <rect x="110" y="65" width="55" height="22" rx="10"/>
+                        </g>
+                        <!-- Matahari Kuning Cerah -->
+                        <circle cx="495" cy="65" r="36" fill="#FACC15" stroke="#FEF08A" stroke-width="6"/>
+                        <!-- Sinar Matahari -->
+                        <g stroke="#FACC15" stroke-width="5" stroke-linecap="round">
+                            <line x1="495" y1="15" x2="495" y2="5"/>
+                            <line x1="495" y1="115" x2="495" y2="125"/>
+                            <line x1="445" y1="65" x2="435" y2="65"/>
+                            <line x1="545" y1="65" x2="555" y2="65"/>
+                            <line x1="460" y1="30" x2="452" y2="22"/>
+                            <line x1="530" y1="100" x2="538" y2="108"/>
+                        </g>
+                        <!-- Dua Gunung Biru Tua -->
+                        <polygon points="40,210 190,65 340,210" fill="#1D4ED8"/>
+                        <polygon points="190,65 155,100 175,112 190,100 205,115 225,100" fill="#EFF6FF"/>
+                        <polygon points="240,210 400,80 560,210" fill="#2563EB"/>
+                        <polygon points="400,80 370,106 388,118 400,106 415,118 430,106" fill="#EFF6FF"/>
+                        <!-- Padang Rumput Hijau Luas -->
+                        <path d="M0,195 Q150,175 300,195 T600,190 L600,320 L0,320 Z" fill="#22C55E"/>
+                        <path d="M0,235 Q200,215 400,240 T600,225 L600,320 L0,320 Z" fill="#16A34A"/>
+                        <!-- Semak Hijau -->
+                        <circle cx="80" cy="215" r="24" fill="#15803D"/>
+                        <circle cx="108" cy="218" r="20" fill="#15803D"/>
+                        <circle cx="515" cy="210" r="26" fill="#15803D"/>
+                        <!-- Bunga-bunga Merah Kecil -->
+                        <g>
+                            <line x1="160" y1="265" x2="160" y2="290" stroke="#14532D" stroke-width="4"/>
+                            <circle cx="160" cy="260" r="10" fill="#EF4444"/>
+                            <circle cx="160" cy="260" r="4" fill="#FACC15"/>
+                        </g>
+                        <g>
+                            <line x1="310" y1="255" x2="310" y2="285" stroke="#14532D" stroke-width="4"/>
+                            <circle cx="310" cy="250" r="11" fill="#EF4444"/>
+                            <circle cx="310" cy="250" r="4" fill="#FACC15"/>
+                        </g>
+                        <g>
+                            <line x1="440" y1="268" x2="440" y2="295" stroke="#14532D" stroke-width="4"/>
+                            <circle cx="440" cy="262" r="10" fill="#EF4444"/>
+                            <circle cx="440" cy="262" r="4" fill="#FACC15"/>
+                        </g>
+                    </svg>
+                </div>
+                <p class="text-center text-xs sm:text-sm text-slate-500 font-bold mt-2">
+                    Gambar: Pemandangan Gunung & Padang Rumput
+                </p>
+            </div>
+
+            <!-- SOAL 1 (PG - Bobot 1) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q1">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-400 text-slate-900 font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 1</span>
+                    <span class="bg-slate-100 text-slate-600 font-bold text-xs px-3 py-1 rounded-full">Pilihan Ganda • Pilih 1 Jawaban</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Berdasarkan gambar pemandangan di atas, warna apa yang paling banyak (dominan) terlihat pada gambar tersebut?
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 font-bold transition">
+                        <input type="radio" name="q1" value="A" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>A. Merah dan Kuning</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 font-bold transition">
+                        <input type="radio" name="q1" value="B" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>B. Biru dan Hijau</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 font-bold transition">
+                        <input type="radio" name="q1" value="C" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>C. Ungu dan Cokelat</span>
+                    </label>
+                </div>
+                <div id="fb-q1" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 2 (PGK - Bobot 2) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q2">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-400 text-slate-900 font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 2</span>
+                    <span class="bg-purple-100 text-purple-800 font-bold text-xs px-3 py-1 rounded-full">Pilihan Ganda Kompleks • Boleh Pilih Lebih dari 1</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Manakah saja yang termasuk <strong>warna primer (warna dasar)</strong> yang tampak pada gambar ilustrasi di atas? <em>(Beri tanda centang pada semua jawaban yang benar!)</em>
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q2" value="Merah" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-red-500 inline-block"></span> Merah</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q2" value="Hijau" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-green-500 inline-block"></span> Hijau</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q2" value="Kuning" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-yellow-400 inline-block"></span> Kuning</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q2" value="Biru" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-blue-600 inline-block"></span> Biru</span>
+                    </label>
+                </div>
+                <div id="fb-q2" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 3 (Benar/Salah - Bobot 2) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q3">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-400 text-slate-900 font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 3</span>
+                    <span class="bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1 rounded-full">Benar atau Salah</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Pilihlah <strong>Benar</strong> atau <strong>Salah</strong> untuk pengelompokan warna primer dan warna sekunder berikut ini!
+                </p>
+                <div class="space-y-3">
+                    <!-- Pernyataan 3a -->
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">1. Merah, kuning, dan biru termasuk kelompok warna primer.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q3_1" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q3_1" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Pernyataan 3b -->
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">2. Warna hijau dan oranye termasuk kelompok warna primer.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q3_2" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q3_2" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Pernyataan 3c -->
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">3. Warna ungu adalah warna sekunder dari campuran merah dan biru.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q3_3" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q3_3" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="fb-q3" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 4 (Menjodohkan - Bobot 3) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q4">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-400 text-slate-900 font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 4</span>
+                    <span class="bg-pink-100 text-pink-800 font-bold text-xs px-3 py-1 rounded-full">Menjodohkan Warna</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Pasangkan campuran dua warna dasar di sebelah kiri dengan warna baru yang dihasilkan di sebelah kanan!
+                </p>
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-amber-50/70 border-2 border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="font-bold text-slate-800 flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-red-500 inline-block"></span> Merah + 
+                            <span class="w-5 h-5 rounded-full bg-yellow-400 inline-block"></span> Kuning
+                        </div>
+                        <select id="q4_1" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-amber-400 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Hasil Warna --</option>
+                            <option value="Hijau">🟢 Warna Hijau</option>
+                            <option value="Oranye">🟠 Warna Oranye (Jingga)</option>
+                            <option value="Ungu">🟣 Warna Ungu</option>
+                        </select>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-amber-50/70 border-2 border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="font-bold text-slate-800 flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-blue-600 inline-block"></span> Biru + 
+                            <span class="w-5 h-5 rounded-full bg-yellow-400 inline-block"></span> Kuning
+                        </div>
+                        <select id="q4_2" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-amber-400 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Hasil Warna --</option>
+                            <option value="Hijau">🟢 Warna Hijau</option>
+                            <option value="Oranye">🟠 Warna Oranye (Jingga)</option>
+                            <option value="Ungu">🟣 Warna Ungu</option>
+                        </select>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-amber-50/70 border-2 border-amber-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="font-bold text-slate-800 flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-red-500 inline-block"></span> Merah + 
+                            <span class="w-5 h-5 rounded-full bg-blue-600 inline-block"></span> Biru
+                        </div>
+                        <select id="q4_3" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-amber-400 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Hasil Warna --</option>
+                            <option value="Hijau">🟢 Warna Hijau</option>
+                            <option value="Oranye">🟠 Warna Oranye (Jingga)</option>
+                            <option value="Ungu">🟣 Warna Ungu</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="fb-q4" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 5 (Uraian - Bobot 5) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q5">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-400 text-slate-900 font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 5</span>
+                    <span class="bg-indigo-100 text-indigo-800 font-bold text-xs px-3 py-1 rounded-full">Uraian Singkat • Bobot 5</span>
+                </div>
+                
+                <!-- Ilustrasi SVG Rumah Geometri -->
+                <div class="w-full max-w-xs mx-auto my-3 rounded-2xl border-4 border-indigo-100 bg-sky-50 p-3">
+                    <svg viewBox="0 0 260 220" class="w-full h-auto block" role="img" aria-label="Gambar rumah dari bentuk geometri">
+                        <!-- Atap Segitiga -->
+                        <polygon points="130,20 35,100 225,100" fill="#EF4444" stroke="#991B1B" stroke-width="4" stroke-linejoin="round"/>
+                        <!-- Dinding Persegi -->
+                        <rect x="55" y="100" width="150" height="105" fill="#FDE047" stroke="#CA8A04" stroke-width="4"/>
+                        <!-- Pintu Persegi Panjang -->
+                        <rect x="80" y="135" width="42" height="70" fill="#92400E" stroke="#451A03" stroke-width="3"/>
+                        <circle cx="114" cy="172" r="3" fill="#FACC15"/>
+                        <!-- Jendela Lingkaran -->
+                        <circle cx="162" cy="145" r="22" fill="#38BDF8" stroke="#0369A1" stroke-width="4"/>
+                        <line x1="162" y1="123" x2="162" y2="167" stroke="#0369A1" stroke-width="3"/>
+                        <line x1="140" y1="145" x2="184" y2="145" stroke="#0369A1" stroke-width="3"/>
+                    </svg>
+                </div>
+
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-3">
+                    Perhatikan gambar rumah di atas! Sebutkan <strong>4 jenis bentuk geometri</strong> yang menyusun bagian atap, dinding, pintu, dan jendela rumah tersebut!
+                </p>
+                <textarea id="q5_text" rows="3" oninput="updateProgress()" placeholder="Tulis jawabanmu di sini... (Contoh: Atap berbentuk ..., dinding berbentuk ...)" class="w-full p-4 rounded-2xl border-2 border-indigo-200 focus:border-indigo-500 focus:outline-none font-bold text-slate-700 bg-indigo-50/30"></textarea>
+                
+                <!-- Kunci & Penilaian Mandiri Uraian -->
+                <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
+                    <button type="button" onclick="toggleSelfGrade('sg-q5')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition">
+                        🔑 Lihat Kunci Jawaban & Beri Bintang
+                    </button>
+                </div>
+                <div id="sg-q5" class="hidden mt-3 p-4 rounded-2xl bg-indigo-50 border-2 border-indigo-200 space-y-2">
+                    <p class="text-sm font-bold text-indigo-900">✅ Kunci Jawaban:</p>
+                    <p class="text-sm text-slate-700 font-semibold">1. Atap = <strong>Segitiga</strong> &nbsp;|&nbsp; 2. Dinding = <strong>Persegi (Segi empat)</strong> &nbsp;|&nbsp; 3. Pintu = <strong>Persegi panjang</strong> &nbsp;|&nbsp; 4. Jendela = <strong>Lingkaran</strong>.</p>
+                    <div class="pt-2 border-t border-indigo-200 flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-extrabold text-indigo-800">Pilih Bintang Nilaimu (Maks 5):</span>
+                        <select id="score_q5" onchange="updateProgress()" class="px-3 py-1.5 rounded-xl border-2 border-indigo-400 bg-white font-bold text-sm">
+                            <option value="5">⭐⭐⭐⭐⭐ (5 Poin - Menyebutkan 4 bentuk tepat)</option>
+                            <option value="4">⭐⭐⭐⭐ (4 Poin - Menyebutkan 3 bentuk tepat)</option>
+                            <option value="3">⭐⭐⭐ (3 Poin - Menyebutkan 2 bentuk tepat)</option>
+                            <option value="2">⭐⭐ (2 Poin - Menyebutkan 1 bentuk tepat)</option>
+                            <option value="1">⭐ (1 Poin - Sudah mencoba menjawab)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SEKAT JEDA 1                                              -->
+        <!-- ========================================================= -->
+        <div class="bg-gradient-to-r from-teal-400 via-emerald-400 to-green-400 rounded-3xl p-6 text-white border-4 border-white card-shadow text-center space-y-3">
+            <div class="text-5xl animate-bounce">🙆‍♂️✨</div>
+            <h3 class="text-2xl sm:text-3xl font-bold">Waktunya Peregangan Tangan & Istirahat Mata Sebentar!</h3>
+            <p class="text-emerald-50 font-bold text-base sm:text-lg max-w-xl mx-auto">
+                Hebat! Kamu sudah menyelesaikan 5 soal pertama! Yuk gerakkan jari-jari tanganmu, kedipkan mata 5 kali, dan tarik napas dalam-dalam... Siap lanjut ke Pos 2?
+            </p>
+            <a href="#pos-2" class="inline-block bg-white text-emerald-700 font-title font-bold px-6 py-3 rounded-2xl shadow-md btn-bounce text-base">
+                🚀 Ayo Lanjut ke Pos 2!
+            </a>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- POS 2: KARYA HEBAT & SOPAN SANTUN (SOAL 6 - 10)           -->
+        <!-- ========================================================= -->
+        <section id="pos-2" class="space-y-6 pt-2">
+            <!-- Banner Pos 2 -->
+            <div class="bg-gradient-to-r from-sky-500 to-indigo-500 text-white rounded-3xl p-5 border-4 border-white card-shadow flex items-center justify-between">
+                <div>
+                    <span class="bg-white text-sky-600 font-extrabold text-xs px-3 py-1 rounded-full uppercase">Pos 2 dari 4</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold mt-1">🤝 Karya Hebat & Sopan Santun</h2>
+                    <p class="text-sky-100 text-sm font-semibold">Soal Nomor 6 sampai 10</p>
+                </div>
+                <div class="text-5xl">🖼️</div>
+            </div>
+
+            <!-- ILUSTRASI CERITA PENDEK SOAL 6 - 8 -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-sky-200 card-shadow">
+                <div class="inline-block bg-sky-100 text-sky-800 font-extrabold text-xs sm:text-sm px-3.5 py-1.5 rounded-full mb-3">
+                    📖 Bacalah Cerita Bergambar Berikut untuk Soal Nomor 6 – 8!
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-sky-50/70 p-4 rounded-2xl border-2 border-sky-200">
+                    <!-- SVG Ilustrasi Dua Anak Berdiskusi Gambar -->
+                    <div class="w-full max-w-xs mx-auto">
+                        <svg viewBox="0 0 320 210" class="w-full h-auto block" role="img" aria-label="Budi memberi saran dengan sopan kepada Rani tentang gambar pohon">
+                            <!-- Latar Ruang Kelas -->
+                            <rect width="320" height="210" rx="16" fill="#E0F2FE"/>
+                            <!-- Meja -->
+                            <rect x="20" y="150" width="280" height="60" rx="8" fill="#F59E0B"/>
+                            <!-- Rani (Kiri) -->
+                            <circle cx="95" cy="85" r="28" fill="#FDE68A"/>
+                            <!-- Rambut Rani -->
+                            <path d="M67,85 Q67,48 95,48 Q123,48 123,85" fill="#1E293B"/>
+                            <circle cx="65" cy="95" r="10" fill="#1E293B"/>
+                            <circle cx="125" cy="95" r="10" fill="#1E293B"/>
+                            <!-- Mata & Senyum Rani -->
+                            <circle cx="87" cy="83" r="3" fill="#1E293B"/>
+                            <circle cx="103" cy="83" r="3" fill="#1E293B"/>
+                            <path d="M88,95 Q95,102 102,95" stroke="#1E293B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                            <path d="M65,150 Q65,115 95,115 Q125,115 125,150 Z" fill="#F43F5E"/>
+                            <!-- Budi (Kanan) -->
+                            <circle cx="225" cy="85" r="28" fill="#FDE68A"/>
+                            <path d="M197,80 Q197,48 225,48 Q253,48 253,80 Z" fill="#1E293B"/>
+                            <circle cx="217" cy="83" r="3" fill="#1E293B"/>
+                            <circle cx="233" cy="83" r="3" fill="#1E293B"/>
+                            <path d="M218,95 Q225,102 232,95" stroke="#1E293B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                            <path d="M195,150 Q195,115 225,115 Q255,115 255,150 Z" fill="#3B82F6"/>
+                            <!-- Kertas Gambar di Meja -->
+                            <rect x="115" y="132" width="90" height="55" rx="4" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+                            <circle cx="160" cy="150" r="12" fill="#22C55E"/>
+                            <rect x="157" y="160" width="6" height="15" fill="#92400E"/>
+                            <!-- Balon Bicara -->
+                            <rect x="145" y="10" width="160" height="34" rx="12" fill="#FFFFFF" stroke="#3B82F6" stroke-width="2"/>
+                            <text x="225" y="31" text-anchor="middle" font-size="11" font-weight="bold" fill="#1E3A8A">"Pohonnya bagus, Rani!"</text>
+                        </svg>
+                    </div>
+                    <div class="space-y-2 text-slate-700 font-semibold text-sm sm:text-base leading-relaxed">
+                        <p>
+                            Di kelas 2, <strong>Rani</strong> sedang mewarnai gambar pemandangan pohon. Temannya, <strong>Budi</strong>, melihat gambar Rani.
+                        </p>
+                        <p>
+                            Budi berkata dengan ramah dan tersenyum: <em>"Gambarmu rapi sekali, Rani! Daun pohonnya pasti akan terlihat lebih hidup jika ditambah gradasi warna hijau muda dan hijau tua."</em>
+                        </p>
+                        <p>
+                            Rani tersenyum senang mendengar saran dari Budi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOAL 6 (PG - Bobot 1) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q6">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-sky-400 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 6</span>
+                    <span class="bg-slate-100 text-slate-600 font-bold text-xs px-3 py-1 rounded-full">Pilihan Ganda • Pilih 1 Jawaban</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Bagaimana sikap positif yang sebaiknya dilakukan Rani setelah menerima saran dari Budi untuk memperbaiki karyanya?
+                </p>
+                <div class="space-y-2.5">
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-sky-400 font-bold transition">
+                        <input type="radio" name="q6" value="A" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>A. Marah kepada Budi dan merobek kertas gambarnya.</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-sky-400 font-bold transition">
+                        <input type="radio" name="q6" value="B" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>B. Mengucapkan terima kasih dan mencoba memperbaiki warna daun pohonnya.</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-sky-400 font-bold transition">
+                        <input type="radio" name="q6" value="C" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>C. Mengejek gambar milik Budi agar terlihat lebih jelek.</span>
+                    </label>
+                </div>
+                <div id="fb-q6" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 7 (Benar/Salah - Bobot 2) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q7">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-sky-400 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 7</span>
+                    <span class="bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1 rounded-full">Benar atau Salah</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Tentukan <strong>Benar</strong> atau <strong>Salah</strong> mengenai pentingnya menyampaikan umpan balik (saran) dengan cara yang santun!
+                </p>
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">1. Memberi saran dengan kata-kata yang sopan membuat teman tidak sakit hati.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q7_1" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q7_1" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">2. Kita boleh berteriak dan mengejek karya teman yang belum rapi.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q7_2" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q7_2" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">3. Memuji kelebihan karya teman terlebih dahulu adalah sikap yang terpuji.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q7_3" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q7_3" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="fb-q7" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 8 (Menjodohkan - Bobot 3) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q8">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-sky-400 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 8</span>
+                    <span class="bg-pink-100 text-pink-800 font-bold text-xs px-3 py-1 rounded-full">Menjodohkan Sikap Baik</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Pasangkan kejadian saat berkarya di kelas dengan sikap yang paling baik!
+                </p>
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-sky-50/70 border-2 border-sky-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-800">1. Teman memberi saran agar gambarmu lebih rapi</span>
+                        <select id="q8_1" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-sky-400 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Sikap Baik --</option>
+                            <option value="TerimaKasih">Mendengarkan & bilang terima kasih</option>
+                            <option value="Memuji">Memuji hasil karya teman dengan tulus</option>
+                            <option value="Sopan">Menyampaikan saran dengan lembut</option>
+                        </select>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-sky-50/70 border-2 border-sky-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-800">2. Melihat hasil cetakan teman yang sangat bagus</span>
+                        <select id="q8_2" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-sky-400 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Sikap Baik --</option>
+                            <option value="TerimaKasih">Mendengarkan & bilang terima kasih</option>
+                            <option value="Memuji">Memuji hasil karya teman dengan tulus</option>
+                            <option value="Sopan">Menyampaikan saran dengan lembut</option>
+                        </select>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-sky-50/70 border-2 border-sky-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-800">3. Ingin memberi masukan pada warna gambar teman</span>
+                        <select id="q8_3" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-sky-400 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Sikap Baik --</option>
+                            <option value="TerimaKasih">Mendengarkan & bilang terima kasih</option>
+                            <option value="Memuji">Memuji hasil karya teman dengan tulus</option>
+                            <option value="Sopan">Menyampaikan saran dengan lembut</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="fb-q8" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 9 (PG - Bobot 1) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q9">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-sky-400 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 9</span>
+                    <span class="bg-slate-100 text-slate-600 font-bold text-xs px-3 py-1 rounded-full">Pilihan Ganda • Pilih 1 Jawaban</span>
+                </div>
+                
+                <!-- Ilustrasi SVG Origami / Dekorasi Kelas -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 bg-amber-50 p-4 rounded-2xl border-2 border-amber-200 mb-4">
+                    <svg viewBox="0 0 140 110" class="w-32 h-auto shrink-0" role="img" aria-label="Hiasan lipat kertas warna-warni">
+                        <polygon points="35,15 15,55 35,95 55,55" fill="#F43F5E" stroke="#BE123C" stroke-width="2"/>
+                        <polygon points="75,15 55,55 75,95 95,55" fill="#FACC15" stroke="#CA8A04" stroke-width="2"/>
+                        <polygon points="112,20 95,55 112,90 128,55" fill="#38BDF8" stroke="#0369A1" stroke-width="2"/>
+                        <line x1="5" y1="15" x2="135" y2="15" stroke="#475569" stroke-width="3" stroke-dasharray="4 3"/>
+                    </svg>
+                    <p class="text-base sm:text-lg font-bold text-slate-800">
+                        Ibu Guru mengajak murid kelas 2 membuat hiasan gantung kelas dengan cara <strong>melipat-lipat bahan</strong> menjadi bentuk burung dan kipas. Bahan apa yang bersifat lentur dan mudah dilipat?
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-sky-400 font-bold transition">
+                        <input type="radio" name="q9" value="A" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>A. Kertas origami (kertas warna)</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-sky-400 font-bold transition">
+                        <input type="radio" name="q9" value="B" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>B. Kepingan batu kerikil</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-sky-400 font-bold transition">
+                        <input type="radio" name="q9" value="C" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>C. Potongan kayu tebal</span>
+                    </label>
+                </div>
+                <div id="fb-q9" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 10 (PGK - Bobot 2) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q10">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-sky-400 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 10</span>
+                    <span class="bg-purple-100 text-purple-800 font-bold text-xs px-3 py-1 rounded-full">Pilihan Ganda Kompleks • Boleh Pilih Lebih dari 1</span>
+                </div>
+
+                <!-- Ilustrasi SVG Seni Cetak Bahan Alam (Belimbing & Daun) -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 bg-emerald-50 p-4 rounded-2xl border-2 border-emerald-200 mb-4">
+                    <svg viewBox="0 0 150 110" class="w-36 h-auto shrink-0" role="img" aria-label="Cetakan penampang belimbing dan daun">
+                        <!-- Cap Bintang Belimbing -->
+                        <polygon points="45,15 53,38 77,38 58,52 65,75 45,61 25,75 32,52 13,38 37,38" fill="#FACC15" stroke="#CA8A04" stroke-width="2.5"/>
+                        <!-- Cap Daun -->
+                        <ellipse cx="112" cy="55" rx="22" ry="38" transform="rotate(15 112 55)" fill="#22C55E" stroke="#15803D" stroke-width="2.5"/>
+                        <line x1="118" y1="22" x2="106" y2="88" stroke="#14532D" stroke-width="2.5"/>
+                    </svg>
+                    <p class="text-base sm:text-lg font-bold text-slate-800">
+                        Murid-murid melakukan <strong>seni cetak (mencap)</strong> menggunakan potongan buah belimbing, pelepah pisang, dan daun. Apa saja ciri-ciri (karakteristik) bahan alam tersebut?
+                    </p>
+                </div>
+
+                <div class="space-y-2.5">
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q10" value="Unik" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Memiliki bentuk permukaan dan urat tekstur yang unik saat dicetak.</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q10" value="Sekitar" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Berasal dari tumbuhan dan mudah ditemukan di lingkungan sekitar.</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q10" value="Logam" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Terbuat dari besi dan plastik buatan pabrik.</span>
+                    </label>
+                </div>
+                <div id="fb-q10" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SEKAT JEDA 2                                              -->
+        <!-- ========================================================= -->
+        <div class="bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 rounded-3xl p-6 text-white border-4 border-white card-shadow text-center space-y-3">
+            <div class="text-5xl animate-bounce">🥤🌟</div>
+            <h3 class="text-2xl sm:text-3xl font-bold">Hebat! Setengah Perjalanan Sudah Selesai!</h3>
+            <p class="text-purple-100 font-bold text-base sm:text-lg max-w-xl mx-auto">
+                Kamu sudah menyelesaikan 10 soal! Minum air putih dulu yuk supaya otak makin segar! Tebak-tebakan sebentar: <em>Warna apa yang muncul kalau kuning dicampur biru?</em> (Betul, Hijau! 🐸)
+            </p>
+            <a href="#pos-3" class="inline-block bg-white text-purple-700 font-title font-bold px-6 py-3 rounded-2xl shadow-md btn-bounce text-base">
+                🏃‍♂️ Gas Lanjut ke Pos 3!
+            </a>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- POS 3: ALAT, BAHAN & LINGKUNGAN SEKOLAH (SOAL 11 - 16)    -->
+        <!-- ========================================================= -->
+        <section id="pos-3" class="space-y-6 pt-2">
+            <!-- Banner Pos 3 -->
+            <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-3xl p-5 border-4 border-white card-shadow flex items-center justify-between">
+                <div>
+                    <span class="bg-white text-amber-600 font-extrabold text-xs px-3 py-1 rounded-full uppercase">Pos 3 dari 4</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold mt-1">✂️ Alat, Bahan & Lingkungan Sekolah</h2>
+                    <p class="text-amber-100 text-sm font-semibold">Soal Nomor 11 sampai 16</p>
+                </div>
+                <div class="text-5xl">🏫</div>
+            </div>
+
+            <!-- ILUSTRASI BERSAMA SOAL 11 - 12 -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-amber-200 card-shadow">
+                <div class="inline-block bg-amber-100 text-amber-800 font-extrabold text-xs sm:text-sm px-3.5 py-1.5 rounded-full mb-3">
+                    🛠️ Perhatikan Ilustrasi Peralatan Prakarya Berikut untuk Soal Nomor 11 – 12!
+                </div>
+                <div class="flex flex-col sm:flex-row items-center gap-4 bg-amber-50/70 p-4 rounded-2xl border-2 border-amber-200">
+                    <svg viewBox="0 0 220 120" class="w-48 h-auto shrink-0" role="img" aria-label="Gunting ujung tumpul, lem kertas, dan kertas warna">
+                        <!-- Gunting Ujung Tumpul -->
+                        <circle cx="35" cy="85" r="14" fill="none" stroke="#EF4444" stroke-width="6"/>
+                        <circle cx="65" cy="85" r="14" fill="none" stroke="#EF4444" stroke-width="6"/>
+                        <rect x="44" y="25" width="8" height="50" rx="4" transform="rotate(-12 48 50)" fill="#94A3B8"/>
+                        <rect x="52" y="25" width="8" height="50" rx="4" transform="rotate(12 56 50)" fill="#CBD5E1"/>
+                        <!-- Botol Lem Stik -->
+                        <rect x="105" y="35" width="28" height="65" rx="6" fill="#3B82F6"/>
+                        <rect x="108" y="20" width="22" height="16" rx="3" fill="#FACC15"/>
+                        <text x="119" y="72" text-anchor="middle" font-size="10" font-weight="bold" fill="#FFFFFF">LEM</text>
+                        <!-- Kertas Karton -->
+                        <rect x="155" y="30" width="48" height="68" rx="4" fill="#A7F3D0" stroke="#059669" stroke-width="2"/>
+                    </svg>
+                    <p class="text-sm sm:text-base font-bold text-slate-700 leading-relaxed">
+                        Hari ini kelas 2 akan membuat prakarya kartu ucapan dari kertas karton warna-warni. Di atas meja sudah tersedia <strong>gunting berujung tumpul</strong>, <strong>lem kertas</strong>, dan <strong>potongan kertas hias</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SOAL 11 (Benar/Salah - Bobot 2) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q11">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-500 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 11</span>
+                    <span class="bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1 rounded-full">Benar atau Salah</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Pilihlah <strong>Benar</strong> atau <strong>Salah</strong> mengenai cara menggunakan alat berkarya dengan aman!
+                </p>
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">1. Anak kelas 2 sebaiknya memakai gunting berujung tumpul agar lebih aman.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q11_1" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q11_1" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">2. Kita boleh berlari-lari di kelas sambil memegang gunting yang terbuka.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q11_2" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q11_2" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">3. Setelah selesai berkarya, gunting dan lem harus dirapikan kembali ke tempatnya.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q11_3" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q11_3" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="fb-q11" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 12 (Uraian - Bobot 5) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q12">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-500 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 12</span>
+                    <span class="bg-indigo-100 text-indigo-800 font-bold text-xs px-3 py-1 rounded-full">Uraian Singkat • Bobot 5</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-3">
+                    Agar potongan kertas hias dapat menempel dengan kuat dan rapi pada kartu ucapan, <strong>bahan perekat apa</strong> yang harus digunakan dan bagaimana cara mengoleskannya agar tidak belepotan?
+                </p>
+                <textarea id="q12_text" rows="3" oninput="updateProgress()" placeholder="Tulis jawabanmu di sini..." class="w-full p-4 rounded-2xl border-2 border-indigo-200 focus:border-indigo-500 focus:outline-none font-bold text-slate-700 bg-indigo-50/30"></textarea>
+                
+                <div class="mt-3">
+                    <button type="button" onclick="toggleSelfGrade('sg-q12')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition">
+                        🔑 Lihat Kunci Jawaban & Beri Bintang
+                    </button>
+                </div>
+                <div id="sg-q12" class="hidden mt-3 p-4 rounded-2xl bg-indigo-50 border-2 border-indigo-200 space-y-2">
+                    <p class="text-sm font-bold text-indigo-900">✅ Kunci Jawaban:</p>
+                    <p class="text-sm text-slate-700 font-semibold">Menggunakan <strong>lem kertas (lem stik / lem putih)</strong>. Cara mengoleskannya cukup tipis dan merata di bagian belakang kertas agar tidak basah atau belepotan.</p>
+                    <div class="pt-2 border-t border-indigo-200 flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-extrabold text-indigo-800">Pilih Bintang Nilaimu (Maks 5):</span>
+                        <select id="score_q12" onchange="updateProgress()" class="px-3 py-1.5 rounded-xl border-2 border-indigo-400 bg-white font-bold text-sm">
+                            <option value="5">⭐⭐⭐⭐⭐ (5 Poin - Menyebutkan lem & caranya dengan tepat)</option>
+                            <option value="4">⭐⭐⭐⭐ (4 Poin - Jawaban hampir lengkap)</option>
+                            <option value="3">⭐⭐⭐ (3 Poin - Hanya menyebutkan lem kertas)</option>
+                            <option value="2">⭐⭐ (2 Poin - Kurang tepat)</option>
+                            <option value="1">⭐ (1 Poin - Sudah mencoba menjawab)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ILUSTRASI BERSAMA SOAL 13 - 16 (LINGKUNGAN SEKOLAH) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-emerald-200 card-shadow">
+                <div class="inline-block bg-emerald-100 text-emerald-800 font-extrabold text-xs sm:text-sm px-3.5 py-1.5 rounded-full mb-3">
+                    🏫 Amatilah Gambar Lingkungan Sekolah Berikut untuk Soal Nomor 13 – 16!
+                </div>
+                <div class="w-full max-w-xl mx-auto rounded-2xl overflow-hidden border-4 border-slate-200 bg-sky-100">
+                    <!-- SVG Halaman Sekolah -->
+                    <svg viewBox="0 0 600 280" class="w-full h-auto block" role="img" aria-label="Lingkungan halaman sekolah dengan gedung atap segitiga, pohon rindang berdaun hijau, papan pengumuman persegi panjang, dan bola lingkaran">
+                        <!-- Langit & Tanah -->
+                        <rect width="600" height="190" fill="#BAE6FD"/>
+                        <rect y="190" width="600" height="90" fill="#86EFAC"/>
+                        <!-- Gedung Sekolah -->
+                        <polygon points="180,95 310,35 440,95" fill="#DC2626"/>
+                        <rect x="200" y="95" width="220" height="95" fill="#FEF3C7" stroke="#D97706" stroke-width="3"/>
+                        <!-- Papan Pengumuman Persegi Panjang -->
+                        <rect x="230" y="115" width="65" height="42" fill="#1E293B" stroke="#92400E" stroke-width="4"/>
+                        <!-- Pintu Sekolah -->
+                        <rect x="330" y="120" width="40" height="70" fill="#B45309"/>
+                        <!-- Pohon Rindang -->
+                        <rect x="85" y="135" width="24" height="65" fill="#78350F"/>
+                        <circle cx="97" cy="110" r="42" fill="#16A34A"/>
+                        <circle cx="70" cy="125" r="28" fill="#22C55E"/>
+                        <circle cx="124" cy="125" r="28" fill="#22C55E"/>
+                        <!-- Bola Bundar di Halaman -->
+                        <circle cx="490" cy="215" r="20" fill="#FFFFFF" stroke="#1E293B" stroke-width="3"/>
+                        <polygon points="490,205 498,211 495,220 485,220 482,211" fill="#1E293B"/>
+                        <!-- Batu Kerikil -->
+                        <ellipse cx="150" cy="225" rx="14" ry="9" fill="#94A3B8"/>
+                        <ellipse cx="172" cy="230" rx="10" ry="7" fill="#64748B"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- SOAL 13 (PG - Bobot 1) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q13">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-500 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 13</span>
+                    <span class="bg-slate-100 text-slate-600 font-bold text-xs px-3 py-1 rounded-full">Pilihan Ganda • Pilih 1 Jawaban</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Berdasarkan hasil pengamatan pada gambar halaman sekolah di atas, warna apakah batang pohon dan daun pohon tersebut?
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 font-bold transition">
+                        <input type="radio" name="q13" value="A" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>A. Batang cokelat dan daun hijau</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 font-bold transition">
+                        <input type="radio" name="q13" value="B" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>B. Batang biru dan daun merah</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-amber-400 font-bold transition">
+                        <input type="radio" name="q13" value="C" class="w-5 h-5 accent-blue-600" onchange="updateProgress()">
+                        <span>C. Batang kuning dan daun ungu</span>
+                    </label>
+                </div>
+                <div id="fb-q13" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 14 (PGK - Bobot 2) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q14">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-500 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 14</span>
+                    <span class="bg-purple-100 text-purple-800 font-bold text-xs px-3 py-1 rounded-full">Pilihan Ganda Kompleks • Boleh Pilih Lebih dari 1</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Pilihlah benda-benda di lingkungan sekolah pada gambar di atas yang memiliki <strong>bentuk dasar geometri</strong>! <em>(Boleh pilih lebih dari satu)</em>
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q14" value="Papan" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Papan pengumuman (berbentuk persegi panjang)</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q14" value="Bola" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Bola di lapangan (berbentuk lingkaran/bulat)</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q14" value="Atap" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Atap gedung sekolah (berbentuk segitiga)</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q14" value="Batu" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Batu kerikil tak beraturan (bentuk bebas/organik)</span>
+                    </label>
+                </div>
+                <div id="fb-q14" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 15 (Menjodohkan - Bobot 3) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q15">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-500 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 15</span>
+                    <span class="bg-pink-100 text-pink-800 font-bold text-xs px-3 py-1 rounded-full">Menjodohkan Warna Alam</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Pasangkan benda alam di sekitar sekolah berikut dengan warna aslinya di alam!
+                </p>
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-emerald-50/70 border-2 border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-800">1. Daun segar di pohon</span>
+                        <select id="q15_1" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-emerald-400 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Warna Asli --</option>
+                            <option value="Hijau">🟢 Hijau</option>
+                            <option value="Cokelat">🟤 Cokelat</option>
+                            <option value="Putih">⚪ Putih</option>
+                        </select>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-emerald-50/70 border-2 border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-800">2. Batang kayu pohon & tanah</span>
+                        <select id="q15_2" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-emerald-400 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Warna Asli --</option>
+                            <option value="Hijau">🟢 Hijau</option>
+                            <option value="Cokelat">🟤 Cokelat</option>
+                            <option value="Putih">⚪ Putih</option>
+                        </select>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-emerald-50/70 border-2 border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-800">3. Awan cerah di langit</span>
+                        <select id="q15_3" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-emerald-400 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Warna Asli --</option>
+                            <option value="Hijau">🟢 Hijau</option>
+                            <option value="Cokelat">🟤 Cokelat</option>
+                            <option value="Putih">⚪ Putih</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="fb-q15" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 16 (Unjuk Kerja - Kanvas Gambar Interaktif - Bobot 5) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-amber-300 card-shadow" id="card-q16">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-amber-500 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 16</span>
+                    <span class="bg-rose-100 text-rose-800 font-bold text-xs px-3 py-1 rounded-full">Unjuk Kerja • Ayo Menggambar! (Bobot 5)</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-2">
+                    Gambarlah <strong>1 benda atau pemandangan di lingkungan sekolahmu</strong> (misalnya: pohon, bunga, gedung sekolah, atau bola) menggunakan unsur <strong>garis, bentuk, dan warna</strong> pada papan gambar di bawah ini!
+                </p>
+                <p class="text-xs sm:text-sm text-slate-500 font-semibold mb-3">
+                    💡 Pilih warna kuas, atur ukuran, lalu gambar langsung menggunakan jari atau mouse! (Boleh juga digambar di buku gambar jika dicetak).
+                </p>
+
+                <!-- Toolbar Kanvas Gambar -->
+                <div class="bg-slate-100 p-3 rounded-2xl border-2 border-slate-200 flex flex-wrap items-center justify-between gap-3 mb-3 no-print">
+                    <div class="flex flex-wrap items-center gap-1.5" id="color-palette">
+                        <button type="button" onclick="setBrushColor('#1E293B', this)" class="color-btn w-8 h-8 rounded-full bg-slate-800 ring-4 ring-amber-400" title="Hitam"></button>
+                        <button type="button" onclick="setBrushColor('#EF4444', this)" class="color-btn w-8 h-8 rounded-full bg-red-500" title="Merah"></button>
+                        <button type="button" onclick="setBrushColor('#F97316', this)" class="color-btn w-8 h-8 rounded-full bg-orange-500" title="Oranye"></button>
+                        <button type="button" onclick="setBrushColor('#FACC15', this)" class="color-btn w-8 h-8 rounded-full bg-yellow-400" title="Kuning"></button>
+                        <button type="button" onclick="setBrushColor('#22C55E', this)" class="color-btn w-8 h-8 rounded-full bg-green-500" title="Hijau"></button>
+                        <button type="button" onclick="setBrushColor('#3B82F6', this)" class="color-btn w-8 h-8 rounded-full bg-blue-500" title="Biru"></button>
+                        <button type="button" onclick="setBrushColor('#A855F7', this)" class="color-btn w-8 h-8 rounded-full bg-purple-500" title="Ungu"></button>
+                        <button type="button" onclick="setBrushColor('#92400E', this)" class="color-btn w-8 h-8 rounded-full bg-amber-800" title="Cokelat"></button>
+                        <button type="button" onclick="setBrushColor('#FFFFFF', this)" class="color-btn w-8 h-8 rounded-full bg-white border-2 border-slate-400 flex items-center justify-center text-xs" title="Penghapus">🧽</button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <select id="brush-size" class="px-2.5 py-1.5 rounded-xl border-2 border-slate-300 bg-white font-bold text-xs">
+                            <option value="4">Kuas Tipis</option>
+                            <option value="8" selected>Kuas Sedang</option>
+                            <option value="16">Kuas Tebal</option>
+                        </select>
+                        <button type="button" onclick="clearCanvas()" class="bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold text-xs px-3 py-2 rounded-xl border border-rose-300">
+                            🗑️ Hapus Semua
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Area Kanvas Gambar -->
+                <div class="w-full h-64 sm:h-72 bg-white rounded-2xl border-4 border-dashed border-amber-300 overflow-hidden relative touch-none">
+                    <canvas id="drawing-canvas" class="w-full h-full block cursor-crosshair"></canvas>
+                </div>
+
+                <!-- Rubrik Penilaian Karya -->
+                <div class="mt-3 p-3.5 rounded-2xl bg-amber-50 border-2 border-amber-200 flex flex-wrap items-center justify-between gap-2">
+                    <span class="text-xs sm:text-sm font-extrabold text-amber-900">🌟 Bintang Karyaku (Guru / Orang Tua / Mandiri):</span>
+                    <select id="score_q16" onchange="updateProgress()" class="px-3 py-1.5 rounded-xl border-2 border-amber-400 bg-white font-bold text-xs sm:text-sm">
+                        <option value="5">⭐⭐⭐⭐⭐ (5 Poin - Ada garis, bentuk & warna lengkap)</option>
+                        <option value="4">⭐⭐⭐⭐ (4 Poin - Gambar rapi dan berwarna)</option>
+                        <option value="3">⭐⭐⭐ (3 Poin - Gambar sudah terbentuk)</option>
+                        <option value="2">⭐⭐ (2 Poin - Masih sketsa sederhana)</option>
+                        <option value="1">⭐ (1 Poin - Sudah mencoba menggambar)</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SEKAT JEDA 3                                              -->
+        <!-- ========================================================= -->
+        <div class="bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 rounded-3xl p-6 text-white border-4 border-white card-shadow text-center space-y-3">
+            <div class="text-5xl animate-bounce">🏁🎉</div>
+            <h3 class="text-2xl sm:text-3xl font-bold">Keren Sekali! Tinggal 4 Soal Terakhir Menuju Garis Finis!</h3>
+            <p class="text-cyan-50 font-bold text-base sm:text-lg max-w-xl mx-auto">
+                Gambarmu bagus sekali! Ayo semangat sedikit lagi untuk menaklukkan Pos 4 tentang membuat kolase dan menjaga kebersihan sekolah!
+            </p>
+            <a href="#pos-4" class="inline-block bg-white text-cyan-700 font-title font-bold px-6 py-3 rounded-2xl shadow-md btn-bounce text-base">
+                🏆 Menuju Pos 4 (Terakhir)!
+            </a>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- POS 4: KOLASE PEDULI LINGKUNGAN (SOAL 17 - 20)            -->
+        <!-- ========================================================= -->
+        <section id="pos-4" class="space-y-6 pt-2">
+            <!-- Banner Pos 4 -->
+            <div class="bg-gradient-to-r from-emerald-600 to-green-500 text-white rounded-3xl p-5 border-4 border-white card-shadow flex items-center justify-between">
+                <div>
+                    <span class="bg-white text-emerald-700 font-extrabold text-xs px-3 py-1 rounded-full uppercase">Pos 4 dari 4 • Finis!</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold mt-1">🍂 Kolase Peduli Lingkungan</h2>
+                    <p class="text-emerald-100 text-sm font-semibold">Soal Nomor 17 sampai 20</p>
+                </div>
+                <div class="text-5xl">🦋</div>
+            </div>
+
+            <!-- ILUSTRASI BERSAMA SOAL 17 - 18 -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-emerald-200 card-shadow">
+                <div class="inline-block bg-emerald-100 text-emerald-800 font-extrabold text-xs sm:text-sm px-3.5 py-1.5 rounded-full mb-3">
+                    🍃 Perhatikan Ilustrasi Halaman Sekolah Berikut untuk Soal Nomor 17 – 18!
+                </div>
+                <div class="flex flex-col sm:flex-row items-center gap-4 bg-emerald-50/70 p-4 rounded-2xl border-2 border-emerald-200">
+                    <svg viewBox="0 0 180 120" class="w-40 h-auto shrink-0" role="img" aria-label="Daun kering dan ranting berserakan di halaman sekolah">
+                        <rect width="180" height="120" rx="12" fill="#FEF3C7"/>
+                        <!-- Daun Kering Cokelat & Kuning -->
+                        <ellipse cx="45" cy="45" rx="18" ry="9" transform="rotate(-25 45 45)" fill="#D97706"/>
+                        <ellipse cx="110" cy="35" rx="20" ry="10" transform="rotate(20 110 35)" fill="#B45309"/>
+                        <ellipse cx="80" cy="80" rx="19" ry="9" transform="rotate(-10 80 80)" fill="#EAB308"/>
+                        <ellipse cx="140" cy="85" rx="17" ry="8" transform="rotate(35 140 85)" fill="#92400E"/>
+                        <!-- Ranting Kecil -->
+                        <line x1="25" y1="95" x2="65" y2="75" stroke="#78350F" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                    <p class="text-sm sm:text-base font-bold text-slate-700 leading-relaxed">
+                        Setelah angin bertiup kencang, halaman sekolah terlihat kotor karena banyak <strong>daun-daun kering dan ranting kecil</strong> yang gugur berserakan di tanah.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SOAL 17 (PGK - Bobot 2) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q17">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-emerald-600 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 17</span>
+                    <span class="bg-purple-100 text-purple-800 font-bold text-xs px-3 py-1 rounded-full">Pilihan Ganda Kompleks • Boleh Pilih Lebih dari 1</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Tindakan tepat apa yang dapat kamu lakukan untuk merespons halaman sekolah yang kotor dengan daun kering melalui kegiatan seni rupa? <em>(Pilih semua jawaban yang benar!)</em>
+                </p>
+                <div class="space-y-2.5">
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q17" value="KumpulKolase" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Mengumpulkan daun-daun kering yang bagus untuk dijadikan bahan karya kolase.</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q17" value="BersihRanting" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Membersihkan halaman bersama teman sambil memilih ranting kecil untuk bingkai karya.</span>
+                    </label>
+                    <label class="option-label cursor-pointer flex items-center gap-3 p-3.5 rounded-2xl border-2 border-slate-200 hover:border-purple-400 font-bold transition">
+                        <input type="checkbox" name="q17" value="Biarkan" class="w-5 h-5 accent-purple-600 rounded" onchange="updateProgress()">
+                        <span>Membiarkan halaman tetap kotor dan membuang sampah plastik sembarangan.</span>
+                    </label>
+                </div>
+                <div id="fb-q17" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 18 (Menjodohkan - Bobot 3) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q18">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-emerald-600 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 18</span>
+                    <span class="bg-pink-100 text-pink-800 font-bold text-xs px-3 py-1 rounded-full">Menjodohkan Bahan Kolase</span>
+                </div>
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-4">
+                    Pasangkan bahan alam untuk membuat kolase di sebelah kiri dengan warna aslinya di sebelah kanan!
+                </p>
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-emerald-50/70 border-2 border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-800">1. Daun kering yang gugur</span>
+                        <select id="q18_1" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-emerald-500 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Warna Asli --</option>
+                            <option value="Cokelat">🟤 Cokelat kekuningan</option>
+                            <option value="Hijau">🟢 Hijau</option>
+                            <option value="Kuning">🟡 Kuning</option>
+                        </select>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-emerald-50/70 border-2 border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-800">2. Biji kacang hijau</span>
+                        <select id="q18_2" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-emerald-500 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Warna Asli --</option>
+                            <option value="Cokelat">🟤 Cokelat kekuningan</option>
+                            <option value="Hijau">🟢 Hijau</option>
+                            <option value="Kuning">🟡 Kuning</option>
+                        </select>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-emerald-50/70 border-2 border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-800">3. Biji jagung kering</span>
+                        <select id="q18_3" onchange="updateProgress()" class="px-4 py-2.5 rounded-xl border-2 border-emerald-500 bg-white font-bold text-slate-700 focus:outline-none">
+                            <option value="">-- Pilih Warna Asli --</option>
+                            <option value="Cokelat">🟤 Cokelat kekuningan</option>
+                            <option value="Hijau">🟢 Hijau</option>
+                            <option value="Kuning">🟡 Kuning</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="fb-q18" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 19 (Benar/Salah - Bobot 2) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q19">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-emerald-600 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 19</span>
+                    <span class="bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1 rounded-full">Benar atau Salah</span>
+                </div>
+                
+                <!-- Ilustrasi SVG Daur Ulang Botol Bekas jadi Tempat Pensil -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 bg-teal-50 p-4 rounded-2xl border-2 border-teal-200 mb-4">
+                    <svg viewBox="0 0 120 110" class="w-28 h-auto shrink-0" role="img" aria-label="Tempat pensil hias dari botol bekas">
+                        <!-- Pensil -->
+                        <rect x="42" y="12" width="8" height="45" fill="#FACC15"/>
+                        <polygon points="42,12 46,3 50,12" fill="#FDE68A"/>
+                        <rect x="65" y="18" width="8" height="40" fill="#F43F5E"/>
+                        <!-- Wadah Botol Hias -->
+                        <rect x="30" y="45" width="60" height="55" rx="8" fill="#38BDF8" stroke="#0284C7" stroke-width="3"/>
+                        <circle cx="60" cy="72" r="10" fill="#FACC15"/>
+                    </svg>
+                    <p class="text-sm sm:text-base font-bold text-slate-700">
+                        Siswa kelas 2 memanfaatkan botol plastik bekas dan daun kering di sekolah untuk dibuat menjadi <strong>tempat pensil hias</strong> yang cantik.
+                    </p>
+                </div>
+
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-3">
+                    Tentukan <strong>Benar</strong> atau <strong>Salah</strong> pernyataan sesuai ilustrasi di atas!
+                </p>
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">1. Mengolah botol bekas menjadi tempat pensil membantu mengurangi sampah di sekolah.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q19_1" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q19_1" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">2. Kegiatan berkarya dari bahan bekas membuat lingkungan sekolah menjadi kotor.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q19_2" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q19_2" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border-2 border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <span class="font-bold text-slate-700">3. Sisa potongan daun dan kertas harus dibuang ke tempat sampah setelah berkarya.</span>
+                        <div class="flex gap-2 shrink-0">
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q19_3" value="B" class="hidden" onchange="updateProgress()"> ✅ Benar
+                            </label>
+                            <label class="option-label cursor-pointer px-4 py-2 rounded-xl border-2 border-slate-300 font-extrabold text-sm">
+                                <input type="radio" name="q19_3" value="S" class="hidden" onchange="updateProgress()"> ❌ Salah
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div id="fb-q19" class="hidden mt-4 p-3.5 rounded-2xl text-sm font-bold"></div>
+            </div>
+
+            <!-- SOAL 20 (Uraian - Bobot 5) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-slate-200 card-shadow" id="card-q20">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="bg-emerald-600 text-white font-title font-bold px-3.5 py-1 rounded-xl text-base">Soal 20</span>
+                    <span class="bg-indigo-100 text-indigo-800 font-bold text-xs px-3 py-1 rounded-full">Uraian Singkat • Bobot 5</span>
+                </div>
+                
+                <!-- Ilustrasi Teks & Gambar Kolase Kupu-kupu -->
+                <div class="bg-amber-50 p-4 rounded-2xl border-2 border-amber-200 mb-3 flex flex-col sm:flex-row items-center gap-4">
+                    <svg viewBox="0 0 120 100" class="w-28 h-auto shrink-0" role="img" aria-label="Kolase kupu-kupu dari daun kering dan biji-bijian">
+                        <!-- Sayap Kupu-kupu (Daun) -->
+                        <ellipse cx="38" cy="38" rx="22" ry="15" transform="rotate(-30 38 38)" fill="#F97316"/>
+                        <ellipse cx="82" cy="38" rx="22" ry="15" transform="rotate(30 82 38)" fill="#F97316"/>
+                        <ellipse cx="42" cy="65" rx="16" ry="11" transform="rotate(25 42 65)" fill="#FACC15"/>
+                        <ellipse cx="78" cy="65" rx="16" ry="11" transform="rotate(-25 78 65)" fill="#FACC15"/>
+                        <!-- Badan Kupu-kupu (Biji-bijian) -->
+                        <rect x="56" y="25" width="8" height="52" rx="4" fill="#78350F"/>
+                        <path d="M58,25 Q50,12 45,15" stroke="#78350F" stroke-width="2.5" fill="none"/>
+                        <path d="M62,25 Q70,12 75,15" stroke="#78350F" stroke-width="2.5" fill="none"/>
+                    </svg>
+                    <p class="text-sm sm:text-base font-bold text-slate-700">
+                        <strong>Bacalah teks berikut:</strong><br>
+                        <em>"Siti ingin membuat karya kolase berbentuk kupu-kupu di atas kertas gambar. Ia sudah menyiapkan sketsa gambar kupu-kupu, daun kering untuk sayapnya, biji kacang hijau untuk badannya, serta lem."</em>
+                    </p>
+                </div>
+
+                <p class="text-base sm:text-lg font-bold text-slate-800 mb-3">
+                    Tuliskan <strong>3 langkah berurutan</strong> yang harus dilakukan Siti untuk membuat kolase kupu-kupu tersebut hingga selesai!
+                </p>
+                <textarea id="q20_text" rows="3" oninput="updateProgress()" placeholder="Langkah 1: ...&#10;Langkah 2: ...&#10;Langkah 3: ..." class="w-full p-4 rounded-2xl border-2 border-indigo-200 focus:border-indigo-500 focus:outline-none font-bold text-slate-700 bg-indigo-50/30"></textarea>
+                
+                <div class="mt-3">
+                    <button type="button" onclick="toggleSelfGrade('sg-q20')" class="bg-indigo-100 hover:bg-indigo-200 text-indigo-800 font-bold text-xs sm:text-sm px-4 py-2 rounded-xl transition">
+                        🔑 Lihat Kunci Jawaban & Beri Bintang
+                    </button>
+                </div>
+                <div id="sg-q20" class="hidden mt-3 p-4 rounded-2xl bg-indigo-50 border-2 border-indigo-200 space-y-2">
+                    <p class="text-sm font-bold text-indigo-900">✅ Kunci Jawaban:</p>
+                    <ol class="text-sm text-slate-700 font-semibold list-decimal list-inside space-y-1">
+                        <li>Mengoleskan <strong>lem</strong> secara merata pada pola gambar kupu-kupu.</li>
+                        <li>Menempelkan <strong>daun kering</strong> pada bagian sayap dan <strong>biji kacang hijau</strong> pada bagian badan kupu-kupu dengan rapi.</li>
+                        <li>Mengeringkan karya kolase dan merapikan sisa bahan yang berserakan.</li>
+                    </ol>
+                    <div class="pt-2 border-t border-indigo-200 flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-extrabold text-indigo-800">Pilih Bintang Nilaimu (Maks 5):</span>
+                        <select id="score_q20" onchange="updateProgress()" class="px-3 py-1.5 rounded-xl border-2 border-indigo-400 bg-white font-bold text-sm">
+                            <option value="5">⭐⭐⭐⭐⭐ (5 Poin - 3 langkah urut dan jelas)</option>
+                            <option value="4">⭐⭐⭐⭐ (4 Poin - 2-3 langkah cukup jelas)</option>
+                            <option value="3">⭐⭐⭐ (3 Poin - Langkah kurang lengkap)</option>
+                            <option value="2">⭐⭐ (2 Poin - Hanya 1 langkah)</option>
+                            <option value="1">⭐ (1 Poin - Sudah mencoba menjawab)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- TOMBOL SELESAI & HASIL PENILAIAN                          -->
+        <!-- ========================================================= -->
+        <div class="pt-4 text-center space-y-4 no-print">
+            <button type="button" onclick="gradeQuiz()" class="w-full sm:w-auto bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 hover:from-amber-600 hover:to-rose-600 text-white font-title font-bold text-xl sm:text-2xl px-8 py-4 rounded-3xl border-4 border-white card-shadow btn-bounce inline-flex items-center justify-center gap-3">
+                <span>🏆</span> Cek Nilai & Pembahasan Sekarang!
+            </button>
+        </div>
+
+        <!-- PANEL HASIL SKOR (TERSEMBUNYI HINGGA TOMBOL DIKLIK) -->
+        <section id="result-panel" class="hidden bg-white rounded-3xl p-6 sm:p-8 border-4 border-amber-400 card-shadow text-center space-y-5">
+            <div class="text-6xl animate-bounce" id="trophy-icon">🏆</div>
+            <div>
+                <span class="bg-amber-100 text-amber-800 font-extrabold text-xs sm:text-sm px-4 py-1.5 rounded-full uppercase">Hasil Latihan Seni Rupa Kelas 2</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-slate-800 mt-2" id="result-greeting">Hebat Sekali!</h2>
+                <p class="text-slate-600 font-bold text-base mt-1" id="result-identity">Siswa Kelas II</p>
+            </div>
+
+            <!-- Kotak Nilai -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto">
+                <div class="bg-gradient-to-br from-amber-400 to-orange-400 text-white p-5 rounded-3xl shadow-sm">
+                    <div class="text-xs font-extrabold uppercase tracking-wider opacity-90">Nilai Akhir (Skala 100)</div>
+                    <div class="text-5xl font-title font-bold mt-1" id="final-score-100">0</div>
+                </div>
+                <div class="bg-sky-50 border-2 border-sky-200 text-sky-900 p-5 rounded-3xl">
+                    <div class="text-xs font-extrabold uppercase tracking-wider text-sky-700">Total Poin Kisi-Kisi</div>
+                    <div class="text-3xl font-title font-bold mt-2"><span id="raw-score">0</span> <span class="text-lg text-sky-600">/ 52 Poin</span></div>
+                    <p class="text-xs font-bold text-slate-500 mt-1">Sesuai Pedoman Penskoran</p>
+                </div>
+            </div>
+
+            <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4 max-w-xl mx-auto text-sm font-bold text-emerald-900">
+                💡 Gulir ke atas untuk melihat tanda <strong>Benar / Salah</strong> dan <strong>Pembahasan</strong> di setiap nomor soal ya!
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3 pt-2 no-print">
+                <button type="button" onclick="window.print()" class="bg-sky-500 hover:bg-sky-600 text-white font-bold px-6 py-3 rounded-2xl shadow btn-bounce">
+                    🖨️ Cetak / Simpan PDF Hasil
+                </button>
+                <button type="button" onclick="resetQuiz()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-6 py-3 rounded-2xl btn-bounce">
+                    🔄 Ulangi Latihan
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // ==========================================
+        // 1. INISIALISASI KANVAS GAMBAR (SOAL NO 16)
+        // ==========================================
+        const canvas = document.getElementById('drawing-canvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let brushColor = '#1E293B';
+        let hasDrawn = false;
+
+        function resizeCanvas() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            // Simpan gambar sementara sebelum resize
+            const tempImg = canvas.toDataURL();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const img = new Image();
+            img.onload = () => ctx.drawImage(img, 0, 0);
+            img.src = tempImg;
+        }
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            updateProgress();
+        });
+        window.addEventListener('resize', resizeCanvas);
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startDraw(e) {
+            isDrawing = true;
+            hasDrawn = true;
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            updateProgress();
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            const pos = getPos(e);
+            ctx.lineWidth = document.getElementById('brush-size').value;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = brushColor;
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+        }
+
+        function endDraw() {
+            isDrawing = false;
+            ctx.closePath();
+        }
+
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', endDraw);
+        canvas.addEventListener('mouseleave', endDraw);
+
+        canvas.addEventListener('touchstart', startDraw, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        canvas.addEventListener('touchend', endDraw);
+
+        function setBrushColor(color, btn) {
+            brushColor = color;
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('ring-4', 'ring-amber-400'));
+            btn.classList.add('ring-4', 'ring-amber-400');
+        }
+
+        function clearCanvas() {
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            hasDrawn = false;
+            updateProgress();
+        }
+
+        // ==========================================
+        // 2. TOGGLE KUNCI JAWABAN URAIAN
+        // ==========================================
+        function toggleSelfGrade(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        // ==========================================
+        // 3. HITUNG PROGRES PENGERJAAN (20 SOAL)
+        // ==========================================
+        function updateProgress() {
+            let answered = 0;
+
+            // PG: 1, 6, 9, 13
+            if (document.querySelector('input[name="q1"]:checked')) answered++;
+            if (document.querySelector('input[name="q6"]:checked')) answered++;
+            if (document.querySelector('input[name="q9"]:checked')) answered++;
+            if (document.querySelector('input[name="q13"]:checked')) answered++;
+
+            // PGK: 2, 10, 14, 17
+            if (document.querySelectorAll('input[name="q2"]:checked').length > 0) answered++;
+            if (document.querySelectorAll('input[name="q10"]:checked').length > 0) answered++;
+            if (document.querySelectorAll('input[name="q14"]:checked').length > 0) answered++;
+            if (document.querySelectorAll('input[name="q17"]:checked').length > 0) answered++;
+
+            // BS: 3, 7, 11, 19 (terisi minimal semua 3 pernyataan)
+            if (document.querySelector('input[name="q3_1"]:checked') && document.querySelector('input[name="q3_2"]:checked') && document.querySelector('input[name="q3_3"]:checked')) answered++;
+            if (document.querySelector('input[name="q7_1"]:checked') && document.querySelector('input[name="q7_2"]:checked') && document.querySelector('input[name="q7_3"]:checked')) answered++;
+            if (document.querySelector('input[name="q11_1"]:checked') && document.querySelector('input[name="q11_2"]:checked') && document.querySelector('input[name="q11_3"]:checked')) answered++;
+            if (document.querySelector('input[name="q19_1"]:checked') && document.querySelector('input[name="q19_2"]:checked') && document.querySelector('input[name="q19_3"]:checked')) answered++;
+
+            // Menjodohkan: 4, 8, 15, 18
+            if (document.getElementById('q4_1').value && document.getElementById('q4_2').value && document.getElementById('q4_3').value) answered++;
+            if (document.getElementById('q8_1').value && document.getElementById('q8_2').value && document.getElementById('q8_3').value) answered++;
+            if (document.getElementById('q15_1').value && document.getElementById('q15_2').value && document.getElementById('q15_3').value) answered++;
+            if (document.getElementById('q18_1').value && document.getElementById('q18_2').value && document.getElementById('q18_3').value) answered++;
+
+            // Uraian: 5, 12, 20
+            if (document.getElementById('q5_text').value.trim().length > 2) answered++;
+            if (document.getElementById('q12_text').value.trim().length > 2) answered++;
+            if (document.getElementById('q20_text').value.trim().length > 2) answered++;
+
+            // Unjuk Kerja: 16
+            if (hasDrawn) answered++;
+
+            const pct = Math.round((answered / 20) * 100);
+            document.getElementById('progress-bar').style.width = pct + '%';
+            document.getElementById('progress-text').textContent = `${answered} / 20 Soal Terisi`;
+        }
+
+        // ==========================================
+        // 4. SISTEM PENILAIAN SESUAI KISI-KISI
+        // ==========================================
+        function showFeedback(id, isCorrect, text) {
+            const fb = document.getElementById(id);
+            fb.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900', 'bg-amber-100', 'text-amber-900');
+            if (isCorrect === true) {
+                fb.classList.add('bg-emerald-100', 'text-emerald-900');
+                fb.innerHTML = `✅ <strong>Hebat! Jawabanmu Benar!</strong> ${text}`;
+            } else if (isCorrect === 'partial') {
+                fb.classList.add('bg-amber-100', 'text-amber-900');
+                fb.innerHTML = `⭐ <strong>Hampir Sempurna!</strong> ${text}`;
+            } else {
+                fb.classList.add('bg-rose-100', 'text-rose-900');
+                fb.innerHTML = `💡 <strong>Yuk Belajar Lagi:</strong> ${text}`;
+            }
+        }
+
+        function checkPG(name, correctVal, fbId, explanation) {
+            const sel = document.querySelector(`input[name="${name}"]:checked`);
+            const ok = sel && sel.value === correctVal;
+            showFeedback(fbId, ok, explanation);
+            return ok ? 1 : 0;
+        }
+
+        function checkPGK(name, correctArr, fbId, explanation) {
+            const checked = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+            const isExact = checked.length === correctArr.length && correctArr.every(v => checked.includes(v));
+            const hasSomeCorrect = checked.some(v => correctArr.includes(v)) && !checked.some(v => !correctArr.includes(v));
+            
+            if (isExact) {
+                showFeedback(fbId, true, explanation);
+                return 2;
+            } else if (hasSomeCorrect && checked.length > 0) {
+                showFeedback(fbId, 'partial', explanation);
+                return 1;
+            } else {
+                showFeedback(fbId, false, explanation);
+                return 0;
+            }
+        }
+
+        function checkBS(prefix, answers, fbId, explanation) {
+            let correctCount = 0;
+            answers.forEach((ans, idx) => {
+                const sel = document.querySelector(`input[name="${prefix}_${idx + 1}"]:checked`);
+                if (sel && sel.value === ans) correctCount++;
+            });
+            const score = correctCount === 3 ? 2 : (correctCount >= 1 ? 1 : 0);
+            showFeedback(fbId, correctCount === 3 ? true : (correctCount > 0 ? 'partial' : false), `Kamu benar ${correctCount} dari 3 pernyataan. ${explanation}`);
+            return score;
+        }
+
+        function checkMatch(prefix, answers, fbId, explanation) {
+            let correctCount = 0;
+            answers.forEach((ans, idx) => {
+                const val = document.getElementById(`${prefix}_${idx + 1}`).value;
+                if (val === ans) correctCount++;
+            });
+            showFeedback(fbId, correctCount === 3 ? true : (correctCount > 0 ? 'partial' : false), `Kamu memasangkan ${correctCount} dari 3 dengan tepat. ${explanation}`);
+            return correctCount; // Maksimal 3 poin
+        }
+
+        function gradeQuiz() {
+            let totalScore = 0;
+
+            // --- POS 1 ---
+            // No 1 (PG = 1)
+            totalScore += checkPG('q1', 'B', 'fb-q1', 'Warna yang paling luas pada gambar adalah warna biru (langit dan gunung) serta hijau (padang rumput).');
+            // No 2 (PGK = 2)
+            totalScore += checkPGK('q2', ['Merah', 'Kuning', 'Biru'], 'fb-q2', 'Warna primer (dasar) ada 3, yaitu Merah (bunga), Kuning (matahari), dan Biru (langit & gunung). Hijau adalah warna sekunder.');
+            // No 3 (BS = 2)
+            totalScore += checkBS('q3', ['B', 'S', 'B'], 'fb-q3', 'Merah, kuning, biru = warna primer. Hijau, oranye, ungu = warna sekunder.');
+            // No 4 (Menjodohkan = 3)
+            totalScore += checkMatch('q4', ['Oranye', 'Hijau', 'Ungu'], 'fb-q4', 'Merah + Kuning = Oranye; Biru + Kuning = Hijau; Merah + Biru = Ungu.');
+            // No 5 (Uraian = 5)
+            document.getElementById('sg-q5').classList.remove('hidden');
+            const q5Val = document.getElementById('q5_text').value.trim();
+            totalScore += q5Val ? parseInt(document.getElementById('score_q5').value) : 0;
+
+            // --- POS 2 ---
+            // No 6 (PG = 1)
+            totalScore += checkPG('q6', 'B', 'fb-q6', 'Saat menerima saran dari teman, kita harus berterima kasih dengan ramah dan memperbaiki karya kita.');
+            // No 7 (BS = 2)
+            totalScore += checkBS('q7', ['B', 'S', 'B'], 'fb-q7', 'Saran harus disampaikan dengan sopan, tidak mengejek, dan diawali pujian yang baik.');
+            // No 8 (Menjodohkan = 3)
+            totalScore += checkMatch('q8', ['TerimaKasih', 'Memuji', 'Sopan'], 'fb-q8', 'Saling menghargai karya teman membuat suasana belajar di kelas menyenangkan.');
+            // No 9 (PG = 1)
+            totalScore += checkPG('q9', 'A', 'fb-q9', 'Kertas origami bersifat tipis, lentur, dan sangat mudah dilipat menjadi berbagai bentuk hiasan.');
+            // No 10 (PGK = 2)
+            totalScore += checkPGK('q10', ['Unik', 'Sekitar'], 'fb-q10', 'Bahan alam seperti belimbing dan daun berasal dari tumbuhan di sekitar kita serta memiliki tekstur urat yang unik.');
+
+            // --- POS 3 ---
+            // No 11 (BS = 2)
+            totalScore += checkBS('q11', ['B', 'S', 'B'], 'fb-q11', 'Gunakan gunting berujung tumpul, jangan berlari membawa gunting, dan rapikan alat setelah selesai.');
+            // No 12 (Uraian = 5)
+            document.getElementById('sg-q12').classList.remove('hidden');
+            const q12Val = document.getElementById('q12_text').value.trim();
+            totalScore += q12Val ? parseInt(document.getElementById('score_q12').value) : 0;
+            // No 13 (PG = 1)
+            totalScore += checkPG('q13', 'A', 'fb-q13', 'Pada pengamatan gambar lingkungan sekolah, batang pohon berwarna cokelat dan daunnya berwarna hijau.');
+            // No 14 (PGK = 2)
+            totalScore += checkPGK('q14', ['Papan', 'Bola', 'Atap'], 'fb-q14', 'Papan (persegi panjang), bola (lingkaran), dan atap (segitiga) adalah bentuk geometri. Batu kerikil berbentuk bebas.');
+            // No 15 (Menjodohkan = 3)
+            totalScore += checkMatch('q15', ['Hijau', 'Cokelat', 'Putih'], 'fb-q15', 'Daun segar berwarna hijau, batang kayu/tanah berwarna cokelat, dan awan cerah berwarna putih.');
+            // No 16 (Unjuk Kerja = 5)
+            totalScore += hasDrawn ? parseInt(document.getElementById('score_q16').value) : 0;
+
+            // --- POS 4 ---
+            // No 17 (PGK = 2)
+            totalScore += checkPGK('q17', ['KumpulKolase', 'BersihRanting'], 'fb-q17', 'Daun kering dan ranting di halaman sekolah bisa dikumpulkan sambil bersih-bersih untuk dijadikan karya kolase yang indah.');
+            // No 18 (Menjodohkan = 3)
+            totalScore += checkMatch('q18', ['Cokelat', 'Hijau', 'Kuning'], 'fb-q18', 'Daun kering berwarna cokelat kekuningan, kacang hijau berwarna hijau, dan biji jagung berwarna kuning.');
+            // No 19 (BS = 2)
+            totalScore += checkBS('q19', ['B', 'S', 'B'], 'fb-q19', 'Memanfaatkan botol bekas mengurangi sampah, dan sisa bahan prakarya harus dibuang ke tempat sampah.');
+            // No 20 (Uraian = 5)
+            document.getElementById('sg-q20').classList.remove('hidden');
+            const q20Val = document.getElementById('q20_text').value.trim();
+            totalScore += q20Val ? parseInt(document.getElementById('score_q20').value) : 0;
+
+            // Tampilkan Hasil Akhir (Total Maksimal = 52 Poin)
+            const maxPoints = 52;
+            const score100 = Math.round((totalScore / maxPoints) * 100);
+
+            const name = document.getElementById('student-name').value.trim() || 'Siswa Hebat';
+            const cls = document.getElementById('student-class').value.trim() || 'Kelas II';
+
+            document.getElementById('raw-score').textContent = totalScore;
+            document.getElementById('final-score-100').textContent = score100;
+            document.getElementById('result-identity').textContent = `${name} • ${cls}`;
+
+            const greetingEl = document.getElementById('result-greeting');
+            const trophyEl = document.getElementById('trophy-icon');
+            if (score100 >= 85) {
+                greetingEl.textContent = `Luar Biasa, ${name}! Kamu Juara Seni Rupa!`;
+                trophyEl.textContent = '🏆';
+            } else if (score100 >= 70) {
+                greetingEl.textContent = `Bagus Sekali, ${name}! Terus Berlatih Ya!`;
+                trophyEl.textContent = '🥇';
+            } else {
+                greetingEl.textContent = `Semangat Belajar, ${name}! Ayo Coba Lagi!`;
+                trophyEl.textContent = '🌟';
+            }
+
+            const panel = document.getElementById('result-panel');
+            panel.classList.remove('hidden');
+            panel.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
+            document.querySelectorAll('select').forEach(el => {
+                if (!el.id.startsWith('score_') && el.id !== 'brush-size') el.value = '';
+            });
+            document.querySelectorAll('textarea').forEach(el => el.value = '');
+            document.querySelectorAll('[id^="fb-"], [id^="sg-"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('result-panel').classList.add('hidden');
+            clearCanvas();
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
